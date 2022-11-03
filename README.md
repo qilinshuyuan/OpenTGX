@@ -1,2 +1,2 @@
 # Free MetaMMORPG Maker
-framework and toolkits for MMORPG and Meta World
+a framework and toolset to help you build your own RPGs and MetaWorlds.
