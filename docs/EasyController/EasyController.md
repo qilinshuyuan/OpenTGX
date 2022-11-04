@@ -8,8 +8,12 @@ main features are as follows:
 - Character Controller（move,jump,animate and collide with objects etc）
 - Camera Controller（ThrePersonCamera,FreeCamera）
 
+![](./images/move.gif)
+![](./images/camera.gif)
+![](./images/jump.gif)
+
 ## Steps to use
-![](./images/EasyController/joystick.jpg)
+![](./images/joystick.jpg)
 
 ### Add virtual joystick
 1. Drag the ui_joystick_panel prefab from the EasyController folder to the Canvas.

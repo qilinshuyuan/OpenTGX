@@ -8,8 +8,12 @@ EasyController 可以看作是 EasyTouch、EasyJoystick、EasyCamera 的合体�
 - 角色控制器（移动、跳跃、动画切换、场景碰撞处理等）
 - 摄像机（第三人称摄像机、漫游摄像机）
 
+![](../../docs/EasyController/images/move.gif)
+![](../../docs/EasyController/images/camera.gif)
+![](../../docs/EasyController/images/jump.gif)
+
 ## 使用步骤
-![](./images/EasyController/joystick.jpg)
+![](../../docs/EasyController/images/joystick.jpg)
 
 ### 添加虚拟摇杆
 1、将 EasyController 目录下的 ui_joystick_panel 预制体拖动到 Canvas 下。
