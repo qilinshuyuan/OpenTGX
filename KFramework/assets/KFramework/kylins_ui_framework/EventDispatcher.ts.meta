@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "67accfbe-c0d5-4d50-b3ff-39481eb8e5b8",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/EventDispatcher.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}

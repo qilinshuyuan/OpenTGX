@@ -1,0 +1,103 @@
+{
+  "ver": "2.3.8",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "2cca57b9-f8e2-4cdc-9817-585128320009",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "24b96": {
+      "importer": "gltf-animation",
+      "uuid": "2cca57b9-f8e2-4cdc-9817-585128320009@24b96",
+      "displayName": "",
+      "id": "24b96",
+      "name": "anim_rig_fall_into_water.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 0.46666666865348816
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "6ecd3": {
+      "importer": "gltf-scene",
+      "uuid": "2cca57b9-f8e2-4cdc-9817-585128320009@6ecd3",
+      "displayName": "",
+      "id": "6ecd3",
+      "name": "anim_rig_fall_into_water.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "anim_rig_fall_into_water",
+        "duration": 0.46666666865348816,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "anim_rig_fall_into_water",
+            "from": 0,
+            "to": 0.46666666865348816,
+            "wrapMode": 2,
+            "previousId": "24b96"
+          }
+        ]
+      }
+    ],
+    "redirect": "2cca57b9-f8e2-4cdc-9817-585128320009@6ecd3",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "2cca57b9-f8e2-4cdc-9817-585128320009@6ecd3"
+      ]
+    },
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "mountAllAnimationsOnPrefab": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2682 @@
+[
+  {
+    "__type__": "cc.animation.AnimationGraph",
+    "_name": "",
+    "_objFlags": 0,
+    "_native": "",
+    "_layers": [
+      {
+        "__id__": 1
+      },
+      {
+        "__id__": 158
+      },
+      {
+        "__id__": 175
+      }
+    ],
+    "_variables": {
+      "speed": {
+        "__id__": 190
+      },
+      "is_ground": {
+        "__id__": 191
+      },
+      "trigger_jump": {
+        "__id__": 192
+      },
+      "trigger_fly": {
+        "__id__": 193
+      },
+      "blend_fall_into_water": {
+        "__id__": 194
+      },
+      "trigger_prop": {
+        "__id__": 195
+      },
+      "trigger_ready": {
+        "__id__": 196
+      },
+      "\btrigger_win": {
+        "__id__": 197
+      },
+      "trigger_fall_into_water": {
+        "__id__": 198
+      },
+      "state_num": {
+        "__id__": 199
+      },
+      "trigger_exit_move": {
+        "__id__": 200
+      },
+      "move_speed": {
+        "__id__": 201
+      },
+      "is_glide": {
+        "__id__": 202
+      },
+      "is_win": {
+        "__id__": 203
+      },
+      "trigger_umbrella_open": {
+        "__id__": 204
+      },
+      "trigger_umbrella_close": {
+        "__id__": 205
+      },
+      "is_fall_water": {
+        "__id__": 206
+      },
+      "is_sokoban": {
+        "__id__": 207
+      }
+    }
+  },
+  {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 2
+    },
+    "name": "base",
+    "weight": 1,
+    "mask": null
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 0.5344901917338459,
+        "top": 23.90428311894145,
+        "left": 82.65413472647934
+      }
+    },
+    "_states": [
+      {
+        "__id__": 3
+      },
+      {
+        "__id__": 4
+      },
+      {
+        "__id__": 5
+      },
+      {
+        "__id__": 6
+      },
+      {
+        "__id__": 93
+      },
+      {
+        "__id__": 112
+      },
+      {
+        "__id__": 122
+      },
+      {
+        "__id__": 138
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 147
+      },
+      {
+        "__id__": 150
+      },
+      {
+        "__id__": 153
+      },
+      {
+        "__id__": 154
+      },
+      {
+        "__id__": 155
+      },
+      {
+        "__id__": 157
+      }
+    ],
+    "_entryState": {
+      "__id__": 3
+    },
+    "_exitState": {
+      "__id__": 4
+    },
+    "_anyState": {
+      "__id__": 5
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -425.04062454469556,
+      "centerY": -64.81434905132491,
+      "id": "16479166515940.9304406092265542"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 163.74355819468985,
+      "centerY": -70.8433182000532,
+      "id": "16479166529780.3025503923839066"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": -120.17099398868817,
+      "centerY": -63.714366043213744,
+      "id": "16479205721830.7884465143619128"
+    },
+    "name": "state_move",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 7
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1.049883115804195,
+        "top": 0.2046151506794961,
+        "left": 6.341718009626607
+      }
+    },
+    "_states": [
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 9
+      },
+      {
+        "__id__": 10
+      },
+      {
+        "__id__": 11
+      },
+      {
+        "__id__": 13
+      },
+      {
+        "__id__": 23
+      },
+      {
+        "__id__": 58
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 65
+      },
+      {
+        "__id__": 68
+      },
+      {
+        "__id__": 70
+      },
+      {
+        "__id__": 73
+      },
+      {
+        "__id__": 76
+      },
+      {
+        "__id__": 79
+      },
+      {
+        "__id__": 80
+      },
+      {
+        "__id__": 82
+      },
+      {
+        "__id__": 83
+      },
+      {
+        "__id__": 86
+      },
+      {
+        "__id__": 87
+      },
+      {
+        "__id__": 90
+      }
+    ],
+    "_entryState": {
+      "__id__": 8
+    },
+    "_exitState": {
+      "__id__": 9
+    },
+    "_anyState": {
+      "__id__": 10
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -229.38289071778973,
+      "centerY": 35.66785420619078,
+      "id": "16480139350530.6901122365390455"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 107.35872000218347,
+      "centerY": 125.5263617669437,
+      "id": "16480139296870.870493211382888"
+    },
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -49.36166613408989,
+      "centerY": 125.27920331636369,
+      "id": "16480150369440.6989233709803311"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -109.35847571062502,
+      "centerY": -116.73152252451358,
+      "id": "16479229823420.06245585355137262",
+      "name": "jump"
+    },
+    "name": "jump",
+    "_components": [],
+    "motion": {
+      "__id__": 12
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16479229823390.1919219008955717",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "22b9e5fa-452b-4d39-b970-0ef14606f9ec@d32b9",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -113.38116526203933,
+      "centerY": 37.67565789534251,
+      "id": "16480065069340.7899713588459727"
+    },
+    "name": "move",
+    "_components": [
+      {
+        "__id__": 14
+      }
+    ],
+    "motion": {
+      "__id__": 15
+    },
+    "speed": 1,
+    "speedMultiplier": "move_speed",
+    "speedMultiplierEnabled": true
+  },
+  {
+    "__type__": "animationgraph_move",
+    "time": 0.5,
+    "msg": "msg_walk_sfx"
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1D",
+    "__editorExtras__": {
+      "id": "16480065069280.06550289613712934",
+      "centerX": -95.94935910905653,
+      "centerY": 0,
+      "autoThreshold": false,
+      "viewport": {
+        "scale": 0.9518000000000013,
+        "top": -8.345613816873646,
+        "left": -21.41349847673879
+      }
+    },
+    "name": "move",
+    "_items": [
+      {
+        "__id__": 16
+      },
+      {
+        "__id__": 18
+      },
+      {
+        "__id__": 20
+      }
+    ],
+    "param": {
+      "__id__": 22
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 17
+    },
+    "threshold": 0
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480065716810.11419813441696691",
+      "centerX": 102,
+      "centerY": -96.44575045207955
+    },
+    "clip": {
+      "__uuid__": "ad458d2b-05f5-4d4a-ab6a-936cd46d9766@e6c45",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 19
+    },
+    "threshold": 0.01
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480065796140.7211534715404544",
+      "centerX": 103.0506408909435,
+      "centerY": 10.5
+    },
+    "clip": {
+      "__uuid__": "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4@c0bd0",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 21
+    },
+    "threshold": 1
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480065896000.5004568465095278",
+      "centerX": 109.30384534566082,
+      "centerY": 109.65192267283044
+    },
+    "clip": {
+      "__uuid__": "4e5e790d-384c-4806-ace2-11fb5131d5a4@bf627",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "speed",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": 78.21199482588366,
+      "centerY": -51.86015281948718,
+      "id": "16552844628080.0991669936374513",
+      "name": "fall-glide"
+    },
+    "name": "fall-glide",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 24
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1.1344000000000003,
+        "top": -0.14203748570180447,
+        "left": -43.43877834289081
+      }
+    },
+    "_states": [
+      {
+        "__id__": 25
+      },
+      {
+        "__id__": 26
+      },
+      {
+        "__id__": 27
+      },
+      {
+        "__id__": 28
+      },
+      {
+        "__id__": 30
+      },
+      {
+        "__id__": 32
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 34
+      },
+      {
+        "__id__": 35
+      },
+      {
+        "__id__": 38
+      },
+      {
+        "__id__": 41
+      },
+      {
+        "__id__": 44
+      },
+      {
+        "__id__": 47
+      },
+      {
+        "__id__": 50
+      },
+      {
+        "__id__": 52
+      },
+      {
+        "__id__": 55
+      }
+    ],
+    "_entryState": {
+      "__id__": 25
+    },
+    "_exitState": {
+      "__id__": 26
+    },
+    "_anyState": {
+      "__id__": 27
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -135.97450429393945,
+      "centerY": -120.7958274706263,
+      "id": "16552846342270.9399556730433636"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -16.507954395602383,
+      "centerY": -13.350904447490507,
+      "id": "16552846964760.7861522179566192"
+    },
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -163.58041635133904,
+      "centerY": 59.101066219765585,
+      "id": "16552846955750.3193644004256795"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 29.31983021364556,
+      "centerY": -119.19200813960511,
+      "id": "16552845809620.7619497876083858",
+      "name": "fly"
+    },
+    "name": "fly",
+    "_components": [],
+    "motion": {
+      "__id__": 29
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16552845809560.24738791919104108",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "b8549459-6e21-4ea0-a69c-c23213cfa0b1@078fa",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -140.2119474785316,
+      "centerY": 4.30389904249418,
+      "id": "16552846135530.7433059605303824",
+      "name": "fall"
+    },
+    "name": "fall",
+    "_components": [],
+    "motion": {
+      "__id__": 31
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16552846135460.06310908830453843",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "22b9e5fa-452b-4d39-b970-0ef14606f9ec@2fbd8",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 31.74400822433671,
+      "centerY": 56.550099812710755,
+      "id": "16571038964940.9974638571480396",
+      "name": "sky_jump"
+    },
+    "name": "sky_jump",
+    "_components": [],
+    "motion": {
+      "__id__": 33
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16571038964760.8105396465913037",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "c1384d07-8d39-4e1b-afc5-a861976b43b2@5e9fa",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 25
+    },
+    "to": {
+      "__id__": 30
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 30
+    },
+    "to": {
+      "__id__": 28
+    },
+    "conditions": [
+      {
+        "__id__": 36
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 37
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 28
+    },
+    "to": {
+      "__id__": 30
+    },
+    "conditions": [
+      {
+        "__id__": 39
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 1,
+    "operand": {
+      "__id__": 40
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 25
+    },
+    "to": {
+      "__id__": 28
+    },
+    "conditions": [
+      {
+        "__id__": 42
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 43
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 28
+    },
+    "to": {
+      "__id__": 26
+    },
+    "conditions": [
+      {
+        "__id__": 45
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 46
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_ground",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 30
+    },
+    "to": {
+      "__id__": 26
+    },
+    "conditions": [
+      {
+        "__id__": 48
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 49
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_ground",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 27
+    },
+    "to": {
+      "__id__": 32
+    },
+    "conditions": [
+      {
+        "__id__": 51
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_jump"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 32
+    },
+    "to": {
+      "__id__": 30
+    },
+    "conditions": [
+      {
+        "__id__": 53
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 1,
+    "operand": {
+      "__id__": 54
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 32
+    },
+    "to": {
+      "__id__": 28
+    },
+    "conditions": [
+      {
+        "__id__": 56
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 57
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -185.53284614617877,
+      "centerY": -85.43989593310835,
+      "id": "16582010170610.08967349199563412",
+      "name": "jump"
+    },
+    "name": "jump",
+    "_components": [],
+    "motion": {
+      "__id__": 59
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1D",
+    "__editorExtras__": {
+      "id": "16582010170520.18973336663943385",
+      "centerX": -138,
+      "centerY": -6,
+      "name": "",
+      "autoThreshold": false,
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "name": "jump",
+    "_items": [
+      {
+        "__id__": 60
+      },
+      {
+        "__id__": 62
+      }
+    ],
+    "param": {
+      "__id__": 64
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 61
+    },
+    "threshold": 0.3
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16582010497120.14586496501932134",
+      "centerX": 57.40625,
+      "centerY": 89.5,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "22b9e5fa-452b-4d39-b970-0ef14606f9ec@d32b9",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 63
+    },
+    "threshold": 1
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16582010533480.2161074899803761",
+      "centerX": 39.40625,
+      "centerY": -73.5,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "c1384d07-8d39-4e1b-afc5-a861976b43b2@5e9fa",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "move_speed",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 8
+    },
+    "to": {
+      "__id__": 13
+    },
+    "conditions": [
+      {
+        "__id__": 66
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 67
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_ground",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 10
+    },
+    "to": {
+      "__id__": 9
+    },
+    "conditions": [
+      {
+        "__id__": 69
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_exit_move"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 11
+    },
+    "to": {
+      "__id__": 23
+    },
+    "conditions": [
+      {
+        "__id__": 71
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0.3
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 72
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 23
+    },
+    "to": {
+      "__id__": 13
+    },
+    "conditions": [
+      {
+        "__id__": 74
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 75
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_ground",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 13
+    },
+    "to": {
+      "__id__": 23
+    },
+    "conditions": [
+      {
+        "__id__": 77
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 1,
+    "operand": {
+      "__id__": 78
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_ground",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 11
+    },
+    "to": {
+      "__id__": 23
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 13
+    },
+    "to": {
+      "__id__": 58
+    },
+    "conditions": [
+      {
+        "__id__": 81
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_jump"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 58
+    },
+    "to": {
+      "__id__": 13
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 58
+    },
+    "to": {
+      "__id__": 23
+    },
+    "conditions": [
+      {
+        "__id__": 84
+      }
+    ],
+    "duration": 0.1,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0.3
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 85
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_glide",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 58
+    },
+    "to": {
+      "__id__": 23
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 10
+    },
+    "to": {
+      "__id__": 9
+    },
+    "conditions": [
+      {
+        "__id__": 88
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 89
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_win",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 10
+    },
+    "to": {
+      "__id__": 9
+    },
+    "conditions": [
+      {
+        "__id__": 91
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 92
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_fall_water",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": 54.98292100118971,
+      "centerY": -67.8231542338163,
+      "id": "16479206048000.3802231049018676"
+    },
+    "name": "state_fall_into_water",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 94
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 0.9980000000000002,
+        "top": -0.21717815577684776,
+        "left": -0.08605497810201732
+      }
+    },
+    "_states": [
+      {
+        "__id__": 95
+      },
+      {
+        "__id__": 96
+      },
+      {
+        "__id__": 97
+      },
+      {
+        "__id__": 98
+      },
+      {
+        "__id__": 105
+      },
+      {
+        "__id__": 107
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 109
+      },
+      {
+        "__id__": 110
+      },
+      {
+        "__id__": 111
+      }
+    ],
+    "_entryState": {
+      "__id__": 95
+    },
+    "_exitState": {
+      "__id__": 96
+    },
+    "_anyState": {
+      "__id__": 97
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 59.04606674286077,
+      "centerY": -229.99199601595757,
+      "id": "16480151206840.8587311024454869"
+    },
+    "name": "fall_into_water",
+    "_components": [],
+    "motion": {
+      "__id__": 99
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1D",
+    "__editorExtras__": {
+      "id": "16480151206650.4309146993864119",
+      "centerX": -95,
+      "centerY": -4,
+      "autoThreshold": true,
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "name": "fall_into_water",
+    "_items": [
+      {
+        "__id__": 100
+      },
+      {
+        "__id__": 102
+      }
+    ],
+    "param": {
+      "__id__": 104
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 101
+    },
+    "threshold": 0
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480151832610.8010877525026341",
+      "centerX": 102,
+      "centerY": -82.5
+    },
+    "clip": {
+      "__uuid__": "2cca57b9-f8e2-4cdc-9817-585128320009@24b96",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.AnimationBlend1DItem",
+    "motion": {
+      "__id__": 103
+    },
+    "threshold": 1
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480151886390.9583193083414501",
+      "centerX": 100,
+      "centerY": 43.5
+    },
+    "clip": {
+      "__uuid__": "6f667909-55ed-4ad3-97d1-5a103ff6d769@79341",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableNumber",
+    "variable": "blend_fall_into_water",
+    "value": 0
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -35.687355179108124,
+      "centerY": -71.23849487304679,
+      "id": "16555310690010.13255402319114995"
+    },
+    "name": "anim_rig_fall_into_water",
+    "_components": [],
+    "motion": {
+      "__id__": 106
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16555310689960.4779601289497666",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "2cca57b9-f8e2-4cdc-9817-585128320009@24b96",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 215.81565083291594,
+      "centerY": -101.29861511352775,
+      "id": "16555310874840.9279904534284473"
+    },
+    "name": "anim_rig_fall_into_water_die",
+    "_components": [],
+    "motion": {
+      "__id__": 108
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16555310874770.32666009780115446",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "b1fb1f6e-d9fb-4d78-a31c-c9295bffa8f2@380a2",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 95
+    },
+    "to": {
+      "__id__": 105
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 105
+    },
+    "to": {
+      "__id__": 107
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 5
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 107
+    },
+    "to": {
+      "__id__": 105
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": -117.79996611341241,
+      "centerY": 89.14003383352508,
+      "id": "16479206518810.49495854576390585"
+    },
+    "name": "state_win",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 113
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "_states": [
+      {
+        "__id__": 114
+      },
+      {
+        "__id__": 115
+      },
+      {
+        "__id__": 116
+      },
+      {
+        "__id__": 117
+      },
+      {
+        "__id__": 119
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 121
+      }
+    ],
+    "_entryState": {
+      "__id__": 114
+    },
+    "_exitState": {
+      "__id__": 115
+    },
+    "_anyState": {
+      "__id__": 116
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -32.5,
+      "centerY": -40.5,
+      "id": "16480139688280.5103779706724336",
+      "name": "win"
+    },
+    "name": "win",
+    "_components": [],
+    "motion": {
+      "__id__": 118
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480139688220.1503157471932075",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "86700f78-dd53-445d-b4f3-bf1d6bf6addc@53e2d",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 70.5,
+      "centerY": -35.5,
+      "id": "16480152955730.2982834248661961",
+      "name": "idle"
+    },
+    "name": "idle",
+    "_components": [],
+    "motion": {
+      "__id__": 120
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480152955550.5208782770053959",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "ad458d2b-05f5-4d4a-ab6a-936cd46d9766@e6c45",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 114
+    },
+    "to": {
+      "__id__": 117
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": -296.20302963589654,
+      "centerY": -63.91020399196617,
+      "id": "16480011155170.8321555622952104"
+    },
+    "name": "state_ready",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 123
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "_states": [
+      {
+        "__id__": 124
+      },
+      {
+        "__id__": 125
+      },
+      {
+        "__id__": 126
+      },
+      {
+        "__id__": 127
+      },
+      {
+        "__id__": 129
+      },
+      {
+        "__id__": 131
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 133
+      },
+      {
+        "__id__": 134
+      },
+      {
+        "__id__": 135
+      },
+      {
+        "__id__": 137
+      }
+    ],
+    "_entryState": {
+      "__id__": 124
+    },
+    "_exitState": {
+      "__id__": 125
+    },
+    "_anyState": {
+      "__id__": 126
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -175,
+      "centerY": -17,
+      "id": "16480012081690.5712639744088228"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 171,
+      "centerY": 74,
+      "id": "16480012555220.7325118999643028"
+    },
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -23,
+      "centerY": 123,
+      "id": "16480012639750.34373981805374965"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -79.5,
+      "centerY": -16,
+      "id": "16480011890280.513014290632924",
+      "name": "idle_1"
+    },
+    "name": "idle_1",
+    "_components": [],
+    "motion": {
+      "__id__": 128
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480011890130.2898451426168258",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "ad458d2b-05f5-4d4a-ab6a-936cd46d9766@e6c45",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 73.5,
+      "centerY": -15,
+      "id": "16480012184920.3112741637484784",
+      "name": "idle_2"
+    },
+    "name": "idle_2",
+    "_components": [],
+    "motion": {
+      "__id__": 130
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480012184800.8802016936645449",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "6f667909-55ed-4ad3-97d1-5a103ff6d769@79341",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -18.5,
+      "centerY": 62,
+      "id": "16480012809490.0593905360878515"
+    },
+    "name": "anim_rig_idle_1",
+    "_components": [],
+    "motion": {
+      "__id__": 132
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480012809420.7102534463944967",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "ad458d2b-05f5-4d4a-ab6a-936cd46d9766@e6c45",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 124
+    },
+    "to": {
+      "__id__": 127
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 127
+    },
+    "to": {
+      "__id__": 129
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 2
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 126
+    },
+    "to": {
+      "__id__": 125
+    },
+    "conditions": [
+      {
+        "__id__": 136
+      }
+    ],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_ready"
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 129
+    },
+    "to": {
+      "__id__": 127
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.SubStateMachine",
+    "__editorExtras__": {
+      "centerX": -120.65791833388661,
+      "centerY": -213.9091249093247,
+      "id": "16480154170580.1865128899644961"
+    },
+    "name": "state_eat_prop",
+    "_components": [],
+    "_stateMachine": {
+      "__id__": 139
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "_states": [
+      {
+        "__id__": 140
+      },
+      {
+        "__id__": 141
+      },
+      {
+        "__id__": 142
+      },
+      {
+        "__id__": 143
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 145
+      },
+      {
+        "__id__": 146
+      }
+    ],
+    "_entryState": {
+      "__id__": 140
+    },
+    "_exitState": {
+      "__id__": 141
+    },
+    "_anyState": {
+      "__id__": 142
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": -0.5,
+      "centerY": -30.5,
+      "id": "16480155639390.5248856780001991",
+      "name": "eat"
+    },
+    "name": "eat",
+    "_components": [],
+    "motion": {
+      "__id__": 144
+    },
+    "speed": 2,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16480155639090.4431751607746097",
+      "centerX": 0,
+      "centerY": 0
+    },
+    "clip": {
+      "__uuid__": "22b9e5fa-452b-4d39-b970-0ef14606f9ec@2fbd8",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 140
+    },
+    "to": {
+      "__id__": 143
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 143
+    },
+    "to": {
+      "__id__": 141
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 6
+    },
+    "to": {
+      "__id__": 93
+    },
+    "conditions": [
+      {
+        "__id__": 148
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 149
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_fall_water",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 6
+    },
+    "to": {
+      "__id__": 112
+    },
+    "conditions": [
+      {
+        "__id__": 151
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 152
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_win",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 122
+    },
+    "to": {
+      "__id__": 6
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 3
+    },
+    "to": {
+      "__id__": 122
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 6
+    },
+    "to": {
+      "__id__": 138
+    },
+    "conditions": [
+      {
+        "__id__": 156
+      }
+    ]
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_prop"
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 138
+    },
+    "to": {
+      "__id__": 6
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 159
+    },
+    "name": "umbrella",
+    "weight": 1,
+    "mask": {
+      "__uuid__": "90de7847-9e60-4cb2-8f12-51399ada4b6c",
+      "__expectedType__": "cc.animation.AnimationMask"
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 1,
+        "top": 0,
+        "left": 0
+      }
+    },
+    "_states": [
+      {
+        "__id__": 160
+      },
+      {
+        "__id__": 161
+      },
+      {
+        "__id__": 162
+      },
+      {
+        "__id__": 163
+      },
+      {
+        "__id__": 164
+      },
+      {
+        "__id__": 166
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 168
+      },
+      {
+        "__id__": 169
+      },
+      {
+        "__id__": 170
+      },
+      {
+        "__id__": 171
+      },
+      {
+        "__id__": 173
+      }
+    ],
+    "_entryState": {
+      "__id__": 160
+    },
+    "_exitState": {
+      "__id__": 161
+    },
+    "_anyState": {
+      "__id__": 162
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -206,
+      "centerY": -49,
+      "id": "16570977291950.37129494955929254"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 172,
+      "centerY": -57,
+      "id": "16570985485530.3020684675426595"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.EmptyState",
+    "__editorExtras__": {
+      "centerX": -120.5,
+      "centerY": -57,
+      "id": "16570977175430.9663331143033371"
+    },
+    "name": "Empty"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 12.5,
+      "centerY": -115,
+      "id": "16570977231350.8172612341256189"
+    },
+    "name": "anim_rig_fly_shut",
+    "_components": [],
+    "motion": {
+      "__id__": 165
+    },
+    "speed": 2,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16570977231270.19037553010796215",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "c657cafb-170c-45b7-ba51-ac61469db43f@35302",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 14.5,
+      "centerY": -11,
+      "id": "16570978158740.9551537476187624"
+    },
+    "name": "anim_rig_fly_open",
+    "_components": [],
+    "motion": {
+      "__id__": 167
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16570978158690.48534274035149516",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "71cd5f68-0f8d-4c92-842a-19b599abf4e3@95b6d",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 160
+    },
+    "to": {
+      "__id__": 163
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 164
+    },
+    "to": {
+      "__id__": 163
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 166
+    },
+    "to": {
+      "__id__": 163
+    },
+    "conditions": [],
+    "duration": 0.3,
+    "relativeDuration": false,
+    "exitConditionEnabled": true,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 1
+  },
+  {
+    "__type__": "cc.animation.EmptyStateTransition",
+    "from": {
+      "__id__": 163
+    },
+    "to": {
+      "__id__": 164
+    },
+    "conditions": [
+      {
+        "__id__": 172
+      }
+    ],
+    "duration": 0.3,
+    "destinationStart": 0,
+    "relativeDestinationStart": false
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_umbrella_close"
+  },
+  {
+    "__type__": "cc.animation.EmptyStateTransition",
+    "from": {
+      "__id__": 163
+    },
+    "to": {
+      "__id__": 166
+    },
+    "conditions": [
+      {
+        "__id__": 174
+      }
+    ],
+    "duration": 0.3,
+    "destinationStart": 0,
+    "relativeDestinationStart": false
+  },
+  {
+    "__type__": "cc.animation.TriggerCondition",
+    "trigger": "trigger_umbrella_open"
+  },
+  {
+    "__type__": "cc.animation.Layer",
+    "_stateMachine": {
+      "__id__": 176
+    },
+    "name": "sokoban",
+    "weight": 1,
+    "mask": {
+      "__uuid__": "f26be37a-e527-4b5d-a764-80104c4560e5",
+      "__expectedType__": "cc.animation.AnimationMask"
+    }
+  },
+  {
+    "__type__": "cc.animation.StateMachine",
+    "__editorExtras__": {
+      "viewport": {
+        "scale": 0.6080137696743002,
+        "top": 5.74865886839715,
+        "left": 12.0251510778908
+      }
+    },
+    "_states": [
+      {
+        "__id__": 177
+      },
+      {
+        "__id__": 178
+      },
+      {
+        "__id__": 179
+      },
+      {
+        "__id__": 180
+      },
+      {
+        "__id__": 182
+      }
+    ],
+    "_transitions": [
+      {
+        "__id__": 183
+      },
+      {
+        "__id__": 184
+      },
+      {
+        "__id__": 187
+      }
+    ],
+    "_entryState": {
+      "__id__": 177
+    },
+    "_exitState": {
+      "__id__": 178
+    },
+    "_anyState": {
+      "__id__": 179
+    }
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": -193,
+      "centerY": -15,
+      "id": "16641810867640.37751974676832"
+    },
+    "name": "Entry"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "name": "Exit"
+  },
+  {
+    "__type__": "cc.animation.State",
+    "__editorExtras__": {
+      "centerX": 177,
+      "centerY": -2,
+      "id": "16641810910130.16667220765521096"
+    },
+    "name": "Any"
+  },
+  {
+    "__type__": "cc.animation.Motion",
+    "__editorExtras__": {
+      "centerX": 64.5,
+      "centerY": -148.5,
+      "id": "16641810533260.5999553680774063"
+    },
+    "name": "anim_rig_sokoban",
+    "_components": [],
+    "motion": {
+      "__id__": 181
+    },
+    "speed": 1,
+    "speedMultiplier": "",
+    "speedMultiplierEnabled": false
+  },
+  {
+    "__type__": "cc.animation.ClipMotion",
+    "__editorExtras__": {
+      "id": "16641810533210.8483501851192115",
+      "centerX": 0,
+      "centerY": 0,
+      "name": ""
+    },
+    "clip": {
+      "__uuid__": "ef35630b-fbaf-43b2-ab69-409fabe89908@36da2",
+      "__expectedType__": "cc.AnimationClip"
+    }
+  },
+  {
+    "__type__": "cc.animation.EmptyState",
+    "__editorExtras__": {
+      "centerX": -114.5,
+      "centerY": -103.5,
+      "id": "16641810953670.36509469552229756"
+    },
+    "name": "Empty"
+  },
+  {
+    "__type__": "cc.animation.Transition",
+    "from": {
+      "__id__": 177
+    },
+    "to": {
+      "__id__": 182
+    },
+    "conditions": []
+  },
+  {
+    "__type__": "cc.animation.EmptyStateTransition",
+    "from": {
+      "__id__": 182
+    },
+    "to": {
+      "__id__": 180
+    },
+    "conditions": [
+      {
+        "__id__": 185
+      }
+    ],
+    "duration": 0.3,
+    "destinationStart": 0,
+    "relativeDestinationStart": false
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 0,
+    "operand": {
+      "__id__": 186
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_sokoban",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.AnimationTransition",
+    "from": {
+      "__id__": 180
+    },
+    "to": {
+      "__id__": 182
+    },
+    "conditions": [
+      {
+        "__id__": 188
+      }
+    ],
+    "duration": 0,
+    "relativeDuration": false,
+    "exitConditionEnabled": false,
+    "destinationStart": 0,
+    "relativeDestinationStart": false,
+    "interruptionSource": 0,
+    "_exitCondition": 0.01
+  },
+  {
+    "__type__": "cc.animation.UnaryCondition",
+    "operator": 1,
+    "operand": {
+      "__id__": 189
+    }
+  },
+  {
+    "__type__": "cc.animation.BindableBoolean",
+    "variable": "is_sokoban",
+    "value": false
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 0,
+    "_value": 0
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 2
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 2
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 0,
+    "_value": 0.5
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 0
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 3,
+    "_value": 0
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 2
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 0,
+    "_value": 0
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 2
+  },
+  {
+    "__type__": "cc.animation.TriggerVariable",
+    "_flags": 2
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  },
+  {
+    "__type__": "cc.animation.PlainVariable",
+    "_type": 1,
+    "_value": false
+  }
+]

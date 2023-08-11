@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "8fac4981-1bc9-4fa3-9c41-df044d19386c",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/InputMgr.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}

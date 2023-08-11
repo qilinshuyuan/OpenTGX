@@ -1,0 +1,103 @@
+{
+  "ver": "2.3.8",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "bf851bc5-65ad-42e0-bc99-644270b6cf67",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "981f6": {
+      "importer": "gltf-animation",
+      "uuid": "bf851bc5-65ad-42e0-bc99-644270b6cf67@981f6",
+      "displayName": "",
+      "id": "981f6",
+      "name": "anim_rig_high_speed_drop_ground.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 3
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "637df": {
+      "importer": "gltf-scene",
+      "uuid": "bf851bc5-65ad-42e0-bc99-644270b6cf67@637df",
+      "displayName": "",
+      "id": "637df",
+      "name": "anim_rig_high_speed_drop_ground.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "fbx": {
+      "smartMaterialEnabled": true,
+      "matchMeshNames": false
+    },
+    "animationImportSettings": [
+      {
+        "name": "anim_rig_high_speed_drop_ground",
+        "duration": 3,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "anim_rig_high_speed_drop_ground",
+            "from": 0,
+            "to": 3,
+            "wrapMode": 2,
+            "previousId": "981f6"
+          }
+        ]
+      }
+    ],
+    "redirect": "bf851bc5-65ad-42e0-bc99-644270b6cf67@637df",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "bf851bc5-65ad-42e0-bc99-644270b6cf67@637df"
+      ]
+    },
+    "mountAllAnimationsOnPrefab": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}
