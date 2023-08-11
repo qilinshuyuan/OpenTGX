@@ -1,6 +1,5 @@
-import { Vec3, v3 } from "cc";
 import { UIController } from "../UIController";
-import { UILayer, UIMgr } from "../UIMgr";
+import { UIMgr } from "../UIMgr";
 import { Layout_UIAlert } from "./Layout_UIAlert";
 
 export class UIAlertOptions{
