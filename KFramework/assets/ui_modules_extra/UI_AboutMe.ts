@@ -1,10 +1,11 @@
-import { UIController } from "../KFramework/kylins_ui_framework/UIController";
-import { Layout_AboutMe } from "./Layout_AboutMe";
-import { GameUILayer } from "../ui_modules_basic/GameUILayer";
 
-export class UI_AboutMe extends UIController{
+import { Layout_AboutMe } from "./Layout_AboutMe";
+import { UIModule, UI_AboutMe } from "../scripts/UIDef";
+import { GameUILayer } from "../scripts/GameUILayer";
+
+export class UI_AboutMe_Impl extends UI_AboutMe{
     constructor(){
-        super('UI_AboutMe', GameUILayer.POPUP0, Layout_AboutMe, 'ui_modules_about');
+        super('UI_AboutMe', GameUILayer.POPUP0, Layout_AboutMe);
     }
 
     public getRes(): [] {
@@ -17,5 +18,6 @@ export class UI_AboutMe extends UIController{
             this.hide();
         });
     }
-
 }
+
+UIModule.attachImplClass(UI_AboutMe,UI_AboutMe_Impl);

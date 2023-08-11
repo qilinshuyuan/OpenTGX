@@ -10,11 +10,15 @@ export class LoadingScene extends Component {
     start() {
         const entryScene = 'rooster_jump';
         assetManager.loadBundle('scenes_rpg',null,()=>{
-            director.loadScene(entryScene);return;
+            let now = Date.now();
             director.preloadScene(entryScene,(completedCount:number,totalCount:number)=>{
                 this._percent = ~~(completedCount/totalCount*100) + '%';
             },()=>{
-                director.loadScene(entryScene);
+                console.log('preloadScene:' + (Date.now() - now) + ' ms');
+                now = Date.now();
+                director.loadScene(entryScene,()=>{
+                    console.log('loadScene:' + (Date.now() - now) + ' ms'); 
+                });
             });
         });
     }

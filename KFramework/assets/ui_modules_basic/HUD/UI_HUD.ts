@@ -1,12 +1,11 @@
 import { profiler, view, macro, screen } from "cc";
-import { UIController } from "../../KFramework/kylins_ui_framework/UIController";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { GameUILayer } from "../GameUILayer";
+import { UIModule, UI_AboutMe, UI_HUD } from "../../scripts/UIDef";
 import { UIMgr } from "../../KFramework/kylins_ui_framework/UIMgr";
-import { UIDef, UIModule } from "../../scripts/UIDef";
-export class UI_HUD extends UIController {
+import { GameUILayer } from "../../scripts/GameUILayer";
+export class UI_HUD_Impl extends UI_HUD {
     constructor() {
-        super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD, UIModule.UI_Module_Basic);
+        super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
     }
 
     public getRes(): [] {
@@ -23,7 +22,7 @@ export class UI_HUD extends UIController {
         this.onButtonEvent(layout.btnToggleStats, this.onToggleStats, this);
 
         this.onButtonEvent(layout.btnAbout, () => {
-            //UIMgr.inst.showUI(UI_AboutMe, null, null);
+            UIMgr.inst.showUI(UI_AboutMe);
         });
     }
 
@@ -63,4 +62,4 @@ export class UI_HUD extends UIController {
     }
 }
 
-UIModule.addUIClass(UIDef.UI_HUD, UI_HUD);
+UIModule.attachImplClass(UI_HUD, UI_HUD_Impl);

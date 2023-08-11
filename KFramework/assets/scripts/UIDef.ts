@@ -1,33 +1,26 @@
+import { UIController } from "../KFramework/kylins_ui_framework/UIController";
 import { UIMgr } from "../KFramework/kylins_ui_framework/UIMgr";
 
-let _currentModule = '';
-function setCurrentModule(module:string){
 
-}
-function addUI(name:string){
-    UIMgr.inst.registerUI(name,_currentModule);
+function addUI(uiBaseCls,module:string){
+    UIMgr.inst.attachModule(uiBaseCls,module);
 }
 
 export class UIModule{
-    public static UI_Module_Basic = 'ui_module_basic';
-    public static UI_Module_Extra = 'ui_module_extra';
+    public static UI_Module_Basic = 'ui_modules_basic';
+    public static UI_Module_Extra = 'ui_modules_extra';
 
-    public static addUIClass(name:string, uiCls:any){
-        UIMgr.inst.attachUIClass(name,uiCls);
+    public static attachImplClass(uiBaseCls, uiImplCls:any){
+        UIMgr.inst.attachImplClass(uiBaseCls,uiImplCls);
     }
 }
 
-export class UIDef{
-    //============= ui module basic ==============
-    public static UI_HUD:string = 'UI_HUD';
+export class UI_HUD extends UIController{}
+
+addUI(UI_HUD,UIModule.UI_Module_Basic);
 
 
-    //============= ui module extra ==============
-    public static UI_ABOUT_ME:string = 'UI_ABOUT_ME';
-}
 
-setCurrentModule(UIModule.UI_Module_Basic);
-addUI(UIDef.UI_HUD);
+export class UI_AboutMe extends UIController{}
 
-setCurrentModule(UIModule.UI_Module_Extra);
-addUI(UIDef.UI_ABOUT_ME);
+addUI(UI_AboutMe,UIModule.UI_Module_Extra);

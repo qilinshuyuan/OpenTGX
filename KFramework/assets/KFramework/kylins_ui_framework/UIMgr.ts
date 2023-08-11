@@ -35,7 +35,21 @@ export class UIMgr {
         return this._inst;
     }
 
-    private _uiClsMap = {};
+    attachModule(uiCls,moduleName){
+        uiCls['__module__name__'] = moduleName;
+    }
+
+    getModule(uiCls){
+        return uiCls['__module__name__'];
+    }
+
+    attachImplClass(uiCls,uiImplCls){
+        uiCls['__impl__class__'] = uiImplCls;
+    }
+
+    getImplClass(uiCls){
+        return uiCls['__impl__class__'];
+    }
 
     public resize() {
         //根据屏幕大小决定适配策略
@@ -113,18 +127,6 @@ export class UIMgr {
         UIController.updateAll();
     }
 
-    public registerUI(clsName:string, module:string){
-        this._uiClsMap[clsName] = {module:module};
-    }
-
-    public attachUIClass(clsName:string, uiCls){
-        let info = this._uiClsMap[clsName];
-        if(!info){
-            throw Error('Can not find clsName:' + clsName);
-        }
-        info.uiCls = uiCls;
-    }
-
     /***
      * @en show ui by the given parameters.
      * @zh 显示UI
@@ -133,11 +135,12 @@ export class UIMgr {
      * @param thisArg the this argument for param `cb`.
      * @returns the instance of `uiCls`
      *  */
-    public showUI(uiCls: any, cb?: Function, thisArg?: any, dependModule?: string): any {
-        if (dependModule) {
-            let bundle = assetManager.getBundle(dependModule);
+    public showUI(uiCls: any, cb?: Function, thisArg?: any): any {
+        let bundleName = this.getModule(uiCls);
+        if (bundleName) {
+            let bundle = assetManager.getBundle(bundleName);
             if (!bundle) {
-                assetManager.loadBundle(dependModule, null, (err, loadedBundle) => {
+                assetManager.loadBundle(bundleName, null, (err, loadedBundle) => {
                     if (err) {
                         console.log(err);
                     }
@@ -149,7 +152,9 @@ export class UIMgr {
             }
         }
 
-        let ui = new uiCls() as UIController;
+        let uiImplCls = this.getImplClass(uiCls);
+
+        let ui = new uiImplCls() as UIController;
         let resArr = ui.getRes() || [];
         if (typeof (ui.prefab) == 'string') {
             resArr.push(ui.prefab as never);
@@ -193,9 +198,9 @@ export class UIMgr {
             return ui;
         }
 
-        let bundle = assetManager.getBundle(ui.bundle);
+        let bundle = assetManager.getBundle(bundleName);
         if (!bundle) {
-            assetManager.loadBundle(ui.bundle, null, (err, loadedBundle) => {
+            assetManager.loadBundle(bundleName, null, (err, loadedBundle) => {
                 if (err) {
                     console.log(err);
                 }

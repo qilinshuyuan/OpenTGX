@@ -1,8 +1,8 @@
 import { _decorator, assetManager, Component, game, Node } from 'cc';
 import { UI_Joystick } from '../KFramework/kylins_easy_controller/UI_Joystick';
 import { UIMgr } from '../KFramework/kylins_ui_framework/UIMgr';
-import { GameUILayer } from '../ui_modules_basic/GameUILayer';
-import { UI_HUD } from '../ui_modules_basic/HUD/UI_HUD';
+import { UI_HUD } from './UIDef';
+import { GameUILayer } from './GameUILayer';
 const { ccclass, property } = _decorator;
 
 @ccclass('RoosterJumpEntry')
@@ -15,10 +15,8 @@ export class RoosterJumpEntry extends Component {
 
         game.frameRate = 61;
 
-        assetManager.loadBundle('ui_modules',null,()=>{
-            UIMgr.inst.setup(GameUILayer.NUM);
-            UIMgr.inst.showUI(UI_HUD);
-        });
+        UIMgr.inst.setup(GameUILayer.NUM);
+        UIMgr.inst.showUI(UI_HUD);
     }
 
     update(deltaTime: number) {

@@ -2544,7 +2544,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 360,
+    "_orthoHeight": 387.4247491638796,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -3235,11 +3235,11 @@
     "_useHDR": true,
     "_editableMaterial": null,
     "_reflectionHDR": {
-      "__uuid__": "e81f0627-8f90-4fcf-8850-17efd0d8cc9a@b47c0",
+      "__uuid__": "6a5a382f-0634-4256-9e8b-f7c062d69655@b47c0",
       "__expectedType__": "cc.TextureCube"
     },
     "_reflectionLDR": {
-      "__uuid__": "e81f0627-8f90-4fcf-8850-17efd0d8cc9a@b47c0",
+      "__uuid__": "6a5a382f-0634-4256-9e8b-f7c062d69655@b47c0",
       "__expectedType__": "cc.TextureCube"
     },
     "_rotationAngle": 0

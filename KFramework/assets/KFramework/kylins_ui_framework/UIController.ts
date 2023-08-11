@@ -92,17 +92,15 @@ export class UIController extends AutoEventHandler {
 
     private static _controllers: UIController[] = [];
     private _instId: number = 0;
-    private _bundle: string = 'resources';
     private _prefab: string | Prefab;
     private _layer: number;
     private _layout: any;
     protected node: Node;
-    constructor(prefab: string | Prefab, layer: number, layoutCls: any, bundle: string = 'resources') {
+    constructor(prefab: string | Prefab, layer: number, layoutCls: any) {
         super();
         this._prefab = prefab;
         this._layer = layer;
         this._layout = layoutCls;
-        this._bundle = bundle;
         this._instId = UIController._idBase++;
         UIController._controllers.push(this);
     }
@@ -113,14 +111,6 @@ export class UIController extends AutoEventHandler {
      *  */
     public get instId(): number {
         return this._instId;
-    }
-
-    /***
-     * @en url of the bundle where the assets in.
-     * @zh 本 UI 相关资源所在的 bundle
-     *  */
-    public get bundle(): string {
-        return this._bundle;
     }
 
     /***
