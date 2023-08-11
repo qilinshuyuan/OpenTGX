@@ -1,8 +1,8 @@
 import { profiler, view, macro, screen } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { UIModule, UI_AboutMe, UI_HUD } from "../../scripts/UIDef";
-import { UIMgr } from "../../KFramework/kylins_ui_framework/UIMgr";
-import { GameUILayer } from "../../scripts/GameUILayer";
+import { UIMgr } from "../../../KFramework/kylins_ui_framework/UIMgr";
+import { GameUILayer } from "../../../scripts/GameUILayer";
+import { UI_HUD, UI_AboutMe, UIModule } from "../../../scripts/UIDef";
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
         super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);

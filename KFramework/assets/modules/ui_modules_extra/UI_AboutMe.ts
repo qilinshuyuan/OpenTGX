@@ -1,7 +1,7 @@
 
+import { GameUILayer } from "../../scripts/GameUILayer";
+import { UI_AboutMe, UIModule } from "../../scripts/UIDef";
 import { Layout_AboutMe } from "./Layout_AboutMe";
-import { UIModule, UI_AboutMe } from "../scripts/UIDef";
-import { GameUILayer } from "../scripts/GameUILayer";
 
 export class UI_AboutMe_Impl extends UI_AboutMe{
     constructor(){

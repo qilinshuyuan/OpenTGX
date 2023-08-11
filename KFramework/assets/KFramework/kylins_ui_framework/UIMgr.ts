@@ -198,19 +198,8 @@ export class UIMgr {
             return ui;
         }
 
+        bundleName = bundleName || 'resources';
         let bundle = assetManager.getBundle(bundleName);
-        if (!bundle) {
-            assetManager.loadBundle(bundleName, null, (err, loadedBundle) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    fnLoadAndCreateFromBundle(loadedBundle);
-                }
-            });
-        }
-        else {
-            fnLoadAndCreateFromBundle(bundle);
-        }
+        fnLoadAndCreateFromBundle(bundle);
     }
 }

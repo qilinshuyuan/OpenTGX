@@ -1,5 +1,6 @@
 import { UIController } from "../KFramework/kylins_ui_framework/UIController";
 import { UIMgr } from "../KFramework/kylins_ui_framework/UIMgr";
+import { UIAlert } from "../KFramework/kylins_ui_framework/alert/UIAlert";
 
 
 function addUI(uiBaseCls,module:string){
@@ -7,6 +8,7 @@ function addUI(uiBaseCls,module:string){
 }
 
 export class UIModule{
+    public static UI_Base = 'ui_base';
     public static UI_Module_Basic = 'ui_modules_basic';
     public static UI_Module_Extra = 'ui_modules_extra';
 
@@ -14,6 +16,8 @@ export class UIModule{
         UIMgr.inst.attachImplClass(uiBaseCls,uiImplCls);
     }
 }
+
+addUI(UIAlert,UIModule.UI_Base);
 
 export class UI_HUD extends UIController{}
 
