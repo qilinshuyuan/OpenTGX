@@ -1,7 +1,5 @@
-import { _decorator, Node, Prefab, instantiate, find, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, Canvas, Camera, CameraComponent, director } from 'cc';
+import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director } from 'cc';
 import { UIController } from './UIController';
-const { ccclass, property } = _decorator;
-
 
 /****
  * @en ui layers.each project can modify it based on needs.
