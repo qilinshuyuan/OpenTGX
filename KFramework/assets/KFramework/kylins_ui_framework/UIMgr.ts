@@ -1,4 +1,4 @@
-import { _decorator, Node, Prefab, instantiate, find, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager } from 'cc';
+import { _decorator, Node, Prefab, instantiate, find, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, Canvas, Camera, CameraComponent, director } from 'cc';
 import { UIController } from './UIController';
 const { ccclass, property } = _decorator;
 
@@ -51,6 +51,8 @@ export class UIMgr {
         return uiCls['__impl__class__'];
     }
 
+    private _uiCanvas:Node;
+
     public resize() {
         //根据屏幕大小决定适配策略
         //想明白原理，请阅读本文 https://blog.csdn.net/qq_36720848/article/details/89742451
@@ -80,7 +82,7 @@ export class UIMgr {
         //手工修改canvas和设计分辨率，这样反复调用也能生效。
         //we use the code below instead of fitWidth = true or fitHeight = true. so that we can recall this method many times.
         view.setDesignResolutionSize(finalW, finalH, ResolutionPolicy.UNKNOWN);
-        let cvs = find('Canvas').getComponent(UITransform);
+        let cvs = this._uiCanvas.getComponent(UITransform);
         cvs.width = finalW;
         cvs.height = finalH;
     }
@@ -89,16 +91,20 @@ export class UIMgr {
      * @en setup this UIMgr,`don't call more than once`.
      * @zh 初始化UIMgr,`不要多次调用`
      *  */
-    public setup(maxLayers: number) {
+    public setup(uiCanvas:Node, maxLayers: number) {
+        this._uiCanvas = uiCanvas;
+        director.addPersistRootNode(this._uiCanvas);
+
         this.resize();
-        let canvas = find('Canvas').getComponent(UITransform);
+        let canvas = this._uiCanvas.getComponent(UITransform);
         //create layers
         for (let i = 0; i < maxLayers; ++i) {
             let layerNode = new Node();
             layerNode.layer = canvas.node.layer;
-            let uiTransfrom = layerNode.addComponent(UITransform);
-            uiTransfrom.width = canvas.width;
-            uiTransfrom.height = canvas.height;
+            layerNode.name = 'layer_' + i;
+            let uiTransform = layerNode.addComponent(UITransform);
+            uiTransform.width = canvas.width;
+            uiTransform.height = canvas.height;
 
             let widget = layerNode.addComponent(Widget);
             widget.isAlignBottom = true;
@@ -115,7 +121,7 @@ export class UIMgr {
     }
 
     public getLayerNode(layerIndex: number): Node {
-        let canvas = find('Canvas');
+        let canvas = this._uiCanvas;
         return canvas.children[layerIndex];
     }
 
@@ -173,7 +179,7 @@ export class UIMgr {
                 else {
                     //special for empty ui
                     node = new Node();
-                    node.layer = find('Canvas').layer;
+                    node.layer = this._uiCanvas.layer;
 
                     //keep size
                     let widget = node.addComponent(Widget);
@@ -188,7 +194,7 @@ export class UIMgr {
                     widget.bottom = 0;
                 }
 
-                let parent = UIMgr.inst.getLayerNode(ui.layer) || find('Canvas');
+                let parent = UIMgr.inst.getLayerNode(ui.layer) || this._uiCanvas;
                 parent.addChild(node);
                 ui.setup(node);
                 if (cb) {
@@ -200,6 +206,6 @@ export class UIMgr {
 
         bundleName = bundleName || 'resources';
         let bundle = assetManager.getBundle(bundleName);
-        fnLoadAndCreateFromBundle(bundle);
+        return fnLoadAndCreateFromBundle(bundle);
     }
 }

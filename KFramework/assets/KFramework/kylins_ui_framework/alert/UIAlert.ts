@@ -2,54 +2,72 @@ import { UIController } from "../UIController";
 import { UIMgr } from "../UIMgr";
 import { Layout_UIAlert } from "./Layout_UIAlert";
 
-export class UIAlertOptions{
-    title?:string;
-    content?:string;
-    showCancel?:boolean;
-    onClick?:Function;
-    onClickThisArg?:Function
-}
+export class UIAlertOptions {
+    private _title?: string;
+    private _content?: string;
+    private _showCancel?: boolean;
+    private _cbClick?: Function;
+    private _cbClickThisArg?: Function;
 
-export class UIAlert extends UIController{
-    private _options:UIAlertOptions;
-
-    public static show(options:UIAlertOptions){
-        let implCls = UIMgr.inst.getImplClass(UIAlert);
-        if(implCls){
-            UIMgr.inst.showUI(implCls,(alert:UIAlert)=>{
-                alert.init(options);
-            });
-        }
+    setTitle(title: string): UIAlertOptions {
+        this._title = title;
+        return this;
     }
 
-    private init(options:UIAlertOptions){
-        this._options = options;
+    onClick(cb: (isOK: boolean) => void, thisArg?: any): UIAlertOptions {
+        this._cbClick = cb;
+        this._cbClickThisArg = thisArg;
+        return this;
+    }
+}
+
+export class UIAlert extends UIController {
+    private _options: UIAlertOptions;
+
+    public static show(content: string, showCancel?: boolean): UIAlertOptions {
+        let opts = new UIAlertOptions() as any;
+        opts._content = content;
+        opts._showCancel = showCancel;
+        let implCls = UIMgr.inst.getImplClass(UIAlert);
+        if (implCls) {
+            UIMgr.inst.showUI(implCls, (alert: UIAlert) => {
+                alert.init(opts);
+            }) as UIAlert;
+        }
+        return opts;
+    }
+
+    private init(opts: UIAlertOptions) {
+        this._options = opts;
+        let options = this._options as any as { _title: string, _content: string, _showCancel: boolean };
         let layout = this.layout as Layout_UIAlert;
-        if(options.hasOwnProperty('title')){
-            layout.title.string = options.title || '';
+        if (options.hasOwnProperty('title')) {
+            layout.title.string = options._title || '';
         }
 
-        layout.content.string = options.content || '';
-        layout.btnCancel.node.active = options.showCancel;
-        if(!options.showCancel){
+        layout.content.string = options._content || '';
+        layout.btnCancel.node.active = options._showCancel;
+        if (!options._showCancel) {
             let pos = layout.btnOK.node.position;
-            layout.btnOK.node.setPosition(0,pos.y,pos.z);
+            layout.btnOK.node.setPosition(0, pos.y, pos.z);
         }
     }
 
     protected onCreated(): void {
         let layout = this.layout as Layout_UIAlert;
-        this.onButtonEvent(layout.btnOK,()=>{
+        this.onButtonEvent(layout.btnOK, () => {
             this.hide();
-            if(this._options.onClick){
-                this._options.onClick.call(this._options.onClickThisArg,true);
+            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any};
+            if (options._cbClick) {
+                options._cbClick.call(options._cbClickThisArg, true);
             }
         });
 
-        this.onButtonEvent(layout.btnCancel,()=>{
+        this.onButtonEvent(layout.btnCancel, () => {
             this.hide();
-            if(this._options.onClick){
-                this._options.onClick.call(this._options.onClickThisArg,false);
+            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any};
+            if (options._cbClick) {
+                options._cbClick.call(options._cbClickThisArg, false);
             }
         });
     }
