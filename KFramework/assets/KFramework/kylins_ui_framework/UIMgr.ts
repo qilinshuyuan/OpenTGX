@@ -90,6 +90,9 @@ export class UIMgr {
      * @zh 初始化UIMgr,`不要多次调用`
      *  */
     public setup(uiCanvas:Node, maxLayers: number) {
+        if(this._uiCanvas){
+            throw Error('this function can be called only once.');
+        }
         this._uiCanvas = uiCanvas;
         director.addPersistRootNode(this._uiCanvas);
 

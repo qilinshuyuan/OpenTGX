@@ -6,5 +6,3 @@ export class Layout_AboutMe extends Component {
     @property(Button)
     btnClose:Button;
 }
-
-

@@ -1,15 +1,17 @@
-import { _decorator, assetManager, Component, director, find, game, Label, Node, Prefab } from 'cc';
-import { UIAlert } from '../KFramework/kylins_ui_framework/alert/UIAlert';
+import { _decorator, assetManager, Component, director, find, game, Label, Prefab } from 'cc';
 import { UIMgr } from '../KFramework/kylins_ui_framework/UIMgr';
 import { GameUILayer } from '../scripts/GameUILayer';
 import { UIWaiting } from '../KFramework/kylins_ui_framework/waiting/UIWaiting';
+import { UIAlert } from '../KFramework/kylins_ui_framework/alert/UIAlert';
+import { UI_DemoList } from '../scripts/UIDef';
 const { ccclass, property } = _decorator;
 
-const _preloadBundles = ['base', 'rpg_scenes'];
+const _preloadBundles = ['base'];
 
 const _preloadRes = [
     { bundle: 'base', url: 'ui_alert/UI_Alert', type: 'prefab' },
     { bundle: 'base', url: 'ui_waiting/UI_Waiting', type: 'prefab' },
+    { bundle: 'base', url: 'ui_demo_list/UI_DemoList', type: 'prefab' },
 ];
 
 @ccclass('PreLoadingScene')
@@ -49,7 +51,7 @@ export class LoadingScene extends Component {
                 this.preloadRes(idx);
             }
             else {
-                this.preloadScene();
+                this.onPreloadingComplete();
             }
         }
         if (bundle) {
@@ -59,9 +61,20 @@ export class LoadingScene extends Component {
         }
     }
 
+    onPreloadingComplete(){
+        this.txtLoading.node.active = false;
+        UIMgr.inst.showUI(UI_DemoList);
+    }
+
     preloadScene() {
-        const entryScene = 'rooster_jump';
-        let bundle = assetManager.getBundle('rpg_scenes');
+return;
+        const entryBundle = 'tank_game';
+        const entryScene = 'tank_game';
+        let bundle = assetManager.getBundle(entryBundle);
+        if(!bundle){
+            UIAlert.show('Can not find bundle:' + entryBundle);
+            return;
+        }
         let now = Date.now();
         bundle.preloadScene(entryScene, (completedCount: number, totalCount: number) => {
             this._percent = ~~(completedCount / totalCount * 100) + '%';

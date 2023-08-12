@@ -18,15 +18,21 @@ export class SubModule{
     }
 }
 
+//base
 addUI(UIAlert,SubModule.Base);
 addUI(UIWaiting,SubModule.Base);
 
+export class UI_DemoList extends UIController{}
+addUI(UI_DemoList, SubModule.Base);
+
+//basic
 export class UI_HUD extends UIController{}
 
 addUI(UI_HUD,SubModule.UI_Basic);
 
 
 
+//extra
 export class UI_AboutMe extends UIController{}
 
 addUI(UI_AboutMe,SubModule.UI_Extra);
