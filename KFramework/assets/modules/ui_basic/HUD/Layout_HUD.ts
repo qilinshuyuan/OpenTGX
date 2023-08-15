@@ -4,10 +4,7 @@ const { ccclass, property } = _decorator;
 @ccclass('Layout_UI_HUD')
 export class Layout_UI_HUD extends Component {
     @property(Button)
-    btnEnterFullScreen;
-
-    @property(Button)
-    btnExitFullScreen;
+    btnScenes;
 
     @property(Button)
     btnToggleStats;

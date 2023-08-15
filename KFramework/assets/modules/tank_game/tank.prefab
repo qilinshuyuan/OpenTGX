@@ -713,7 +713,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "shoot_point",
+    "_name": "fire_point",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
@@ -807,6 +807,17 @@
     "__prefab": {
       "__id__": 35
     },
+    "bullet": {
+      "__uuid__": "d11c96eb-d943-49f1-86c6-a4167c528892",
+      "__expectedType__": "cc.Prefab"
+    },
+    "firePoint": {
+      "__id__": 30
+    },
+    "barrel": {
+      "__id__": 21
+    },
+    "moveSpeed": 250,
     "_id": ""
   },
   {
@@ -822,6 +833,6 @@
       "__id__": 0
     },
     "fileId": "b5GBmUyRxLL4Js3qZ1K1Zv",
-    "targetOverrides": null
+    "targetOverrides": []
   }
 ]

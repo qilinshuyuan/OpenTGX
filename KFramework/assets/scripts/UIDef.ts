@@ -22,7 +22,9 @@ export class SubModule{
 addUI(UIAlert,SubModule.Base);
 addUI(UIWaiting,SubModule.Base);
 
-export class UI_DemoList extends UIController{}
+export class UI_DemoList extends UIController{
+    showCloseBtn(){}
+}
 addUI(UI_DemoList, SubModule.Base);
 
 //basic

@@ -1,8 +1,8 @@
-import { profiler, view, macro, screen } from "cc";
+import { profiler, view, macro, screen, director } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
 import { UIMgr } from "../../../KFramework/kylins_ui_framework/UIMgr";
 import { GameUILayer } from "../../../scripts/GameUILayer";
-import { UI_HUD, UI_AboutMe, SubModule } from "../../../scripts/UIDef";
+import { UI_HUD, UI_AboutMe, SubModule, UI_DemoList } from "../../../scripts/UIDef";
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
         super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
@@ -15,9 +15,8 @@ export class UI_HUD_Impl extends UI_HUD {
     //子类的所有操作，需要在这个函数之后。
     protected onCreated() {
         let layout = this.layout as Layout_UI_HUD;
-        this.onButtonEvent(layout.btnEnterFullScreen, this.onEnterFullScreen, this);
 
-        this.onButtonEvent(layout.btnExitFullScreen, this.onExitFullScreen, this);
+        this.onButtonEvent(layout.btnScenes, this.onSceneChange, this);
 
         this.onButtonEvent(layout.btnToggleStats, this.onToggleStats, this);
 
@@ -35,21 +34,10 @@ export class UI_HUD_Impl extends UI_HUD {
         }
     }
 
-    onEnterFullScreen() {
-        view.setOrientation(macro.ORIENTATION_LANDSCAPE);
-        screen.requestFullScreen();
-        let isFullScreen = screen.fullScreen();
-        let layout = this.layout as Layout_UI_HUD;
-        layout.btnEnterFullScreen.active = !isFullScreen;
-        layout.btnExitFullScreen.active = isFullScreen;
-    }
-
-    onExitFullScreen() {
-        screen.exitFullScreen();
-        let isFullScreen = screen.fullScreen();
-        let layout = this.layout as Layout_UI_HUD;
-        layout.btnEnterFullScreen.active = !isFullScreen;
-        layout.btnExitFullScreen.active = isFullScreen;
+    onSceneChange() {
+        UIMgr.inst.showUI(UI_DemoList,(ui:UI_DemoList)=>{
+            ui.showCloseBtn();
+        });
     }
 
     //销毁
