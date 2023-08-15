@@ -1,6 +1,4 @@
-语言 ( Languages )
-- 中文*
-- [English](./README.md)
+*中文 | [English](./README.md)
 
 # 介绍
 **KylinsToolkit** 中文名称：麒麟子工具包，是一个帮助你快速制作各类游戏和应用的框架和工集集。 使用它你可以轻松搞定 各类游戏、XR、互动营销、3D展馆等需求。
