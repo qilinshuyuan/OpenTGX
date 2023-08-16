@@ -2,6 +2,7 @@ import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, t
 import { EasyController, EasyControllerEvent } from '../../KFramework/kylins_easy_controller/EasyController';
 import { TankBullet } from './TankBullet';
 import { AudioMgr } from '../../KFramework/kylins_base/AudioMgr';
+import { CharacterMovement2D } from '../../KFramework/kylins_easy_controller/CharacterMovement2D';
 const { ccclass, property } = _decorator;
 
 const tempV2 = v2();
@@ -17,32 +18,15 @@ export class TankController extends Component {
     @property(Node)
     barrel: Node;
 
-    @property
-    moveSpeed: number = 100;
+    private _movement2d:CharacterMovement2D;
 
     start() {
-        EasyController.on(EasyControllerEvent.MOVEMENT, this.onMovement, this);
-        EasyController.on(EasyControllerEvent.MOVEMENT_STOP, this.onMovementStop, this);
         EasyController.on(EasyControllerEvent.BUTTON, this.onButtonHit, this);
+
+        this._movement2d = this.node.getComponent(CharacterMovement2D);
     }
 
-    private _moveFactor: number = 0;
-    private _moveDir: Vec2 = v2(1, 0);
-
-    private _fireCD = 1;
     private _isFiring = false;
-
-    onMovement(degree, strengthen) {
-        let angle = degree / 180 * Math.PI;
-        this.node.setRotationFromEuler(0, 0, degree);
-        this._moveDir.set(Math.cos(angle), Math.sin(angle));
-        this._moveDir.normalize();
-        this._moveFactor = strengthen;
-    }
-
-    onMovementStop() {
-        this._moveFactor = 0;
-    }
 
     onButtonHit(btnSlot: string) {
         if (btnSlot == 'btn_slot_0') {
@@ -54,7 +38,7 @@ export class TankController extends Component {
             this.node.parent.addChild(bullet);
             bullet.setWorldPosition(this.firePoint.worldPosition);
             bullet.setWorldRotation(this.node.worldRotation);
-            bullet.getComponent(TankBullet).moveDir = this._moveDir;
+            bullet.getComponent(TankBullet).moveDir = this._movement2d.moveDir;
 
             AudioMgr.inst.playOneShot('sounds/sfx_shoot',1.0,'tank_game');
 
@@ -69,19 +53,7 @@ export class TankController extends Component {
     }
 
     onDestroy() {
-        EasyController.off(EasyControllerEvent.MOVEMENT, this.onMovement, this);
-        EasyController.off(EasyControllerEvent.MOVEMENT_STOP, this.onMovementStop, this);
         EasyController.off(EasyControllerEvent.BUTTON, this.onButtonHit, this);
-    }
-
-
-
-    update(deltaTime: number) {
-        if (this._moveFactor) {
-            Vec2.multiplyScalar(tempV2, this._moveDir, this._moveFactor * this.moveSpeed * deltaTime);
-            let pos = this.node.position;
-            this.node.setPosition(pos.x + tempV2.x, pos.y + tempV2.y, pos.z);
-        }
     }
 }
 
