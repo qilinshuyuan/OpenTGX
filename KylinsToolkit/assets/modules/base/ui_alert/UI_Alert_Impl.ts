@@ -1,12 +1,13 @@
-import { kfc } from "../../../KFC/KFC";
+
+import { kfcLayout_UIAlert, kfcUIAlert } from "../../../KFC/KFC";
 import { GameUILayer } from "../../../scripts/GameUILayer";
 import { SubModule } from "../../../scripts/UIDef";
 
-export class UIAlert_Impl extends kfc.UIAlert{
+export class UIAlert_Impl extends kfcUIAlert{
     constructor(){
-        super('ui_alert/UI_Alert',GameUILayer.ALERT, kfc.Layout_UIAlert);
+        super('ui_alert/UI_Alert',GameUILayer.ALERT, kfcLayout_UIAlert);
     }
 }
 
-SubModule.attachImplClass(kfc.UIAlert, UIAlert_Impl);
+SubModule.attachImplClass(kfcUIAlert, UIAlert_Impl);
 

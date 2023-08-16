@@ -17,7 +17,7 @@ const { ccclass, property } = _decorator;
  * multi-touch for camera zoom.
  *  */
 
-@ccclass('KFC.UI_Joystick')
+@ccclass('kfc.UI_Joystick')
 export class UI_Joystick extends Component {
 
     private static _inst:UI_Joystick = null;

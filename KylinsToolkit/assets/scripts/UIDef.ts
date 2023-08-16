@@ -1,7 +1,7 @@
-import { kfc } from "../KFC/KFC";
+import { kfcUIAlert, kfcUIController, kfcUIMgr, kfcUIWaiting } from "../kfc/kfc";
 
 function addUI(uiBaseCls,module:string){
-   kfc.uiMgr.attachModule(uiBaseCls,module);
+   kfcUIMgr.inst.attachModule(uiBaseCls,module);
 }
 
 export class SubModule{
@@ -10,27 +10,27 @@ export class SubModule{
     public static UI_Extra = 'ui_extra';
 
     public static attachImplClass(uiBaseCls, uiImplCls:any){
-        kfc.uiMgr.attachImplClass(uiBaseCls,uiImplCls);
+        kfcUIMgr.inst.attachImplClass(uiBaseCls,uiImplCls);
     }
 }
 
 //base
-addUI(kfc.UIAlert,SubModule.Base);
-addUI(kfc.UIWaiting,SubModule.Base);
+addUI(kfcUIAlert,SubModule.Base);
+addUI(kfcUIWaiting,SubModule.Base);
 
-export class UI_DemoList extends kfc.UIController{
+export class UI_DemoList extends kfcUIController{
     showCloseBtn(){}
 }
 addUI(UI_DemoList, SubModule.Base);
 
 //basic
-export class UI_HUD extends kfc.UIController{}
+export class UI_HUD extends kfcUIController{}
 
 addUI(UI_HUD,SubModule.UI_Basic);
 
 
 
 //extra
-export class UI_AboutMe extends kfc.UIController{}
+export class UI_AboutMe extends kfcUIController{}
 
 addUI(UI_AboutMe,SubModule.UI_Extra);

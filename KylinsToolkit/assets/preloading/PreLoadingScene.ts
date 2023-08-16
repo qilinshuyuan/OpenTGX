@@ -1,7 +1,7 @@
 import { _decorator, assetManager, Component, director, find, game, Label, Prefab } from 'cc';
 import { UI_DemoList } from '../scripts/UIDef';
 import { GameUILayer } from '../scripts/GameUILayer';
-import { kfc } from '../KFC/KFC';
+import { kfcUIMgr, kfcUIAlert, kfcUIWaiting } from '../kfc/kfc';
 const { ccclass, property } = _decorator;
 
 const _preloadBundles = ['base'];
@@ -20,7 +20,7 @@ export class LoadingScene extends Component {
     private _percent: string = '';
     start() {
         game.frameRate = 61;
-        kfc.uiMgr.setup(find('UICanvas'), GameUILayer.NUM);
+        kfcUIMgr.inst.setup(find('UICanvas'), GameUILayer.NUM);
 
         this.preloadBundle(0);
     }
@@ -59,18 +59,18 @@ export class LoadingScene extends Component {
         }
     }
 
-    onPreloadingComplete(){
+    onPreloadingComplete() {
         this.txtLoading.node.active = false;
-        kfc.uiMgr.showUI(UI_DemoList);
+        kfcUIMgr.inst.showUI(UI_DemoList);
     }
 
     preloadScene() {
-return;
+        return;
         const entryBundle = 'tank_game';
         const entryScene = 'tank_game';
         let bundle = assetManager.getBundle(entryBundle);
-        if(!bundle){
-            kfc.UIAlert.show('Can not find bundle:' + entryBundle);
+        if (!bundle) {
+            kfcUIAlert.show('Can not find bundle:' + entryBundle);
             return;
         }
         let now = Date.now();
@@ -78,9 +78,9 @@ return;
             this._percent = ~~(completedCount / totalCount * 100) + '%';
         }, () => {
             console.log('preloadScene costs ' + (Date.now() - now) + ' ms');
-            kfc.UIAlert.show('加载完成，进入游戏').onClick((isOK: boolean) => {
+            kfcUIAlert.show('加载完成，进入游戏').onClick((isOK: boolean) => {
                 now = Date.now();
-                let uw = kfc.UIWaiting.show();
+                let uw = kfcUIWaiting.show();
                 director.loadScene(entryScene, () => {
                     console.log('loadScene costs ' + (Date.now() - now) + ' ms');
                     uw.hide();

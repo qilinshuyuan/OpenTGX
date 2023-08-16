@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
 import { TankBullet } from './TankBullet';
-import { kfc } from '../../KFC/KFC';
+import { kfcAudioMgr, kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../../kfc/kfc';
+
 const { ccclass, property } = _decorator;
 
 const tempV2 = v2();
@@ -16,12 +17,12 @@ export class TankController extends Component {
     @property(Node)
     barrel: Node;
 
-    private _movement2d: any;//kfc.CharacterMovement2D;
+    private _movement2d: kfcCharacterMovement2D;
 
     start() {
-        kfc.EasyController.on(kfc.EasyControllerEvent.BUTTON, this.onButtonHit, this);
+        kfcEasyController.on(kfcEasyControllerEvent.BUTTON, this.onButtonHit, this);
 
-        this._movement2d = this.node.getComponent(kfc.CharacterMovement2D);
+        this._movement2d = this.node.getComponent(kfcCharacterMovement2D);
     }
 
     private _isFiring = false;
@@ -38,7 +39,7 @@ export class TankController extends Component {
             bullet.setWorldRotation(this.node.worldRotation);
             bullet.getComponent(TankBullet).moveDir = this._movement2d.moveDir;
 
-            kfc.audioMgr.playOneShot('sounds/sfx_shoot',1.0,'tank_game');
+            kfcAudioMgr.inst.playOneShot('sounds/sfx_shoot',1.0,'tank_game');
 
             //animation
             let oldPosX = this.barrel.position.x;
@@ -51,7 +52,7 @@ export class TankController extends Component {
     }
 
     onDestroy() {
-        kfc.EasyController.off(kfc.EasyControllerEvent.BUTTON, this.onButtonHit, this);
+        kfcEasyController.off(kfcEasyControllerEvent.BUTTON, this.onButtonHit, this);
     }
 }
 

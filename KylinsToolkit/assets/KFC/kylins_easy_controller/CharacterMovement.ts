@@ -1,10 +1,11 @@
 import { _decorator, Component, Node, v3, RigidBody, Vec3, find, Camera, SkeletalAnimation, AnimationClip, Collider, ICollisionEvent } from 'cc';
 import { EasyController, EasyControllerEvent } from './EasyController';
+
 const { ccclass, property } = _decorator;
 
 const v3_1 = v3();
 
-@ccclass('KFC.CharacterMovement')
+@ccclass('kfc.CharacterMovement')
 export class CharacterMovement extends Component {
 
     @property(Camera)

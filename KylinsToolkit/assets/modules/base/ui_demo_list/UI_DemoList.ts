@@ -2,7 +2,7 @@ import { AssetManager, Button, assetManager, director } from "cc";
 import { GameUILayer } from "../../../scripts/GameUILayer";
 import { SubModule, UI_DemoList, UI_HUD } from "../../../scripts/UIDef";
 import { Layout_DemoList } from "./Layout_DemoList";
-import { kfc } from "../../../KFC/KFC";
+import { kfcUIMgr, kfcUIWaiting } from "../../../kfc/kfc";
 
 const DemoList = [
     { bundle: 'tank_game', entryScene: 'tank_game' },
@@ -32,12 +32,12 @@ export class UI_DemoList_Impl extends UI_DemoList {
                 if(!info){
                     return;
                 }
-                let wt = kfc.UIWaiting.show();
+                let wt = kfcUIWaiting.show();
                 assetManager.loadBundle(info.bundle,(err,bundle:AssetManager.Bundle)=>{
                     if(bundle){
                         director.loadScene(info.entryScene,()=>{
-                            kfc.uiMgr.hideAll();
-                            kfc.uiMgr.showUI(UI_HUD);
+                            kfcUIMgr.inst.hideAll();
+                            kfcUIMgr.inst.showUI(UI_HUD);
                         });
                     }
                 });

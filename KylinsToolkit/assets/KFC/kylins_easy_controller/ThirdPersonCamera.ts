@@ -7,7 +7,7 @@ const v3_2 = v3();
 
 const ROTATION_STRENGTH = 20.0;
 
-@ccclass('KFC.ThirdPersonCamera')
+@ccclass('kfc.ThirdPersonCamera')
 export class ThirdPersonCamera extends Component {
     @property(Node)
     target: Node;

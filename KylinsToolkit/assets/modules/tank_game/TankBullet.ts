@@ -1,5 +1,5 @@
 import { _decorator, Component, instantiate, Node, Prefab, Quat, v2 } from 'cc';
-import { kfc } from '../../KFC/KFC';
+import { kfcAudioMgr } from '../../kfc/kfc';
 const { ccclass, property } = _decorator;
 
 @ccclass('TankBullet')
@@ -29,7 +29,7 @@ export class TankBullet extends Component {
             this.node.parent.addChild(efx);
             efx.setWorldPosition(this.node.worldPosition);
             efx.setWorldRotation(this.node.worldRotation);
-            kfc.audioMgr.playOneShot('sounds/sfx_boom',1.0,'tank_game');
+            kfcAudioMgr.inst.playOneShot('sounds/sfx_boom',1.0,'tank_game');
             this.node.destroy();
             return;
         }

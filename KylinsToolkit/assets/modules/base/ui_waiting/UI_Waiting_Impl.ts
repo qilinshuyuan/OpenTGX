@@ -1,12 +1,12 @@
 
-import { kfc } from "../../../KFC/KFC";
+import { kfcLayout_UIWaiting, kfcUIWaiting } from "../../../kfc/kfc";
 import { GameUILayer } from "../../../scripts/GameUILayer";
 import { SubModule } from "../../../scripts/UIDef";
 
-export class UIWaiting_Impl extends kfc.UIWaiting{
+export class UIWaiting_Impl extends kfcUIWaiting{
     constructor(){
-        super('ui_waiting/UI_Waiting',GameUILayer.LOADING, kfc.Layout_UIWaiting);
+        super('ui_waiting/UI_Waiting',GameUILayer.LOADING, kfcLayout_UIWaiting);
     }
 }
 
-SubModule.attachImplClass(kfc.UIWaiting, UIWaiting_Impl);
+SubModule.attachImplClass(kfcUIWaiting, UIWaiting_Impl);

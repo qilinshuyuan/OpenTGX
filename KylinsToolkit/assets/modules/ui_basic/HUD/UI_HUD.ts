@@ -2,7 +2,8 @@ import { profiler, view, macro, screen, director } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
 import { GameUILayer } from "../../../scripts/GameUILayer";
 import { UI_HUD, UI_AboutMe, SubModule, UI_DemoList } from "../../../scripts/UIDef";
-import { kfc } from "../../../KFC/KFC";
+import { kfcUIMgr } from "../../../kfc/kfc";
+
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
         super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
@@ -21,7 +22,7 @@ export class UI_HUD_Impl extends UI_HUD {
         this.onButtonEvent(layout.btnToggleStats, this.onToggleStats, this);
 
         this.onButtonEvent(layout.btnAbout, () => {
-            kfc.uiMgr.showUI(UI_AboutMe);
+            kfcUIMgr.inst.showUI(UI_AboutMe);
         });
     }
 
@@ -35,7 +36,7 @@ export class UI_HUD_Impl extends UI_HUD {
     }
 
     onSceneChange() {
-        kfc.uiMgr.showUI(UI_DemoList,(ui:UI_DemoList)=>{
+        kfcUIMgr.inst.showUI(UI_DemoList,(ui:UI_DemoList)=>{
             ui.showCloseBtn();
         });
     }
