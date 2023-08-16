@@ -1,0 +1,103 @@
+{
+  "ver": "2.3.8",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "c1384d07-8d39-4e1b-afc5-a861976b43b2",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "5e9fa": {
+      "importer": "gltf-animation",
+      "uuid": "c1384d07-8d39-4e1b-afc5-a861976b43b2@5e9fa",
+      "displayName": "",
+      "id": "5e9fa",
+      "name": "anim_rig_sky_jump.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.4333332777023315
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "fc519": {
+      "importer": "gltf-scene",
+      "uuid": "c1384d07-8d39-4e1b-afc5-a861976b43b2@fc519",
+      "displayName": "",
+      "id": "fc519",
+      "name": "anim_rig_sky_jump.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "fbx": {
+      "smartMaterialEnabled": true,
+      "matchMeshNames": false
+    },
+    "animationImportSettings": [
+      {
+        "name": "anim_rig_sky_jump",
+        "duration": 1.4333332777023315,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "anim_rig_sky_jump",
+            "from": 0,
+            "to": 1.4333332777023315,
+            "wrapMode": 2,
+            "previousId": "5e9fa"
+          }
+        ]
+      }
+    ],
+    "redirect": "c1384d07-8d39-4e1b-afc5-a861976b43b2@fc519",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "c1384d07-8d39-4e1b-afc5-a861976b43b2@fc519"
+      ]
+    },
+    "mountAllAnimationsOnPrefab": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

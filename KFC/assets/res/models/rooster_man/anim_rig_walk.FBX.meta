@@ -1,0 +1,103 @@
+{
+  "ver": "2.3.8",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4",
+  "files": [
+    "__original-animation-0.cconb"
+  ],
+  "subMetas": {
+    "c0bd0": {
+      "importer": "gltf-animation",
+      "uuid": "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4@c0bd0",
+      "displayName": "",
+      "id": "c0bd0",
+      "name": "anim_rig_walk.animation",
+      "userData": {
+        "gltfIndex": 0,
+        "wrapMode": 2,
+        "sample": 30,
+        "span": {
+          "from": 0,
+          "to": 1.0666667222976685
+        },
+        "events": []
+      },
+      "ver": "1.0.17",
+      "imported": true,
+      "files": [
+        ".cconb"
+      ],
+      "subMetas": {}
+    },
+    "e84a6": {
+      "importer": "gltf-scene",
+      "uuid": "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4@e84a6",
+      "displayName": "",
+      "id": "e84a6",
+      "name": "anim_rig_walk.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "legacyFbxImporter": false,
+    "animationImportSettings": [
+      {
+        "name": "anim_rig_walk",
+        "duration": 1.0666667222976685,
+        "fps": 30,
+        "splits": [
+          {
+            "name": "anim_rig_walk",
+            "from": 0,
+            "to": 1.0666667222976685,
+            "wrapMode": 2,
+            "previousId": "c0bd0"
+          }
+        ]
+      }
+    ],
+    "redirect": "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4@e84a6",
+    "assetFinder": {
+      "meshes": [],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "648b3db6-164d-4e37-bf3a-ba18a1d1bbc4@e84a6"
+      ]
+    },
+    "fbx": {
+      "smartMaterialEnabled": false,
+      "matchMeshNames": false
+    },
+    "mountAllAnimationsOnPrefab": true,
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    }
+  }
+}

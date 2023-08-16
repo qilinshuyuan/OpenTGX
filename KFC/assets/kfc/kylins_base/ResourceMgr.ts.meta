@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "b666c2cf-c69b-456e-adc2-73d54d34f216",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/ResourceMgr.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}

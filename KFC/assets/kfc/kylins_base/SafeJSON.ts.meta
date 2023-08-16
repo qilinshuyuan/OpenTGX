@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "2aad897f-5b30-4f4c-886b-d56e9207d3ed",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/SafeJSON.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}
