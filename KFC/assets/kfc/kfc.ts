@@ -13,3 +13,4 @@ export { Layout_UIAlert as kfcLayout_UIAlert } from "./kylins_ui_framework/alert
 export { UIAlert as kfcUIAlert } from "./kylins_ui_framework/alert/UIAlert";
 export { Layout_UIWaiting as kfcLayout_UIWaiting } from "./kylins_ui_framework/waiting/Layout_UIWaiting";
 export { UIWaiting as kfcUIWaiting } from "./kylins_ui_framework/waiting/UIWaiting";
+export { UILayer as kfcUILayer, UILayerNames as kfcUILayerNames } from "./kylins_ui_framework/UILayer";

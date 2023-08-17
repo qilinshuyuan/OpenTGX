@@ -11,7 +11,7 @@ const DemoList = [
 
 export class UI_DemoList_Impl extends UI_DemoList {
     constructor() {
-        super('ui_demo_list/UI_DemoList', GameUILayer.POPUP0, Layout_DemoList);
+        super('ui_demo_list/UI_DemoList', GameUILayer.POPUP, Layout_DemoList);
     }
 
     public getRes(): [] {

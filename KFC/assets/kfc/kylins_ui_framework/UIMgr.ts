@@ -1,23 +1,5 @@
-import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director } from 'cc';
+import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error } from 'cc';
 import { UIController } from './UIController';
-
-/****
- * @en ui layers.each project can modify it based on needs.
- * @zh UI层级划分,
- * */
-export enum UILayer {
-    GAME,
-    JOY_STICK,
-    HUD,
-    POPUP0,
-    POPUP1,
-    POPUP2,
-    ALERT,
-    NOTICE,
-    LOADING,
-    OVERLAY,
-    NUM
-}
 
 /**
  * @en the `User Interface Manager`, handles some stuffs like the ui loads,ui layers,resizing etc.
@@ -25,7 +7,7 @@ export enum UILayer {
  * 
  * */
 export class UIMgr {
-    
+
     private static _inst: UIMgr;
     public static get inst(): UIMgr {
         if (this._inst == null) {
@@ -34,23 +16,23 @@ export class UIMgr {
         return this._inst;
     }
 
-    attachModule(uiCls,moduleName){
+    attachModule(uiCls, moduleName) {
         uiCls['__module__name__'] = moduleName;
     }
 
-    getModule(uiCls){
+    getModule(uiCls) {
         return uiCls['__module__name__'];
     }
 
-    attachImplClass(uiCls,uiImplCls){
+    attachImplClass(uiCls, uiImplCls) {
         uiCls['__impl__class__'] = uiImplCls;
     }
 
-    getImplClass(uiCls){
+    getImplClass(uiCls) {
         return uiCls['__impl__class__'];
     }
 
-    private _uiCanvas:Node;
+    private _uiCanvas: Node;
 
     public resize() {
         //根据屏幕大小决定适配策略
@@ -90,20 +72,34 @@ export class UIMgr {
      * @en setup this UIMgr,`don't call more than once`.
      * @zh 初始化UIMgr,`不要多次调用`
      *  */
-    public setup(uiCanvas:Node, maxLayers: number) {
-        if(this._uiCanvas){
+    public setup(uiCanvas: Node | Prefab, maxLayers: number, layerNames?: Array<string>) {
+        if (this._uiCanvas) {
             return;
         }
-        this._uiCanvas = uiCanvas;
+
+        if(!uiCanvas){
+            throw error('uiCanvas must be a Node or Prefab');
+        }
+        if(uiCanvas instanceof Node){
+            this._uiCanvas = uiCanvas;
+        }
+        else{
+            this._uiCanvas = instantiate(uiCanvas);
+            director.getScene().addChild(this._uiCanvas);
+        }
+        
+        this._uiCanvas.name = '$kfc.UICanvas$';
         director.addPersistRootNode(this._uiCanvas);
 
         this.resize();
         let canvas = this._uiCanvas.getComponent(UITransform);
+
+        layerNames ||= [];
         //create layers
-        for (let i = 0; i < maxLayers; ++i) {
+        for (let i = maxLayers - 1; i >= 0; --i) {
             let layerNode = new Node();
             layerNode.layer = canvas.node.layer;
-            layerNode.name = 'layer_' + i;
+            layerNode.name = 'ui_layer_' + (layerNames[i] ? layerNames[i] : i);
             let uiTransform = layerNode.addComponent(UITransform);
             uiTransform.width = canvas.width;
             uiTransform.height = canvas.height;
@@ -118,7 +114,7 @@ export class UIMgr {
             widget.right = 0;
             widget.top = 0;
             widget.bottom = 0;
-            canvas.node.addChild(layerNode);
+            canvas.node.insertChild(layerNode, 0);
         }
     }
 
@@ -169,8 +165,8 @@ export class UIMgr {
         }
 
         let fnLoadAndCreateFromBundle = (bundle: AssetManager.Bundle) => {
-            bundle.load(resArr, (err,data) => {
-                if(err){
+            bundle.load(resArr, (err, data) => {
+                if (err) {
                     console.log(err);
                 }
                 let node: Node = null;

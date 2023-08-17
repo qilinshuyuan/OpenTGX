@@ -5,7 +5,7 @@ import { Layout_AboutMe } from "./Layout_AboutMe";
 
 export class UI_AboutMe_Impl extends UI_AboutMe{
     constructor(){
-        super('ui_about/UI_AboutMe', GameUILayer.POPUP0, Layout_AboutMe);
+        super('ui_about/UI_AboutMe', GameUILayer.POPUP, Layout_AboutMe);
     }
 
     public getRes(): [] {
