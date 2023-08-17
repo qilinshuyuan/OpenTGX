@@ -1,22 +1,22 @@
 import { _decorator, Component, instantiate, Node, Prefab, Quat, v2 } from 'cc';
-import { kfcAudioMgr } from '../../kfc/kfc';
+import { TankGameAudioMgr } from './TankGameAudioMgr';
 const { ccclass, property } = _decorator;
 
 @ccclass('TankBullet')
 export class TankBullet extends Component {
 
     @property
-    moveSpeed:number = 200;
+    moveSpeed: number = 200;
 
     @property
-    lifeTime:number = 3000;
+    lifeTime: number = 3000;
 
     @property(Prefab)
-    efx:Prefab;
+    efx: Prefab;
 
     private _lifeStart = 0;
     private _moveDir = v2();
-    public set moveDir(v){
+    public set moveDir(v) {
         this._moveDir.set(v);
     }
     start() {
@@ -24,12 +24,12 @@ export class TankBullet extends Component {
     }
 
     update(deltaTime: number) {
-        if(this._lifeStart + this.lifeTime < Date.now()){
+        if (this._lifeStart + this.lifeTime < Date.now()) {
             let efx = instantiate(this.efx);
             this.node.parent.addChild(efx);
             efx.setWorldPosition(this.node.worldPosition);
             efx.setWorldRotation(this.node.worldRotation);
-            kfcAudioMgr.inst.playOneShot('sounds/sfx_boom',1.0,'tank_game');
+            TankGameAudioMgr.playOneShot('sounds/sfx_boom', 1.0);
             this.node.destroy();
             return;
         }

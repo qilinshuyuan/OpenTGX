@@ -5,8 +5,8 @@ import { Layout_DemoList } from "./Layout_DemoList";
 import { kfcUIMgr, kfcUIWaiting } from "../../../kfc/kfc";
 
 const DemoList = [
-    { bundle: 'tank_game', entryScene: 'tank_game' },
-    { bundle: 'rpg_scenes', entryScene: 'rooster_jump' },
+    { bundle: 'demo_tank_game', entryScene: 'tank_game' },
+    { bundle: 'demo_rpg_scene', entryScene: 'rooster_jump' },
 ];
 
 export class UI_DemoList_Impl extends UI_DemoList {

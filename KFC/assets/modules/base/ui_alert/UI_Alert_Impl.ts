@@ -1,5 +1,5 @@
 
-import { kfcLayout_UIAlert, kfcUIAlert } from "../../../KFC/KFC";
+import { kfcUIAlert, kfcLayout_UIAlert } from "../../../kfc/kfc";
 import { GameUILayer } from "../../../scripts/GameUILayer";
 import { SubModule } from "../../../scripts/UIDef";
 

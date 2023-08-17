@@ -1,4 +1,4 @@
-//KFC is short for Kylins Framework Core
+//kfc is short for Kylins Framework Core
 export { AudioMgr as kfcAudioMgr } from "./kylins_base/AudioMgr";
 export { InputMgr as kfcInputMgr } from "./kylins_base/InputMgr";
 export { ResourceMgr as kfcResourceMgr } from "./kylins_base/ResourceMgr";

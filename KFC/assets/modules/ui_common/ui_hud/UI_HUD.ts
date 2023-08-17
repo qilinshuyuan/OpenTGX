@@ -6,7 +6,7 @@ import { kfcUIMgr } from "../../../kfc/kfc";
 
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
-        super('HUD/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
+        super('ui_hud/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
     }
 
     public getRes(): [] {

@@ -169,7 +169,10 @@ export class UIMgr {
         }
 
         let fnLoadAndCreateFromBundle = (bundle: AssetManager.Bundle) => {
-            bundle.load(resArr, () => {
+            bundle.load(resArr, (err,data) => {
+                if(err){
+                    console.log(err);
+                }
                 let node: Node = null;
                 let prefab: Prefab = ui.prefab as Prefab;
                 if (typeof (ui.prefab) == 'string') {

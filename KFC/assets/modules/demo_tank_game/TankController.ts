@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
 import { TankBullet } from './TankBullet';
-import { kfcAudioMgr, kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../../kfc/kfc';
+import { kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../../kfc/kfc';
+import { TankGameAudioMgr } from './TankGameAudioMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -39,7 +40,7 @@ export class TankController extends Component {
             bullet.setWorldRotation(this.node.worldRotation);
             bullet.getComponent(TankBullet).moveDir = this._movement2d.moveDir;
 
-            kfcAudioMgr.inst.playOneShot('sounds/sfx_shoot',1.0,'tank_game');
+            TankGameAudioMgr.playOneShot('sounds/sfx_shoot', 1.0);
 
             //animation
             let oldPosX = this.barrel.position.x;
