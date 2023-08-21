@@ -1,6 +1,6 @@
 import { profiler, view, macro, screen, director } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { GameUILayer } from "../../../scripts/GameUILayer";
+import { GameUILayer } from "../../../scripts/GameUILayers";
 import { UI_HUD, UI_AboutMe, SubModule, UI_DemoList } from "../../../scripts/UIDef";
 import { kfcUIMgr } from "../../../kfc/kfc";
 

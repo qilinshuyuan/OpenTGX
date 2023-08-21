@@ -9,6 +9,9 @@ export class CharacterMovement2D extends Component {
     @property
     moveSpeed: number = 100;
 
+    @property
+    needRotation:boolean = false;
+
     start() {
         EasyController.on(EasyControllerEvent.MOVEMENT, this.onMovement, this);
         EasyController.on(EasyControllerEvent.MOVEMENT_STOP, this.onMovementStop, this);
@@ -27,7 +30,9 @@ export class CharacterMovement2D extends Component {
 
     onMovement(degree, strengthen) {
         let angle = degree / 180 * Math.PI;
-        this.node.setRotationFromEuler(0, 0, degree);
+        if(this.needRotation){
+            this.node.setRotationFromEuler(0, 0, degree);
+        }
         this._moveDir.set(Math.cos(angle), Math.sin(angle));
         this._moveDir.normalize();
         this._moveFactor = strengthen;

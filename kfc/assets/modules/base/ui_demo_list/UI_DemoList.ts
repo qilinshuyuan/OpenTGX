@@ -1,5 +1,5 @@
 import { AssetManager, Button, assetManager, director } from "cc";
-import { GameUILayer } from "../../../scripts/GameUILayer";
+import { GameUILayer } from "../../../scripts/GameUILayers";
 import { SubModule, UI_DemoList, UI_HUD } from "../../../scripts/UIDef";
 import { Layout_DemoList } from "./Layout_DemoList";
 import { kfcUIMgr, kfcUIWaiting } from "../../../kfc/kfc";

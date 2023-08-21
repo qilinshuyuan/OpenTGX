@@ -297,7 +297,7 @@
     "_id": "7dWQTpwS5LrIHnc1zAPUtf"
   },
   {
-    "__type__": "195f1/tNVtIs5euOncQEpW0",
+    "__type__": "6ea3cEV3klIAZnz+Ay66ut+",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -312,16 +312,16 @@
     "lookAtOffset": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0.5,
+      "y": 0,
       "z": 0
     },
-    "zoomSensitivity": 0.01,
+    "zoomSensitivity": 1,
     "lenMin": 1,
     "lenMax": 10,
-    "len": 2,
+    "len": 5,
     "rotateVHSeparately": false,
     "tweenTime": 0.2,
-    "_id": "8019m4IqBGO4xm2t5yWjhK"
+    "_id": "45hkoTDpNO3oTOvanktir9"
   },
   {
     "__type__": "cc.Node",

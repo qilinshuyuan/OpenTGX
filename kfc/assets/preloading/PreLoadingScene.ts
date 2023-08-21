@@ -1,6 +1,6 @@
 import { _decorator, assetManager, Component, director, find, game, Label, Prefab } from 'cc';
 import { UI_DemoList } from '../scripts/UIDef';
-import { GameUILayer, GameUILayerNames } from '../scripts/GameUILayer';
+import { GameUILayer, GameUILayerNames } from '../scripts/GameUILayers';
 import { kfcUIMgr, kfcUIAlert, kfcUIWaiting } from '../kfc/kfc';
 const { ccclass, property } = _decorator;
 

@@ -1,6 +1,6 @@
 
 import { kfcUIAlert, kfcLayout_UIAlert } from "../../../kfc/kfc";
-import { GameUILayer } from "../../../scripts/GameUILayer";
+import { GameUILayer } from "../../../scripts/GameUILayers";
 import { SubModule } from "../../../scripts/UIDef";
 
 export class UIAlert_Impl extends kfcUIAlert{

@@ -4,6 +4,8 @@ import { Layout_UIWaiting } from "./Layout_UIWaiting";
 
 const loadingTxtArr = ['Loading.','Loading..','Loading...'];
 
+let _inst = null;
+
 export class UIWaiting extends UIController{
 
     protected onCreated(): void {
@@ -11,7 +13,18 @@ export class UIWaiting extends UIController{
     }
 
     public static show():UIWaiting{
-        return UIMgr.inst.showUI(UIMgr.inst.getImplClass(UIWaiting));
+        if(_inst){
+            return _inst;
+        }
+        _inst = UIMgr.inst.showUI(UIMgr.inst.getImplClass(UIWaiting));
+        return _inst;
+    }
+
+    public static hide():void{
+        if(_inst){
+            _inst.hide();
+            _inst = null;
+        }
     }
 
     protected onUpdate() { 

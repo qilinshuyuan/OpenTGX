@@ -21,7 +21,7 @@ export class UIMgr {
     }
 
     getModule(uiCls) {
-        return uiCls['__module__name__'];
+        return uiCls['__module__name__'] || 'resources';
     }
 
     attachImplClass(uiCls, uiImplCls) {
@@ -29,10 +29,32 @@ export class UIMgr {
     }
 
     getImplClass(uiCls) {
-        return uiCls['__impl__class__'];
+        return uiCls['__impl__class__'] || uiCls;
     }
 
     private _uiCanvas: Node;
+    private _uiRoot: Node;
+
+    private createFullScreenNode() {
+        let canvas = this._uiCanvas.getComponent(UITransform);
+        let node = new Node();
+        node.layer = this._uiCanvas.layer;
+        let uiTransform = node.addComponent(UITransform);
+        uiTransform.width = canvas.width;
+        uiTransform.height = canvas.height;
+
+        let widget = node.addComponent(Widget);
+        widget.isAlignBottom = true;
+        widget.isAlignTop = true;
+        widget.isAlignLeft = true;
+        widget.isAlignRight = true;
+
+        widget.left = 0;
+        widget.right = 0;
+        widget.top = 0;
+        widget.bottom = 0;
+        return node;
+    }
 
     public resize() {
         //根据屏幕大小决定适配策略
@@ -77,50 +99,39 @@ export class UIMgr {
             return;
         }
 
-        if(!uiCanvas){
+        if (!uiCanvas) {
             throw error('uiCanvas must be a Node or Prefab');
         }
-        if(uiCanvas instanceof Node){
+        if (uiCanvas instanceof Node) {
             this._uiCanvas = uiCanvas;
         }
-        else{
+        else {
             this._uiCanvas = instantiate(uiCanvas);
             director.getScene().addChild(this._uiCanvas);
         }
-        
+
         this._uiCanvas.name = '$kfc.UICanvas$';
         director.addPersistRootNode(this._uiCanvas);
 
-        this.resize();
+        //this.resize();
         let canvas = this._uiCanvas.getComponent(UITransform);
 
         layerNames ||= [];
+
+        this._uiRoot = this.createFullScreenNode();
+        this._uiRoot.name = '$kfc.uiRoot$'
+        canvas.node.addChild(this._uiRoot);
+
         //create layers
-        for (let i = maxLayers - 1; i >= 0; --i) {
-            let layerNode = new Node();
-            layerNode.layer = canvas.node.layer;
+        for (let i = 0; i < maxLayers; ++i) {
+            let layerNode = this.createFullScreenNode();
             layerNode.name = 'ui_layer_' + (layerNames[i] ? layerNames[i] : i);
-            let uiTransform = layerNode.addComponent(UITransform);
-            uiTransform.width = canvas.width;
-            uiTransform.height = canvas.height;
-
-            let widget = layerNode.addComponent(Widget);
-            widget.isAlignBottom = true;
-            widget.isAlignTop = true;
-            widget.isAlignLeft = true;
-            widget.isAlignRight = true;
-
-            widget.left = 0;
-            widget.right = 0;
-            widget.top = 0;
-            widget.bottom = 0;
-            canvas.node.insertChild(layerNode, 0);
+            this._uiRoot.addChild(layerNode);
         }
     }
 
     public getLayerNode(layerIndex: number): Node {
-        let canvas = this._uiCanvas;
-        return canvas.children[layerIndex];
+        return this._uiRoot.children[layerIndex] || this._uiRoot;
     }
 
     public hideAll() {
@@ -179,23 +190,10 @@ export class UIMgr {
                 }
                 else {
                     //special for empty ui
-                    node = new Node();
-                    node.layer = this._uiCanvas.layer;
-
-                    //keep size
-                    let widget = node.addComponent(Widget);
-                    widget.isAlignBottom = true;
-                    widget.isAlignTop = true;
-                    widget.isAlignLeft = true;
-                    widget.isAlignRight = true;
-
-                    widget.left = 0;
-                    widget.right = 0;
-                    widget.top = 0;
-                    widget.bottom = 0;
+                    node = this.createFullScreenNode();
                 }
 
-                let parent = UIMgr.inst.getLayerNode(ui.layer) || this._uiCanvas;
+                let parent = UIMgr.inst.getLayerNode(ui.layer);
                 parent.addChild(node);
                 ui.setup(node);
                 if (cb) {

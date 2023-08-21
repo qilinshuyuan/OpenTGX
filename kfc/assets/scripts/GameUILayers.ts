@@ -1,8 +1,4 @@
-/****
- * @en ui layers.each project can modify it based on needs.
- * @zh UI层级划分,
- * */
-enum UILayer {
+enum GameUILayers {
     GAME,
     JOY_STICK,
     HUD,
@@ -16,7 +12,7 @@ enum UILayer {
     NUM
 }
 
-const UILayerNames = [
+const GameUILayerNames = [
     'game',
     'joy_stick',
     'hud',
@@ -29,4 +25,4 @@ const UILayerNames = [
     'overlay'
 ];
 
-export { UILayer, UILayerNames };
+export { GameUILayers as GameUILayer, GameUILayerNames };

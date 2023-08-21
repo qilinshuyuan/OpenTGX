@@ -1,5 +1,5 @@
 
-import { GameUILayer } from "../../../scripts/GameUILayer";
+import { GameUILayer } from "../../../scripts/GameUILayers";
 import { UI_AboutMe, SubModule } from "../../../scripts/UIDef";
 import { Layout_AboutMe } from "./Layout_AboutMe";
 
