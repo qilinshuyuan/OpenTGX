@@ -1,15 +1,16 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab } from 'cc';
 import { UI_DemoList } from '../scripts/UIDef';
-import { GameUILayer, GameUILayerNames } from '../scripts/GameUILayers';
-import { kfcUIMgr, kfcUIAlert, kfcUIWaiting } from '../kfc/kfc';
+import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
+import { kfcUIMgr, kfcUIAlert, kfcUIWaiting, kfcGetModule } from '../kfc/kfc';
+import { ModuleDef } from '../scripts/ModuleDef';
 const { ccclass, property } = _decorator;
 
-const _preloadBundles = ['base'];
+const _preloadBundles = ['module_ui'];
 
 const _preloadRes = [
-    { bundle: 'base', url: 'ui_alert/UI_Alert', type: 'prefab' },
-    { bundle: 'base', url: 'ui_waiting/UI_Waiting', type: 'prefab' },
-    { bundle: 'base', url: 'ui_demo_list/UI_DemoList', type: 'prefab' },
+    { bundle: ModuleDef.UI, url: 'ui_alert/UI_Alert', type: 'prefab' },
+    { bundle: ModuleDef.UI, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
+    { bundle: ModuleDef.UI, url: 'ui_demo_list/UI_DemoList', type: 'prefab' },
 ];
 
 @ccclass('PreLoadingScene')
@@ -24,15 +25,14 @@ export class LoadingScene extends Component {
     private _percent: string = '';
     start() {
         game.frameRate = 61;
-        kfcUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayer.NUM, GameUILayerNames);
+        kfcUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
-        //this.preloadBundle(0);
-        this.preloadRes(0);
+        this.preloadBundle(0);
     }
 
     preloadBundle(idx: number) {
         assetManager.loadBundle(_preloadBundles[idx], null, (err, bundle) => {
-            console.log('module' + _preloadBundles[idx] + 'loaded.');
+            console.log('module:<' + _preloadBundles[idx] + '>loaded.');
             idx++;
             if (idx < _preloadBundles.length) {
                 this.preloadBundle(idx);

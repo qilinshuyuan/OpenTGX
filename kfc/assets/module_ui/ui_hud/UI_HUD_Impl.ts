@@ -1,12 +1,12 @@
 import { profiler } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { GameUILayer } from "../../../scripts/GameUILayers";
-import { UI_HUD, UI_AboutMe, UI_DemoList } from "../../../scripts/UIDef";
-import { kfcAttachImplClass, kfcUIMgr } from "../../../kfc/kfc";
+import { kfcUIMgr, kfcAttachImplClass } from "../../kfc/kfc";
+import { GameUILayers } from "../../scripts/GameUILayers";
+import { UI_HUD, UI_AboutMe, UI_DemoList } from "../../scripts/UIDef";
 
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
-        super('ui_hud/UI_HUD', GameUILayer.HUD, Layout_UI_HUD);
+        super('ui_hud/UI_HUD', GameUILayers.HUD, Layout_UI_HUD);
     }
 
     public getRes(): [] {

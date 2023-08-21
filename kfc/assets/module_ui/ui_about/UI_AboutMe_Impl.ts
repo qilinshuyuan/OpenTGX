@@ -1,12 +1,11 @@
-
-import { kfcAttachImplClass } from "../../../kfc/kfc";
-import { GameUILayer } from "../../../scripts/GameUILayers";
-import { UI_AboutMe } from "../../../scripts/UIDef";
+import { kfcAttachImplClass } from "../../kfc/kfc";
+import { GameUILayers } from "../../scripts/GameUILayers";
+import { UI_AboutMe } from "../../scripts/UIDef";
 import { Layout_AboutMe } from "./Layout_AboutMe";
 
 export class UI_AboutMe_Impl extends UI_AboutMe {
     constructor() {
-        super('ui_about/UI_AboutMe', GameUILayer.POPUP, Layout_AboutMe);
+        super('ui_about/UI_AboutMe', GameUILayers.POPUP, Layout_AboutMe);
     }
 
     public getRes(): [] {

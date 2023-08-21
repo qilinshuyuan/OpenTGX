@@ -1,7 +1,8 @@
 import { _decorator, assetManager, AudioClip, Component, Node } from 'cc';
-import { kfcAudioMgr } from '../../kfc/kfc';
+import { kfcAudioMgr } from '../kfc/kfc';
+import { ModuleDef } from '../scripts/ModuleDef';
 
-const BundleName = 'demo_tank_game';
+const BundleName = ModuleDef.DEMO_TANK;
 
 export class TankGameAudioMgr {
     /**

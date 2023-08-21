@@ -1,22 +1,18 @@
-import { kfcAttachModule, kfcUIAlert, kfcUIController, kfcUIMgr, kfcUIWaiting } from "../kfc/kfc";
-
-export class SubModule{
-    public static Base = 'base';
-    public static UI_Common = 'ui_common';
-}
+import { kfcAttachModule, kfcUIAlert, kfcUIController, kfcUIWaiting } from "../kfc/kfc";
+import { ModuleDef } from "./ModuleDef";
 
 //=============base===============
-kfcAttachModule(kfcUIAlert,SubModule.Base);
-kfcAttachModule(kfcUIWaiting,SubModule.Base);
+kfcAttachModule(kfcUIAlert, ModuleDef.UI);
+kfcAttachModule(kfcUIWaiting, ModuleDef.UI);
 
-export class UI_DemoList extends kfcUIController{
-    showCloseBtn(){}
+export class UI_DemoList extends kfcUIController {
+    showCloseBtn() { }
 }
-kfcAttachModule(UI_DemoList, SubModule.Base);
+kfcAttachModule(UI_DemoList, ModuleDef.UI);
 
 //================common================
-export class UI_HUD extends kfcUIController{}
-kfcAttachModule(UI_HUD,SubModule.UI_Common);
+export class UI_HUD extends kfcUIController { }
+kfcAttachModule(UI_HUD, ModuleDef.UI);
 
-export class UI_AboutMe extends kfcUIController{}
-kfcAttachModule(UI_AboutMe,SubModule.UI_Common);
+export class UI_AboutMe extends kfcUIController { }
+kfcAttachModule(UI_AboutMe, ModuleDef.UI);

@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
 import { TankBullet } from './TankBullet';
-import { kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../../kfc/kfc';
+import { kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../kfc/kfc';
 import { TankGameAudioMgr } from './TankGameAudioMgr';
 
 const { ccclass, property } = _decorator;

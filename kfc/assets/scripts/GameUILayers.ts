@@ -25,4 +25,4 @@ const GameUILayerNames = [
     'overlay'
 ];
 
-export { GameUILayers as GameUILayer, GameUILayerNames };
+export { GameUILayers, GameUILayerNames };
