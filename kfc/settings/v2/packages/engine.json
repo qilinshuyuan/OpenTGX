@@ -36,7 +36,7 @@
         "_value": false
       },
       "physics": {
-        "_value": false,
+        "_value": true,
         "_option": "physics-ammo"
       },
       "physics-ammo": {
@@ -134,6 +134,7 @@
       "base",
       "gfx-webgl",
       "intersection-2d",
+      "physics-ammo",
       "primitive",
       "profiler",
       "skeletal-animation",
