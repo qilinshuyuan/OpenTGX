@@ -1,10 +1,11 @@
 import { profiler } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { kfcUIMgr, kfcAttachImplClass } from "../../kfc/kfc";
+import { kfcUIMgr, kfcUIController } from "../../kfc/kfc";
 import { GameUILayers } from "../../scripts/GameUILayers";
-import { UI_HUD, UI_AboutMe, UI_DemoList } from "../../scripts/UIDef";
+import { UI_AboutMe } from "../../scripts/UIDef";
+import { UI_DemoList } from "../ui_demo_list/UI_DemoList";
 
-export class UI_HUD_Impl extends UI_HUD {
+export class UI_HUD extends kfcUIController {
     constructor() {
         super('ui_hud/UI_HUD', GameUILayers.HUD, Layout_UI_HUD);
     }
@@ -50,5 +51,3 @@ export class UI_HUD_Impl extends UI_HUD {
 
     }
 }
-
-kfcAttachImplClass(UI_HUD, UI_HUD_Impl);

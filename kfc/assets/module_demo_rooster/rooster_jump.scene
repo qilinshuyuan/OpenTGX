@@ -3285,7 +3285,7 @@
     "_useHDR": true,
     "_editableMaterial": null,
     "_reflectionHDR": {
-      "__uuid__": "1cf0be03-c2a3-4ed3-9366-6d19c6aec287@b47c0",
+      "__uuid__": "6a5a382f-0634-4256-9e8b-f7c062d69655@b47c0",
       "__expectedType__": "cc.TextureCube"
     },
     "_reflectionLDR": {

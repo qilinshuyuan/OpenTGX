@@ -1,6 +1,6 @@
 import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error } from 'cc';
 import { UIController } from './UIController';
-import { kfcCreateFromMoudle, kfcGetModule } from '../kylins_easy_controller/ModuleClass';
+import { kfcCreateFromModule, kfcGetModule } from '../kylins_easy_controller/ModuleClass';
 import { ResolutionAutoFit } from '../kylins_base/ResolutionAutoFit';
 
 /**
@@ -154,7 +154,7 @@ export class UIMgr {
             }
         }
 
-        let ui = kfcCreateFromMoudle(uiCls) as UIController;
+        let ui = kfcCreateFromModule(uiCls) as UIController;
         let resArr = ui.getRes() || [];
         if (typeof (ui.prefab) == 'string') {
             resArr.push(ui.prefab as never);

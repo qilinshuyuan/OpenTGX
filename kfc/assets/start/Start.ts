@@ -1,20 +1,19 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab } from 'cc';
-import { UI_DemoList } from '../scripts/UIDef';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
-import { kfcUIMgr, kfcUIAlert, kfcUIWaiting, kfcGetModule } from '../kfc/kfc';
+import { kfcUIMgr, kfcUIAlert, kfcUIWaiting, kfcSetDefaultModule } from '../kfc/kfc';
 import { ModuleDef } from '../scripts/ModuleDef';
 const { ccclass, property } = _decorator;
 
-const _preloadBundles = ['module_ui'];
+const _preloadBundles = [ModuleDef.BASIC];
 
 const _preloadRes = [
-    { bundle: ModuleDef.UI, url: 'ui_alert/UI_Alert', type: 'prefab' },
-    { bundle: ModuleDef.UI, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
-    { bundle: ModuleDef.UI, url: 'ui_demo_list/UI_DemoList', type: 'prefab' },
+    { bundle: ModuleDef.BASIC, url: 'ui_alert/UI_Alert', type: 'prefab' },
+    { bundle: ModuleDef.BASIC, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
+    { bundle: ModuleDef.BASIC, url: 'ui_demo_list/UI_DemoList', type: 'prefab' },
 ];
 
-@ccclass('PreLoadingScene')
-export class LoadingScene extends Component {
+@ccclass('Start')
+export class Start extends Component {
     @property(Label)
     txtLoading: Label;
 
@@ -24,6 +23,9 @@ export class LoadingScene extends Component {
 
     private _percent: string = '';
     start() {
+
+        kfcSetDefaultModule(ModuleDef.BASIC);
+
         game.frameRate = 61;
         kfcUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
@@ -65,34 +67,36 @@ export class LoadingScene extends Component {
 
     onPreloadingComplete() {
         this.txtLoading.node.active = false;
-        kfcUIMgr.inst.showUI(UI_DemoList);
-    }
-
-    preloadScene() {
-        return;
-        const entryBundle = 'tank_game';
-        const entryScene = 'tank_game';
-        let bundle = assetManager.getBundle(entryBundle);
-        if (!bundle) {
-            kfcUIAlert.show('Can not find bundle:' + entryBundle);
-            return;
-        }
-        let now = Date.now();
-        bundle.preloadScene(entryScene, (completedCount: number, totalCount: number) => {
-            this._percent = ~~(completedCount / totalCount * 100) + '%';
-        }, () => {
-            console.log('preloadScene costs ' + (Date.now() - now) + ' ms');
-            kfcUIAlert.show('加载完成，进入游戏').onClick((isOK: boolean) => {
-                now = Date.now();
-                let uw = kfcUIWaiting.show();
-                director.loadScene(entryScene, () => {
-                    console.log('loadScene costs ' + (Date.now() - now) + ' ms');
-                    uw.hide();
-                });
-            });
+        let bundle = assetManager.getBundle(ModuleDef.BASIC);
+        bundle.preloadScene('main_menu',()=>{
+            director.loadScene('main_menu');
         });
     }
-
+    /*
+        preloadScene() {
+            const entryBundle = 'tank_game';
+            const entryScene = 'tank_game';
+            let bundle = assetManager.getBundle(entryBundle);
+            if (!bundle) {
+                kfcUIAlert.show('Can not find bundle:' + entryBundle);
+                return;
+            }
+            let now = Date.now();
+            bundle.preloadScene(entryScene, (completedCount: number, totalCount: number) => {
+                this._percent = ~~(completedCount / totalCount * 100) + '%';
+            }, () => {
+                console.log('preloadScene costs ' + (Date.now() - now) + ' ms');
+                kfcUIAlert.show('加载完成，进入游戏').onClick((isOK: boolean) => {
+                    now = Date.now();
+                    let uw = kfcUIWaiting.show();
+                    director.loadScene(entryScene, () => {
+                        console.log('loadScene costs ' + (Date.now() - now) + ' ms');
+                        uw.hide();
+                    });
+                });
+            });
+        }
+    */
     private _loadingText = ['Loading.', 'Loading..', 'Loading...'];
 
     update(deltaTime: number) {

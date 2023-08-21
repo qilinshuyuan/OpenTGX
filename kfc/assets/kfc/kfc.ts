@@ -6,7 +6,7 @@ export { InputMgr as kfcInputMgr } from "./kylins_base/InputMgr";
 export { ResourceMgr as kfcResourceMgr } from "./kylins_base/ResourceMgr";
 export { SafeJSON as kfcSafeJSON } from "./kylins_base/SafeJSON";
 export { ResolutionAutoFit as kfcResolutionAutoFit } from "./kylins_base/ResolutionAutoFit";
-export { kfcAttachImplClass, kfcAttachModule, kfcGetModule } from "./kylins_easy_controller/ModuleClass";
+export { kfcAttachImplClass, kfcAttachModule, kfcGetModule, kfcSetDefaultModule } from "./kylins_easy_controller/ModuleClass";
 
 
 //camera

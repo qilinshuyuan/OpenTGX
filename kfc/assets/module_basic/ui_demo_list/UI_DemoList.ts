@@ -1,16 +1,16 @@
 import { Button, assetManager, AssetManager, director } from "cc";
-import { kfcUIWaiting, kfcUIMgr, kfcAttachImplClass } from "../../kfc/kfc";
+import { kfcUIWaiting, kfcUIMgr, kfcAttachImplClass, kfcUIController, kfcAttachModule } from "../../kfc/kfc";
 import { GameUILayers } from "../../scripts/GameUILayers";
-import { UI_DemoList, UI_HUD } from "../../scripts/UIDef";
 import { Layout_DemoList } from "./Layout_DemoList";
 import { ModuleDef } from "../../scripts/ModuleDef";
+import { UI_HUD } from "../ui_hud/UI_HUD";
 
 const DemoList = [
     { bundle: ModuleDef.DEMO_TANK, entryScene: 'tank_game' },
     { bundle: ModuleDef.DEMO_ROOSTER, entryScene: 'rooster_jump' },
 ];
 
-export class UI_DemoList_Impl extends UI_DemoList {
+export class UI_DemoList extends kfcUIController {
     constructor() {
         super('ui_demo_list/UI_DemoList', GameUILayers.POPUP, Layout_DemoList);
     }
@@ -21,7 +21,7 @@ export class UI_DemoList_Impl extends UI_DemoList {
 
     protected onCreated(): void {
         let layout = this.layout as Layout_DemoList;
-        // layout.btnClose.node.active = false;
+        layout.btnClose.node.active = false;
         this.onButtonEvent(layout.btnClose, () => {
             this.hide();
         });
@@ -51,5 +51,3 @@ export class UI_DemoList_Impl extends UI_DemoList {
         layout.btnClose.node.active = true;
     }
 }
-
-kfcAttachImplClass(UI_DemoList, UI_DemoList_Impl);

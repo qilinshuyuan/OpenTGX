@@ -14,7 +14,7 @@
           "web": {
             "preferredOptions": {
               "isRemote": false,
-              "compressionType": "merge_dep"
+              "compressionType": "merge_all_json"
             },
             "fallbackOptions": {
               "compressionType": "merge_dep"

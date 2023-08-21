@@ -1,18 +1,7 @@
-import { kfcAttachModule, kfcUIAlert, kfcUIController, kfcUIWaiting } from "../kfc/kfc";
+import { kfcAttachModule, kfcUIController } from "../kfc/kfc";
 import { ModuleDef } from "./ModuleDef";
 
-//=============base===============
-kfcAttachModule(kfcUIAlert, ModuleDef.UI);
-kfcAttachModule(kfcUIWaiting, ModuleDef.UI);
+//define UI which are not in basic bundle but be called by other bundles.
 
-export class UI_DemoList extends kfcUIController {
-    showCloseBtn() { }
-}
-kfcAttachModule(UI_DemoList, ModuleDef.UI);
-
-//================common================
-export class UI_HUD extends kfcUIController { }
-kfcAttachModule(UI_HUD, ModuleDef.UI);
-
-export class UI_AboutMe extends kfcUIController { }
-kfcAttachModule(UI_AboutMe, ModuleDef.UI);
+export class UI_AboutMe extends kfcUIController {}
+kfcAttachModule(UI_AboutMe, ModuleDef.EXTRA);

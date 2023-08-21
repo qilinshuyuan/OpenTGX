@@ -1,6 +1,6 @@
 import { _decorator, Component } from 'cc';
 import { kfcUI_Joystick, kfcUIMgr } from '../kfc/kfc';
-import { UI_HUD } from '../scripts/UIDef';
+import { UI_HUD } from '../module_basic/ui_hud/UI_HUD';
 const { ccclass, property } = _decorator;
 
 @ccclass('RoosterJumpEntry')
