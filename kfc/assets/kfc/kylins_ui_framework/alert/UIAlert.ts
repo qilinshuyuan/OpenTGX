@@ -28,12 +28,9 @@ export class UIAlert extends UIController {
         let opts = new UIAlertOptions() as any;
         opts._content = content;
         opts._showCancel = showCancel;
-        let implCls = UIMgr.inst.getImplClass(UIAlert);
-        if (implCls) {
-            UIMgr.inst.showUI(implCls, (alert: UIAlert) => {
-                alert.init(opts);
-            }) as UIAlert;
-        }
+        UIMgr.inst.showUI(UIAlert, (alert: UIAlert) => {
+            alert.init(opts);
+        }) as UIAlert;
         return opts;
     }
 
@@ -57,7 +54,7 @@ export class UIAlert extends UIController {
         let layout = this.layout as Layout_UIAlert;
         this.onButtonEvent(layout.btnOK, () => {
             this.hide();
-            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any};
+            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any };
             if (options._cbClick) {
                 options._cbClick.call(options._cbClickThisArg, true);
             }
@@ -65,7 +62,7 @@ export class UIAlert extends UIController {
 
         this.onButtonEvent(layout.btnCancel, () => {
             this.hide();
-            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any};
+            let options = this._options as any as { _cbClick: Function, _cbClickThisArg: any };
             if (options._cbClick) {
                 options._cbClick.call(options._cbClickThisArg, false);
             }

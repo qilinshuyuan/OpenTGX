@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "preloading",
+    "_name": "start",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",

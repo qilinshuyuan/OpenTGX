@@ -1,5 +1,7 @@
 import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error } from 'cc';
 import { UIController } from './UIController';
+import { kfcCreateFromMoudle, kfcGetModule } from '../kylins_easy_controller/ModuleClass';
+import { ResolutionAutoFit } from '../kylins_base/ResolutionAutoFit';
 
 /**
  * @en the `User Interface Manager`, handles some stuffs like the ui loads,ui layers,resizing etc.
@@ -14,22 +16,6 @@ export class UIMgr {
             this._inst = new UIMgr();
         }
         return this._inst;
-    }
-
-    attachModule(uiCls, moduleName) {
-        uiCls['__module__name__'] = moduleName;
-    }
-
-    getModule(uiCls) {
-        return uiCls['__module__name__'] || 'resources';
-    }
-
-    attachImplClass(uiCls, uiImplCls) {
-        uiCls['__impl__class__'] = uiImplCls;
-    }
-
-    getImplClass(uiCls) {
-        return uiCls['__impl__class__'] || uiCls;
     }
 
     private _uiCanvas: Node;
@@ -115,6 +101,7 @@ export class UIMgr {
 
         //this.resize();
         let canvas = this._uiCanvas.getComponent(UITransform);
+        this._uiCanvas.addComponent(ResolutionAutoFit);
 
         layerNames ||= [];
 
@@ -151,7 +138,7 @@ export class UIMgr {
      * @returns the instance of `uiCls`
      *  */
     public showUI(uiCls: any, cb?: Function, thisArg?: any): any {
-        let bundleName = this.getModule(uiCls);
+        let bundleName = kfcGetModule(uiCls);
         if (bundleName) {
             let bundle = assetManager.getBundle(bundleName);
             if (!bundle) {
@@ -167,9 +154,7 @@ export class UIMgr {
             }
         }
 
-        let uiImplCls = this.getImplClass(uiCls);
-
-        let ui = new uiImplCls() as UIController;
+        let ui = kfcCreateFromMoudle(uiCls) as UIController;
         let resArr = ui.getRes() || [];
         if (typeof (ui.prefab) == 'string') {
             resArr.push(ui.prefab as never);

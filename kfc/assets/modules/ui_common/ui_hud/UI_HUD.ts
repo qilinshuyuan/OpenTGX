@@ -1,8 +1,8 @@
-import { profiler, view, macro, screen, director } from "cc";
+import { profiler } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
 import { GameUILayer } from "../../../scripts/GameUILayers";
-import { UI_HUD, UI_AboutMe, SubModule, UI_DemoList } from "../../../scripts/UIDef";
-import { kfcUIMgr } from "../../../kfc/kfc";
+import { UI_HUD, UI_AboutMe, UI_DemoList } from "../../../scripts/UIDef";
+import { kfcAttachImplClass, kfcUIMgr } from "../../../kfc/kfc";
 
 export class UI_HUD_Impl extends UI_HUD {
     constructor() {
@@ -36,7 +36,7 @@ export class UI_HUD_Impl extends UI_HUD {
     }
 
     onSceneChange() {
-        kfcUIMgr.inst.showUI(UI_DemoList,(ui:UI_DemoList)=>{
+        kfcUIMgr.inst.showUI(UI_DemoList, (ui: UI_DemoList) => {
             ui.showCloseBtn();
         });
     }
@@ -51,4 +51,4 @@ export class UI_HUD_Impl extends UI_HUD {
     }
 }
 
-SubModule.attachImplClass(UI_HUD, UI_HUD_Impl);
+kfcAttachImplClass(UI_HUD, UI_HUD_Impl);

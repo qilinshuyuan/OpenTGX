@@ -2,7 +2,7 @@ import { AssetManager, Button, assetManager, director } from "cc";
 import { GameUILayer } from "../../../scripts/GameUILayers";
 import { SubModule, UI_DemoList, UI_HUD } from "../../../scripts/UIDef";
 import { Layout_DemoList } from "./Layout_DemoList";
-import { kfcUIMgr, kfcUIWaiting } from "../../../kfc/kfc";
+import { kfcAttachImplClass, kfcUIMgr, kfcUIWaiting } from "../../../kfc/kfc";
 
 const DemoList = [
     { bundle: 'demo_tank_game', entryScene: 'tank_game' },
@@ -51,4 +51,4 @@ export class UI_DemoList_Impl extends UI_DemoList {
     }
 }
 
-SubModule.attachImplClass(UI_DemoList, UI_DemoList_Impl);
+kfcAttachImplClass(UI_DemoList, UI_DemoList_Impl);

@@ -1,4 +1,4 @@
-import { _decorator, assetManager, Component, director, find, game, Label, Prefab } from 'cc';
+import { _decorator, assetManager, Component, director, game, Label, Prefab } from 'cc';
 import { UI_DemoList } from '../scripts/UIDef';
 import { GameUILayer, GameUILayerNames } from '../scripts/GameUILayers';
 import { kfcUIMgr, kfcUIAlert, kfcUIWaiting } from '../kfc/kfc';
@@ -26,7 +26,8 @@ export class LoadingScene extends Component {
         game.frameRate = 61;
         kfcUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayer.NUM, GameUILayerNames);
 
-        this.preloadBundle(0);
+        //this.preloadBundle(0);
+        this.preloadRes(0);
     }
 
     preloadBundle(idx: number) {
@@ -44,7 +45,6 @@ export class LoadingScene extends Component {
 
     preloadRes(idx: number) {
         let res = _preloadRes[idx];
-        res.bundle
         let bundle = assetManager.getBundle(res.bundle);
 
         let onComplete = () => {

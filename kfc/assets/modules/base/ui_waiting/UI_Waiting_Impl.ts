@@ -1,5 +1,5 @@
 
-import { kfcLayout_UIWaiting, kfcUIWaiting } from "../../../kfc/kfc";
+import { kfcAttachImplClass, kfcLayout_UIWaiting, kfcUIWaiting } from "../../../kfc/kfc";
 import { GameUILayer } from "../../../scripts/GameUILayers";
 import { SubModule } from "../../../scripts/UIDef";
 
@@ -9,4 +9,4 @@ export class UIWaiting_Impl extends kfcUIWaiting{
     }
 }
 
-SubModule.attachImplClass(kfcUIWaiting, UIWaiting_Impl);
+kfcAttachImplClass(kfcUIWaiting, UIWaiting_Impl);

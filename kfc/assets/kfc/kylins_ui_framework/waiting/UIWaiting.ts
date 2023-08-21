@@ -1,3 +1,4 @@
+
 import { UIController } from "../UIController";
 import { UIMgr } from "../UIMgr";
 import { Layout_UIWaiting } from "./Layout_UIWaiting";
@@ -16,7 +17,7 @@ export class UIWaiting extends UIController{
         if(_inst){
             return _inst;
         }
-        _inst = UIMgr.inst.showUI(UIMgr.inst.getImplClass(UIWaiting));
+        _inst = UIMgr.inst.showUI((UIWaiting));
         return _inst;
     }
 
@@ -39,5 +40,9 @@ export class UIWaiting extends UIController{
             let idx = (~~(Date.now() / 500))
             layout.loadingTxt.string = loadingTxtArr[idx];
         }
+    }
+
+    onDispose(){
+        _inst = null;
     }
 }
