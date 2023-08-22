@@ -1,7 +1,13 @@
-import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error } from 'cc';
+import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error, Component } from 'cc';
 import { UIController } from './UIController';
 import { kfcCreateFromModule, kfcGetModule } from '../kylins_easy_controller/ModuleClass';
 import { ResolutionAutoFit } from '../kylins_base/ResolutionAutoFit';
+
+class UIUpdater extends Component{
+    update(){
+        UIController.updateAll();
+    }
+}
 
 /**
  * @en the `User Interface Manager`, handles some stuffs like the ui loads,ui layers,resizing etc.
@@ -42,40 +48,6 @@ export class UIMgr {
         return node;
     }
 
-    public resize() {
-        //根据屏幕大小决定适配策略
-        //想明白原理，请阅读本文 https://blog.csdn.net/qq_36720848/article/details/89742451
-
-        //decide the resolution policy according to the relationship between screen size and design resolution.  go https://blog.csdn.net/qq_36720848/article/details/89742451 (artile in Chinese) for more detail.
-        let dr = view.getDesignResolutionSize();
-        var s = view.getFrameSize();
-        var rw = s.width;
-        var rh = s.height;
-        var finalW = rw;
-        var finalH = rh;
-
-        //
-        if ((rw / rh) > (dr.width / dr.height)) {
-            //如果更长，则用定高
-            //if screen size is longer than design resolution. use fitHeight
-            finalH = dr.height;
-            finalW = finalH * rw / rh;
-        }
-        else {
-            //如果更短，则用定宽
-            //if screen size is shorter than design resolution. use fitWidth.
-            finalW = dr.width;
-            finalH = rh / rw * finalW;
-        }
-
-        //手工修改canvas和设计分辨率，这样反复调用也能生效。
-        //we use the code below instead of fitWidth = true or fitHeight = true. so that we can recall this method many times.
-        view.setDesignResolutionSize(finalW, finalH, ResolutionPolicy.UNKNOWN);
-        let cvs = this._uiCanvas.getComponent(UITransform);
-        cvs.width = finalW;
-        cvs.height = finalH;
-    }
-
     /**
      * @en setup this UIMgr,`don't call more than once`.
      * @zh 初始化UIMgr,`不要多次调用`
@@ -98,6 +70,10 @@ export class UIMgr {
 
         this._uiCanvas.name = '$kfc.UICanvas$';
         director.addPersistRootNode(this._uiCanvas);
+
+        if(!this._uiCanvas.getComponent(UIUpdater)){
+            this._uiCanvas.addComponent(UIUpdater);
+        }
 
         //this.resize();
         let canvas = this._uiCanvas.getComponent(UITransform);
@@ -125,8 +101,25 @@ export class UIMgr {
         UIController.hideAll();
     }
 
-    public update() {
-        UIController.updateAll();
+    public getUI<T extends UIController>(uiCls):T{
+        let allControllers = (UIController as any)._controllers;
+        for(let i = 0; i < allControllers.length; ++i){
+            let c = allControllers[i];
+            if(c instanceof uiCls){
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public isShowing(uiCls:any):boolean{
+        let allControllers = (UIController as any)._controllers;
+        for(let i = 0; i < allControllers.length; ++i){
+            if(allControllers[i] instanceof uiCls){
+                return true;
+            }
+        }
+        return false;
     }
 
     /***
