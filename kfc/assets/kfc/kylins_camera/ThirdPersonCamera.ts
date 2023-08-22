@@ -35,6 +35,20 @@ export class ThirdPersonCamera extends Component {
     protected _targetLen: number = 0;
     protected _targetAngles: Vec3 = v3();
 
+    start(){
+        this._targetLen = this.len;
+        this._targetAngles.set(this.node.eulerAngles);
+    }
+
+    setLenFactor(factor: number) {
+        let len = (this.lenMax - this.lenMin) * factor + this.lenMin;
+        this._targetLen = len;
+    }
+
+    setTargetAngles(x: number, y: number, z: number) {
+        this._targetAngles.set(x, y, z);
+    }
+
     lateUpdate(deltaTime: number) {
         if (!this.target) {
             return;
