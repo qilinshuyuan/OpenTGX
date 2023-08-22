@@ -1,8 +1,11 @@
 import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error, Component } from 'cc';
 import { UIController } from './UIController';
-import { kfcCreateFromModule, kfcGetModule } from '../kylins_easy_controller/ModuleClass';
+import { kfcCreateFromModule, kfcGetModule } from '../kylins_base/ModuleClass';
 import { ResolutionAutoFit } from '../kylins_base/ResolutionAutoFit';
 
+const { ccclass, property } = _decorator;
+
+@ccclass('kfc.UIMgr.UIUpdater')
 class UIUpdater extends Component{
     update(){
         UIController.updateAll();
