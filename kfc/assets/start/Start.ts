@@ -68,7 +68,7 @@ export class Start extends Component {
     onPreloadingComplete() {
         this.txtLoading.node.active = false;
         let bundle = assetManager.getBundle(ModuleDef.BASIC);
-        bundle.preloadScene('main_menu',()=>{
+        bundle.preloadScene('main_menu', () => {
             director.loadScene('main_menu');
         });
     }
@@ -104,7 +104,7 @@ export class Start extends Component {
             this.txtLoading.string = 'Loading...' + this._percent;
         }
         else {
-            let idx = (~~(game.totalTime / 1000)) % 3;
+            let idx = Math.floor(game.totalTime / 1000) % 3;
             this.txtLoading.string = this._loadingText[idx];
         }
     }

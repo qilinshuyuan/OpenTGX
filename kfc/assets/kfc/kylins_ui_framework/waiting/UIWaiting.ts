@@ -37,7 +37,7 @@ export class UIWaiting extends UIController{
         }
 
         if(layout.loadingTxt){
-            let idx = (~~(Date.now() / 500))
+            let idx = Math.floor(Date.now() / 500) % 3;
             layout.loadingTxt.string = loadingTxtArr[idx];
         }
     }
