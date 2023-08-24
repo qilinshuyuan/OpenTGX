@@ -4,7 +4,9 @@
 
 群名：**KylinsToolkit & KFC**
 
-请加微信 `qilinzi666` 并注明 `KFC`，即可入群。
+请加扫码添加微信（微信号：`qilinzi6666`） 并注明 `KFC`，即可入群。
+
+![](./docs-cn/images/wechat_qrcode.jpeg)
 
 >群里不讨论无关话题。
 
@@ -17,14 +19,14 @@
 - 用技术资源赋能行业商机落地
 - 交个朋友，你不亏！
 ## 项目模板/产品示例
-- [Jare 大冒险](https://store.cocos.com/app/detail/4241)
+- [3D 跑酷- Jare 大冒险](https://store.cocos.com/app/detail/4241)
 - 桌球女孩-即将上线
 - [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
 - [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
 > 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
 
 ## 关于 KylinsToolkit&KFC
-`KylinsToolkit` 是一个基于 [Cocos Creator](https://www.cocos.com/creator)的开源免费的游戏项目开发解决方案。
+`KylinsToolkit` 是一个基于 [Cocos Creator](https://www.cocos.com/creator) 的开源免费的游戏项目开发解决方案。
 
 它由框架核心 `KFC` 和相关工具集组成，它的目标是成为一套能够解决开发者常见需求和问题的基础方案。
 如：
