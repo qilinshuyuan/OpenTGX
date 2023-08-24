@@ -15,7 +15,7 @@ So that you can message me directly and get the latest information about KylinsT
 > If you have examples and products based on KylinsToolkit and want to be listed here, please contact me.
 
 ## About KylinsToolkit
-`KylinsToolkit` is a free and open-source game development solution.
+`KylinsToolkit` is a free and open-source game development solution based on [Cocos Creator](https://www.cocos.com/creator), one of the top game engine in the world.
 
 It consists of `KFC` framework and a set of ralated tools.
 > KFC is short for Kylin's Framework Core

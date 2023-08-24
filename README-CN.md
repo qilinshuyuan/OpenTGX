@@ -24,7 +24,7 @@
 > 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
 
 ## 关于 KylinsToolkit&KFC
-`KylinsToolkit` 是一个免费开源的项目开发解决方案。
+`KylinsToolkit` 是一个基于 [Cocos Creator](https://www.cocos.com/creator)的开源免费的游戏项目开发解决方案。
 
 它由框架核心 `KFC` 和相关工具集组成，它的目标是成为一套能够解决开发者常见需求和问题的基础方案。
 如：
