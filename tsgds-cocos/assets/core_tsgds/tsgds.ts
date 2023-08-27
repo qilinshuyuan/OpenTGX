@@ -6,7 +6,7 @@ export { InputMgr as tgInputMgr } from "./base/InputMgr";
 export { ResourceMgr as tgResourceMgr } from "./base/ResourceMgr";
 export { SafeJSON as tgSafeJSON } from "./base/SafeJSON";
 export { ResolutionAutoFit as tgResolutionAutoFit } from "./base/ResolutionAutoFit";
-export { ModuleClass as tgModuleClass } from "./base/ModuleClass";
+export { ModuleContext as tgModuleContext } from "./base/ModuleContext";
 
 //camera
 export { FPSCamera as tgFPSCamera } from "./easy_camera/FPSCamera";

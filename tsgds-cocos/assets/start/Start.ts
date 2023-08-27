@@ -1,5 +1,5 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab, Node } from 'cc';
-import { tgModuleClass, tgUIMgr } from '../core_tsgds/tsgds';
+import { tgModuleContext, tgUIMgr } from '../core_tsgds/tsgds';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 
 import { ModuleDef } from '../scripts/ModuleDef';
@@ -30,7 +30,7 @@ export class Start extends Component {
     private _percent: string = '';
     private _numCurrentLoaded = 0;
     start() {
-        tgModuleClass.setDefaultModule(ModuleDef.BASIC);
+        tgModuleContext.setDefaultModule(ModuleDef.BASIC);
 
         game.frameRate = 61;
         tgUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);

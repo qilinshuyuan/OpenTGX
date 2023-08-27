@@ -1,6 +1,6 @@
 import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error, Component } from 'cc';
 import { UIController } from './UIController';
-import { ModuleClass } from '../base/ModuleClass';
+import { ModuleContext } from '../base/ModuleContext';
 import { ResolutionAutoFit } from '../base/ResolutionAutoFit';
 
 const { ccclass, property } = _decorator;
@@ -134,7 +134,7 @@ export class UIMgr {
      * @returns the instance of `uiCls`
      *  */
     public showUI(uiCls: any, cb?: Function, thisArg?: any): any {
-        let bundleName = ModuleClass.getModule(uiCls);
+        let bundleName = ModuleContext.getClassModule(uiCls);
         if (bundleName) {
             let bundle = assetManager.getBundle(bundleName);
             if (!bundle) {
@@ -150,7 +150,7 @@ export class UIMgr {
             }
         }
 
-        let ui = ModuleClass.createFromModule(uiCls) as UIController;
+        let ui = ModuleContext.createFromModule(uiCls) as UIController;
         let resArr = ui.getRes() || [];
         if (typeof (ui.prefab) == 'string') {
             resArr.push(ui.prefab as never);

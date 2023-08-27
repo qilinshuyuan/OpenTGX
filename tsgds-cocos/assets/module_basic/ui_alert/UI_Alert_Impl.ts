@@ -1,5 +1,5 @@
 
-import { tgLayout_UIAlert, tgModuleClass, tgUIAlert } from "../../core_tsgds/tsgds";
+import { tgLayout_UIAlert, tgModuleContext, tgUIAlert } from "../../core_tsgds/tsgds";
 import { GameUILayers } from "../../scripts/GameUILayers";
 
 export class UIAlert_Impl extends tgUIAlert {
@@ -8,4 +8,4 @@ export class UIAlert_Impl extends tgUIAlert {
     }
 }
 
-tgModuleClass.attachImplClass(tgUIAlert, UIAlert_Impl);
+tgModuleContext.attachImplClass(tgUIAlert, UIAlert_Impl);

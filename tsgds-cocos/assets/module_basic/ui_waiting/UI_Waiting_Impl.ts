@@ -1,4 +1,4 @@
-import { tgUIWaiting, tgLayout_UIWaiting, tgModuleClass } from "../../core_tsgds/tsgds";
+import { tgUIWaiting, tgLayout_UIWaiting, tgModuleContext } from "../../core_tsgds/tsgds";
 import { GameUILayers } from "../../scripts/GameUILayers";
 
 
@@ -8,4 +8,4 @@ export class UIWaiting_Impl extends tgUIWaiting{
     }
 }
 
-tgModuleClass.attachImplClass(tgUIWaiting, UIWaiting_Impl);
+tgModuleContext.attachImplClass(tgUIWaiting, UIWaiting_Impl);
