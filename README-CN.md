@@ -1,6 +1,10 @@
 *中文 | [English](./README.md)
 
+
 ## 关于 `OpenTsGDS`
+
+![](./opentsgds-txt.png)
+
 `OpenTsGDS`（Open TypeScript Game Development Solution)，是一个基于 TypeScript 语言的开源免费全栈游戏开发解决方案。它能够给你解决客户端和服务器两端的问题，客户端基于 Cocos Creator ( 能够发布到几乎所有的主流平台），服务端使用 NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 ).
 
 `OpenTsGDS` 的主要目标，是为你解决日常开发中的需求和问题。

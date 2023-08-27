@@ -1,5 +1,9 @@
 [中文](./README-CN.md) | *English
+
 ## About OpenTsGDS
+
+![](./opentsgds-txt.png)
+
 `OpenTsGDS` is a free and open-source game development solution using typescript for both client and server sides, which is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server side programming platform).
 
 It targets to be a solution that can solve the daily development requirements and issues.
