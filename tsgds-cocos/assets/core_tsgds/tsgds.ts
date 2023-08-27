@@ -1,4 +1,4 @@
-//tg is shor for ts gds
+//tg is short for ts gds
 
 //base
 export { AudioMgr as tgAudioMgr } from "./base/AudioMgr";
