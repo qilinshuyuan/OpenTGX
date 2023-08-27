@@ -8,7 +8,7 @@ const qt_1 = new Quat();
 const forward = new Vec3();
 const right = new Vec3();
 
-@ccclass('kfc.FreeCamera')
+@ccclass('tsgds.FreeCamera')
 export class FreeCamera extends Component {
 
     @property

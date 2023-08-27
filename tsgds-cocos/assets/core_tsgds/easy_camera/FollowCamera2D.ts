@@ -3,7 +3,7 @@ const { ccclass, property } = _decorator;
 
 const tmpV3 = v3();
 
-@ccclass('kfc.FollowCamera2D')
+@ccclass('tsgds.FollowCamera2D')
 export class FollowCamera2D extends Component {
     @property(Node)
     target:Node;

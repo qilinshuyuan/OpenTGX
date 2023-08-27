@@ -1,7 +1,7 @@
-import { kfcAttachModule, kfcUIController } from "../kfc/kfc";
+import { tgModuleClass, tgUIController } from "../core_tsgds/tsgds";
 import { ModuleDef } from "./ModuleDef";
 
 //define UI which are not in basic bundle but be called by other bundles.
 
-export class UI_AboutMe extends kfcUIController {}
-kfcAttachModule(UI_AboutMe, ModuleDef.EXTRA);
+export class UI_AboutMe extends tgUIController { }
+tgModuleClass.attachImplClass(UI_AboutMe, ModuleDef.EXTRA);

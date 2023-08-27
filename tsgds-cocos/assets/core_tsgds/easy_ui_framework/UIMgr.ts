@@ -1,13 +1,13 @@
 import { _decorator, Node, Prefab, instantiate, Widget, UITransform, view, ResolutionPolicy, assetManager, AssetManager, director, error, Component } from 'cc';
 import { UIController } from './UIController';
-import { kfcCreateFromModule, kfcGetModule } from '../kylins_base/ModuleClass';
-import { ResolutionAutoFit } from '../kylins_base/ResolutionAutoFit';
+import { ModuleClass } from '../base/ModuleClass';
+import { ResolutionAutoFit } from '../base/ResolutionAutoFit';
 
 const { ccclass, property } = _decorator;
 
-@ccclass('kfc.UIMgr.UIUpdater')
-class UIUpdater extends Component{
-    update(){
+@ccclass('tsgds.UIMgr.UIUpdater')
+class UIUpdater extends Component {
+    update() {
         UIController.updateAll();
     }
 }
@@ -71,10 +71,10 @@ export class UIMgr {
             director.getScene().addChild(this._uiCanvas);
         }
 
-        this._uiCanvas.name = '$kfc.UICanvas$';
+        this._uiCanvas.name = '$tsgds.UICanvas$';
         director.addPersistRootNode(this._uiCanvas);
 
-        if(!this._uiCanvas.getComponent(UIUpdater)){
+        if (!this._uiCanvas.getComponent(UIUpdater)) {
             this._uiCanvas.addComponent(UIUpdater);
         }
 
@@ -85,7 +85,7 @@ export class UIMgr {
         layerNames ||= [];
 
         this._uiRoot = this.createFullScreenNode();
-        this._uiRoot.name = '$kfc.uiRoot$'
+        this._uiRoot.name = 'ui_root'
         canvas.node.addChild(this._uiRoot);
 
         //create layers
@@ -104,21 +104,21 @@ export class UIMgr {
         UIController.hideAll();
     }
 
-    public getUI<T extends UIController>(uiCls):T{
+    public getUI<T extends UIController>(uiCls): T {
         let allControllers = (UIController as any)._controllers;
-        for(let i = 0; i < allControllers.length; ++i){
+        for (let i = 0; i < allControllers.length; ++i) {
             let c = allControllers[i];
-            if(c instanceof uiCls){
+            if (c instanceof uiCls) {
                 return c;
             }
         }
         return null;
     }
 
-    public isShowing(uiCls:any):boolean{
+    public isShowing(uiCls: any): boolean {
         let allControllers = (UIController as any)._controllers;
-        for(let i = 0; i < allControllers.length; ++i){
-            if(allControllers[i] instanceof uiCls){
+        for (let i = 0; i < allControllers.length; ++i) {
+            if (allControllers[i] instanceof uiCls) {
                 return true;
             }
         }
@@ -134,7 +134,7 @@ export class UIMgr {
      * @returns the instance of `uiCls`
      *  */
     public showUI(uiCls: any, cb?: Function, thisArg?: any): any {
-        let bundleName = kfcGetModule(uiCls);
+        let bundleName = ModuleClass.getModule(uiCls);
         if (bundleName) {
             let bundle = assetManager.getBundle(bundleName);
             if (!bundle) {
@@ -150,7 +150,7 @@ export class UIMgr {
             }
         }
 
-        let ui = kfcCreateFromModule(uiCls) as UIController;
+        let ui = ModuleClass.createFromModule(uiCls) as UIController;
         let resArr = ui.getRes() || [];
         if (typeof (ui.prefab) == 'string') {
             resArr.push(ui.prefab as never);

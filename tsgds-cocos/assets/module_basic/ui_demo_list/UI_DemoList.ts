@@ -1,16 +1,16 @@
 import { Button, assetManager, AssetManager, director } from "cc";
-import { kfcUIWaiting, kfcUIMgr, kfcAttachImplClass, kfcUIController, kfcAttachModule } from "../../kfc/kfc";
 import { GameUILayers } from "../../scripts/GameUILayers";
 import { Layout_DemoList } from "./Layout_DemoList";
 import { ModuleDef } from "../../scripts/ModuleDef";
 import { UI_HUD } from "../ui_hud/UI_HUD";
+import { tgUIController, tgUIMgr, tgUIWaiting } from "../../core_tsgds/tsgds";
 
 const DemoList = [
     { bundle: ModuleDef.DEMO_TANK, entryScene: 'tank_game' },
     { bundle: ModuleDef.DEMO_ROOSTER, entryScene: 'rooster_jump' },
 ];
 
-export class UI_DemoList extends kfcUIController {
+export class UI_DemoList extends tgUIController {
     constructor() {
         super('ui_demo_list/UI_DemoList', GameUILayers.POPUP, Layout_DemoList);
     }
@@ -33,12 +33,12 @@ export class UI_DemoList extends kfcUIController {
                 if (!info) {
                     return;
                 }
-                let wt = kfcUIWaiting.show();
+                let wt = tgUIWaiting.show();
                 assetManager.loadBundle(info.bundle, (err, bundle: AssetManager.Bundle) => {
                     if (bundle) {
                         director.loadScene(info.entryScene, () => {
-                            kfcUIMgr.inst.hideAll();
-                            kfcUIMgr.inst.showUI(UI_HUD);
+                            tgUIMgr.inst.hideAll();
+                            tgUIMgr.inst.showUI(UI_HUD);
                         });
                     }
                 });

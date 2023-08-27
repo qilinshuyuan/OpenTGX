@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
  * @zh 内部类，用于节点事件监听
  * 
  *  */
-@ccclass('kfc.NodeEventAgent')
+@ccclass('tsgds.NodeEventAgent')
 export class __NodeEventAgent__ extends Component {
     /***
      * @en recieve button click event and deliver them to the real handlers.
@@ -218,7 +218,7 @@ export class UIController extends AutoEventHandler {
         let clickEvents = btn.clickEvents;
         let handler = new EventHandler();
         handler.target = this.node;
-        handler.component = 'kfc.NodeEventAgent';
+        handler.component = 'tsgds.NodeEventAgent';
         handler.handler = 'onButtonClicked';
         handler.customEventData = '' + UIController._idBase++;
 
@@ -314,7 +314,7 @@ export class UIController extends AutoEventHandler {
         let checkEvents = btn.checkEvents;
         let handler = new EventHandler();
         handler.target = this.node;
-        handler.component = 'kfc.NodeEventAgent';
+        handler.component = 'tsgds.NodeEventAgent';
         handler.handler = 'onToggleEvent';
         handler.customEventData = '' + UIController._idBase++;
 

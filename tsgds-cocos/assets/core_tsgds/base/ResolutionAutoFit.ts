@@ -3,7 +3,7 @@ const { ccclass, property } = _decorator;
 
 const CHECK_INTERVAL = 0.1;
 
-@ccclass('kfc.ResolutionAutoFit')
+@ccclass('tsgds.ResolutionAutoFit')
 export class ResolutionAutoFit extends Component {
     private _oldSize:Size = size();
     start() {

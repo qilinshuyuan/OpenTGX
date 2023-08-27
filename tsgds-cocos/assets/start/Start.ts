@@ -1,6 +1,7 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab, Node } from 'cc';
+import { tgModuleClass, tgUIMgr } from '../core_tsgds/tsgds';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
-import { kfcUIMgr, kfcSetDefaultModule } from '../kfc/kfc';
+
 import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
 const { ccclass, property } = _decorator;
@@ -24,20 +25,20 @@ export class Start extends Component {
     uiCanvasPrefab: Prefab;
 
     @property(Node)
-    loadingBar:Node;
+    loadingBar: Node;
 
     private _percent: string = '';
     private _numCurrentLoaded = 0;
     start() {
-        kfcSetDefaultModule(ModuleDef.BASIC);
+        tgModuleClass.setDefaultModule(ModuleDef.BASIC);
 
         game.frameRate = 61;
-        kfcUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
+        tgUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
         this.preloadBundle(0);
     }
 
-    onResLoaded(){
+    onResLoaded() {
         this._numCurrentLoaded++;
         this._percent = ~~(this._numCurrentLoaded / _totalNum * 100) + '%';
     }
@@ -79,7 +80,7 @@ export class Start extends Component {
 
     onPreloadingComplete() {
         let bundle = assetManager.getBundle(ModuleDef.BASIC);
-        bundle.preloadScene(SceneDef.MAIN_MENU,()=>{
+        bundle.preloadScene(SceneDef.MAIN_MENU, () => {
             this.onResLoaded();
             director.loadScene(SceneDef.MAIN_MENU);
         });
@@ -93,7 +94,7 @@ export class Start extends Component {
             let idx = Math.floor(game.totalTime / 1000) % 3;
             this.txtLoading.string = _loadingText[idx];
         }
-        this.loadingBar.setScale(this._numCurrentLoaded/_totalNum,1,1);
+        this.loadingBar.setScale(this._numCurrentLoaded / _totalNum, 1, 1);
     }
 }
 

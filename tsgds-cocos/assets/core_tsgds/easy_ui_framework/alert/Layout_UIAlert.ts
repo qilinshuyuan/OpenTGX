@@ -1,7 +1,7 @@
 import { _decorator, Button, Component, Label, Node } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('kfc.Layout_UIAlert')
+@ccclass('tsgds.Layout_UIAlert')
 export class Layout_UIAlert extends Component {
 
     @property(Label)

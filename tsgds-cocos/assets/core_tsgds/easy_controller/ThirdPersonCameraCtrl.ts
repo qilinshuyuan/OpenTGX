@@ -1,9 +1,9 @@
 import { _decorator, Component, Node } from 'cc';
-import { ThirdPersonCamera } from '../kylins_camera/ThirdPersonCamera';
+import { ThirdPersonCamera } from '../easy_camera/ThirdPersonCamera';
 import { EasyController, EasyControllerEvent } from './EasyController';
 const { ccclass, property } = _decorator;
 
-@ccclass('ThirdPersonCameraCtrl')
+@ccclass('tsgds.ThirdPersonCameraCtrl')
 export class ThirdPersonCameraCtrl extends ThirdPersonCamera {
     start() {
         EasyController.on(EasyControllerEvent.CAMERA_ROTATE, this.onCameraRotate, this);

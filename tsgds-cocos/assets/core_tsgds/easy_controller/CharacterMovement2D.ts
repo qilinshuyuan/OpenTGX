@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 
 const tempV2 = v2();
 
-@ccclass('kfc.CharacterMovement2D')
+@ccclass('tsgds.CharacterMovement2D')
 export class CharacterMovement2D extends Component {
     @property
     moveSpeed: number = 100;

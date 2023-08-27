@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
+import { tgCharacterMovement2D, tgEasyController, tgEasyControllerEvent } from '../core_tsgds/tsgds';
 import { TankBullet } from './TankBullet';
-import { kfcCharacterMovement2D, kfcEasyController, kfcEasyControllerEvent } from '../kfc/kfc';
 import { TankGameAudioMgr } from './TankGameAudioMgr';
 
 const { ccclass, property } = _decorator;
@@ -18,12 +18,12 @@ export class TankController extends Component {
     @property(Node)
     barrel: Node;
 
-    private _movement2d: kfcCharacterMovement2D;
+    private _movement2d: tgCharacterMovement2D;
 
     start() {
-        kfcEasyController.on(kfcEasyControllerEvent.BUTTON, this.onButtonHit, this);
+        tgEasyController.on(tgEasyControllerEvent.BUTTON, this.onButtonHit, this);
 
-        this._movement2d = this.node.getComponent(kfcCharacterMovement2D);
+        this._movement2d = this.node.getComponent(tgCharacterMovement2D);
     }
 
     private _isFiring = false;
@@ -53,7 +53,7 @@ export class TankController extends Component {
     }
 
     onDestroy() {
-        kfcEasyController.off(kfcEasyControllerEvent.BUTTON, this.onButtonHit, this);
+        tgEasyController.off(tgEasyControllerEvent.BUTTON, this.onButtonHit, this);
     }
 }
 

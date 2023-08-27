@@ -1,5 +1,5 @@
 import { _decorator, assetManager, AudioClip, Component, Node } from 'cc';
-import { kfcAudioMgr } from '../kfc/kfc';
+import { tgAudioMgr } from '../core_tsgds/tsgds';
 import { ModuleDef } from '../scripts/ModuleDef';
 
 const BundleName = ModuleDef.DEMO_TANK;
@@ -14,7 +14,7 @@ export class TankGameAudioMgr {
   * @param volume 
   */
     public static playOneShot(sound: AudioClip | string, volume: number = 1.0) {
-        kfcAudioMgr.inst.playOneShot(sound, volume, BundleName);
+        tgAudioMgr.inst.playOneShot(sound, volume, BundleName);
     }
 
     /**
@@ -26,28 +26,28 @@ export class TankGameAudioMgr {
      * @param volume 
      */
     public static play(sound: AudioClip | string, volume: number = 1.0,) {
-        kfcAudioMgr.inst.play(sound, volume, BundleName);
+        tgAudioMgr.inst.play(sound, volume, BundleName);
     }
 
     /**
  * stop the audio play
  */
     public static stop() {
-        kfcAudioMgr.inst.stop();
+        tgAudioMgr.inst.stop();
     }
 
     /**
      * pause the audio play
      */
     public static pause() {
-        kfcAudioMgr.inst.pause();
+        tgAudioMgr.inst.pause();
     }
 
     /**
      * resume the audio play
      */
     public static resume() {
-        kfcAudioMgr.inst.audioSource.play();
+        tgAudioMgr.inst.audioSource.play();
     }
 }
 

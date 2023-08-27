@@ -5,7 +5,7 @@ const { ccclass, property } = _decorator;
 
 const v3_1 = v3();
 
-@ccclass('kfc.CharacterMovement')
+@ccclass('tsgds.CharacterMovement')
 export class CharacterMovement extends Component {
 
     @property(Camera)

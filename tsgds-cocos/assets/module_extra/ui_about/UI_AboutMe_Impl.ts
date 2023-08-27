@@ -1,4 +1,5 @@
-import { kfcAttachImplClass } from "../../kfc/kfc";
+
+import { tgModuleClass } from "../../core_tsgds/tsgds";
 import { GameUILayers } from "../../scripts/GameUILayers";
 import { UI_AboutMe } from "../../scripts/UIDef";
 import { Layout_AboutMe } from "./Layout_AboutMe";
@@ -20,4 +21,4 @@ export class UI_AboutMe_Impl extends UI_AboutMe {
     }
 }
 
-kfcAttachImplClass(UI_AboutMe, UI_AboutMe_Impl);
+tgModuleClass.attachImplClass(UI_AboutMe, UI_AboutMe_Impl);
