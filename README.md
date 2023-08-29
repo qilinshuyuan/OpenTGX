@@ -16,7 +16,7 @@ The most difference compare to the other frameworks is that `OpenGTX` is not onl
 > Open is the attitude, T is the interact interface, G is the technical basis, X is the plan and objective.
 
 
-`OpenGTX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server side programming platform).
+`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server side programming platform).
 
 It targets to be a solution that can solve the daily development requirements and issues.
 
