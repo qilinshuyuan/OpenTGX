@@ -1,10 +1,22 @@
 [中文](./README-CN.md) | *English
 
-## About OpenTsGDS
+## About `OpenTGX`
 
-![](./opentsgds-txt.png)
+![](./open-tgx-logo-txt.png)
 
-`OpenTsGDS` is a free and open-source game development solution using typescript for both client and server sides, which is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server side programming platform).
+`OpenTGX` is a free and open-source game development solution using typescript for both client and server sides.
+
+The most difference compare to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has a plenty of examples and cases to meet the project's requirements and solve problems.
+
+- `Open` = open source and open-minded
+- `T` = TypeScript, both client and server are written by TS
+- `G` = based on Game Development Technique
+- `X` = plenty of varies examples and cases for different fields.
+
+> Open is the attitude, T is the interact interface, G is the technical basis, X is the plan and objective.
+
+
+`OpenGTX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server side programming platform).
 
 It targets to be a solution that can solve the daily development requirements and issues.
 

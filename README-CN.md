@@ -1,13 +1,22 @@
 *中文 | [English](./README.md)
 
 
-## 关于 `OpenTsGDS`
+## 关于 `OpenTGX`
 
-![](./opentsgds-txt.png)
+![](./open-tgx-logo-txt.png)
 
-`OpenTsGDS`（Open TypeScript Game Development Solution)，是一个基于 TypeScript 语言的开源免费全栈游戏开发解决方案。它能够给你解决客户端和服务器两端的问题，客户端基于 Cocos Creator ( 能够发布到几乎所有的主流平台），服务端使用 NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 ).
+`OpenTGX` 是一个基于 TypeScript 的开源免费全栈游戏开发解决方案。
 
-`OpenTsGDS` 的主要目标，是为你解决日常开发中的需求和问题。
+与其他开源框架不同之处在于，它不是单纯的框架。而是依靠统一的基础框架和大量的模板案例来满足行业需求和解决项目问题。
+
+- `Open` = 开源、开放
+- `T` = TypeScript，此方案的前后端都使用 TS 语言编写
+- `G` = Game Development Technique, 游戏开发技术
+- `X` = 领靠众多的行业、项目、案例模板，满足多元化需求
+
+>Open 是态度， T 是使用入口，G 是技术基础，X 是方案和目标
+
+`OpenGTX` 能够加速客户端和服务器两端的开发速度。客户端基于 Cocos Creator ( 能够发布到几乎所有的主流平台），服务端使用 NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 ).
 
 根据你的自身需求，客户端和服务端可以分开使用。
 
@@ -25,7 +34,7 @@
 ## 加入社群
 ### 微信讨论群
 
-群名：**OpenTsGDS|全栈游戏开发**
+群名：**OpenTGX|全栈游戏开发**
 
 请加扫码添加微信（微信号：`qilinzi6666`） 并注明 `KFC`，即可入群。
 
@@ -49,7 +58,7 @@
 - [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
 > 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
 
-## OpenTsGDS-Cocos-Client
+## OpenTGX-Cocos-Client
 - `base`: 一些基础工具组件，如屏幕自动适配、资源加载队列、声音播放管理器、输入管理器等等。
 - `easy_camera`：漫游摄像机、FPS摄像机、第三人称摄像机、2D 跟随摄像机
 - `easy_controller`：虚拟摇杆（支持 2D 和 3D）、按键、摄像机控制器
@@ -61,14 +70,14 @@
 2. 需要**优质的项目模板**，快速验证项目原型和进入迭代周期
 3. 需要**高质量的框架**，解决项目模块管理和一些基础问题。
 
-因此，麒麟子花了一些时间，重启并开源了 `KylinsToolkit`，并命名为 `OpenTsGDS`
+因此，麒麟子花了一些时间，重启并开源了 `KylinsToolkit`，并命名为 `OpenTGX`
 后期会逐步加入网络、2D 游戏常用控件、3D 游戏常用控件等等。
 
 里面的内容来自麒麟子十多年项目经验的总结，虽然不是最优解，但却能在一定程度上，让项目的起步、模块分割、多人协同和后期维护更加顺畅。
 
-在此基础上，麒麟子会和众多开发者一起，基于 `OpenTsGDS`，为大家提供大量的可参考甚至直接使用的项目模板以及教学案例。
+在此基础上，麒麟子会和众多开发者一起，基于 `OpenTGX`，为大家提供大量的可参考甚至直接使用的项目模板以及教学案例。
 
-也希望有更多使用 `OpenTsGDS` 来制作项目的朋友能加入进来。
+也希望有更多使用 `OpenTGX` 来制作项目的朋友能加入进来。
 
 # 适用领域
 使用它你可以轻松搞定以下领域（包含但不限于）：
