@@ -1,0 +1,4 @@
+node_modules
+dist
+.DS_STORE
+/src/shared/**/*.meta

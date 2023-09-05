@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.45",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "4c40ad0c-f5fc-4aa0-be0b-e30e7db0cf54",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "ChatMsgItem"
+  }
+}

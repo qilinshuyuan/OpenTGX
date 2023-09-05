@@ -1,0 +1,13 @@
+{
+  "ver": "1.1.45",
+  "importer": "prefab",
+  "imported": true,
+  "uuid": "b019de5a-7dfa-4bec-9c23-d657f32cf608",
+  "files": [
+    ".json"
+  ],
+  "subMetas": {},
+  "userData": {
+    "syncNodeName": "RoomListItem"
+  }
+}

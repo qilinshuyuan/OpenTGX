@@ -1,0 +1,42 @@
+{
+  "ver": "1.0.26",
+  "importer": "image",
+  "imported": true,
+  "uuid": "5fde3a42-31ec-4184-9904-2ee9ba39db34",
+  "files": [
+    ".json",
+    ".png"
+  ],
+  "subMetas": {
+    "6c48a": {
+      "importer": "texture",
+      "uuid": "5fde3a42-31ec-4184-9904-2ee9ba39db34@6c48a",
+      "displayName": "tex_plane",
+      "id": "6c48a",
+      "name": "texture",
+      "userData": {
+        "wrapModeS": "repeat",
+        "wrapModeT": "repeat",
+        "minfilter": "linear",
+        "magfilter": "linear",
+        "mipfilter": "linear",
+        "anisotropy": 0,
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "5fde3a42-31ec-4184-9904-2ee9ba39db34",
+        "visible": false
+      },
+      "ver": "1.0.22",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "hasAlpha": true,
+    "type": "texture",
+    "redirect": "5fde3a42-31ec-4184-9904-2ee9ba39db34@6c48a",
+    "fixAlphaTransparencyArtifacts": false
+  }
+}

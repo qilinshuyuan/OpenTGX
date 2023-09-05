@@ -1,0 +1,124 @@
+{
+  "modules": {
+    "includeModules": [
+      "2d",
+      "3d",
+      "animation",
+      "base",
+      "gfx-webgl",
+      "gfx-webgl2",
+      "intersection-2d",
+      "light-probe",
+      "physics-cannon",
+      "primitive",
+      "profiler",
+      "skeletal-animation",
+      "tween",
+      "ui",
+      "websocket"
+    ],
+    "cache": {
+      "base": {
+        "_value": true
+      },
+      "graphcis": {
+        "_value": true
+      },
+      "gfx-webgl": {
+        "_value": true
+      },
+      "gfx-webgl2": {
+        "_value": true
+      },
+      "3d": {
+        "_value": true
+      },
+      "2d": {
+        "_value": true
+      },
+      "ui": {
+        "_value": true
+      },
+      "particle": {
+        "_value": false
+      },
+      "physics": {
+        "_value": true,
+        "_option": "physics-cannon"
+      },
+      "physics-ammo": {
+        "_value": true
+      },
+      "physics-cannon": {
+        "_value": true
+      },
+      "physics-physx": {
+        "_value": true
+      },
+      "physics-builtin": {
+        "_value": true
+      },
+      "physics-2d": {
+        "_value": false,
+        "_option": "physics-2d-box2d"
+      },
+      "physics-2d-box2d": {
+        "_value": true
+      },
+      "physics-2d-builtin": {
+        "_value": true
+      },
+      "intersection-2d": {
+        "_value": true
+      },
+      "primitive": {
+        "_value": true
+      },
+      "profiler": {
+        "_value": true
+      },
+      "particle-2d": {
+        "_value": false
+      },
+      "audio": {
+        "_value": false
+      },
+      "video": {
+        "_value": false
+      },
+      "webview": {
+        "_value": false
+      },
+      "tween": {
+        "_value": true
+      },
+      "terrain": {
+        "_value": false
+      },
+      "tiled-map": {
+        "_value": false
+      },
+      "spine": {
+        "_value": false
+      },
+      "dragon-bones": {
+        "_value": false
+      },
+      "marionette": {
+        "_value": false
+      },
+      "animation": {
+        "_value": true
+      },
+      "skeletal-animation": {
+        "_value": true
+      }
+    },
+    "flags": {},
+    "noDeprecatedFeatures": {
+      "value": false,
+      "version": ""
+    }
+  },
+  "__version__": "1.0.7"
+}

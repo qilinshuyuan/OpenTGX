@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "de70297f-154d-46c8-8ce1-7cb5b678da8f",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/UIController.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}

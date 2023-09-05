@@ -1,0 +1,16 @@
+{
+  "name": "frontend",
+  "uuid": "9f97a2fc-568d-427f-ac1f-056f2d6f43f1",
+  "version": "3.4.2",
+  "creator": {
+    "version": "3.8.0"
+  },
+  "scripts": {
+    "postinstall": "cd ../tgx-metaverse-server && npm i && npm run sync"
+  },
+  "description": "OpenTGX+TSRPC 多人在线元宇宙",
+  "dependencies": {
+    "tsrpc-browser": "^3.3.0",
+    "tsrpc-miniapp": "^3.3.0"
+  }
+}

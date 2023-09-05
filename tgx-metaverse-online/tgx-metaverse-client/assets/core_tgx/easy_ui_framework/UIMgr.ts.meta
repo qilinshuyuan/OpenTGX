@@ -1,0 +1,13 @@
+{
+  "ver": "4.0.23",
+  "importer": "typescript",
+  "imported": true,
+  "uuid": "82a59405-4865-4862-b064-ae0017d54dab",
+  "files": [],
+  "subMetas": {},
+  "userData": {
+    "moduleId": "project:///assets/scripts/qfw/UIMgr.js",
+    "importerSettings": 0,
+    "simulateGlobals": []
+  }
+}

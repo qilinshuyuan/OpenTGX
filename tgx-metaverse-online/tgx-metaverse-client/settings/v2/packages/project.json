@@ -1,0 +1,19 @@
+{
+  "general": {
+    "designResolution": {
+      "width": 1280,
+      "height": 720,
+      "fitWidth": false,
+      "fitHeight": true
+    }
+  },
+  "physics": {
+    "defaultMaterial": "a5b729ff-0d0e-4606-ab7b-7d625503c044"
+  },
+  "__version__": "1.0.5",
+  "fbx": {
+    "legacyFbxImporter": {
+      "visible": true
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "mocha current file",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "${file}"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "ts-node current file",
+            "protocol": "inspector",
+            "args": [
+                "${relativeFile}"
+            ],
+            "cwd": "${workspaceRoot}",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
