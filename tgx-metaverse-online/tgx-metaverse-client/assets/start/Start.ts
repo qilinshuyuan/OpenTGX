@@ -6,13 +6,25 @@ import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
 const { ccclass, property } = _decorator;
 
+// ========== config begin =================
+//the first scene after preloading completes.
+const _FPS = 61;
+const _defaultModule = ModuleDef.BASIC;
+const _firstScene = SceneDef.LOGIN;
 const _preloadBundles = [ModuleDef.BASIC];
-const _preloadScenes = [SceneDef.LOBBY];
+const _preloadScenes = [];
 
 const _preloadRes = [
     { bundle: ModuleDef.BASIC, url: 'ui_alert/UI_Alert', type: 'prefab' },
     { bundle: ModuleDef.BASIC, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
+    { bundle: ModuleDef.BASIC, url: 'ui_login/ui_login', type: 'prefab' },
 ];
+
+// ========= config end =====================
+
+if(_preloadScenes.indexOf(_firstScene) == -1){
+    _preloadScenes.push(_firstScene);
+}
 
 for (let i = 0; i < _preloadScenes.length; ++i) {
     let sceneInfo = _preloadScenes[i];
@@ -40,9 +52,9 @@ export class Start extends Component {
     private _percent: string = '';
     private _numCurrentLoaded = 0;
     start() {
-        tgxModuleContext.setDefaultModule(ModuleDef.BASIC);
+        tgxModuleContext.setDefaultModule(_defaultModule);
 
-        game.frameRate = 61;
+        game.frameRate = _FPS;
         tgxUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
         this.preloadBundle(0);
@@ -92,8 +104,7 @@ export class Start extends Component {
     }
 
     onPreloadingComplete() {
-        let sceneInfo = SceneDef.LOBBY;
-        director.loadScene(sceneInfo.name);
+        director.loadScene(_firstScene.name);
     }
 
     update(deltaTime: number) {

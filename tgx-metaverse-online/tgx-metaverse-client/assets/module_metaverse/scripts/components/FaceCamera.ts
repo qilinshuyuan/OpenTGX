@@ -9,7 +9,8 @@ export class FaceCamera extends Component {
     }
 
     update(deltaTime: number) {
-        this.node.setWorldRotationFromEuler(0, this._mainCamera.eulerAngles.y ,0);
+        let cameraEuler = this._mainCamera.eulerAngles;
+        this.node.setWorldRotationFromEuler(cameraEuler.x, cameraEuler.y , 0);
     }
 }
 
