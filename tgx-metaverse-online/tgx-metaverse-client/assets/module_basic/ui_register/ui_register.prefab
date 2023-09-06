@@ -1540,7 +1540,7 @@
     "_string": "",
     "_tabIndex": 0,
     "_backgroundImage": null,
-    "_inputFlag": 5,
+    "_inputFlag": 0,
     "_inputMode": 6,
     "_maxLength": -1,
     "_id": ""
@@ -2347,7 +2347,7 @@
     "_string": "",
     "_tabIndex": 0,
     "_backgroundImage": null,
-    "_inputFlag": 5,
+    "_inputFlag": 0,
     "_inputMode": 6,
     "_maxLength": -1,
     "_id": ""

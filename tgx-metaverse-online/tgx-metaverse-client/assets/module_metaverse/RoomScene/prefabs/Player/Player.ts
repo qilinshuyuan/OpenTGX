@@ -1,7 +1,7 @@
 
 import { Camera, Color, Component, Node, SkeletalAnimation, SkinnedMeshRenderer, Vec3, view, _decorator, Label } from 'cc';
-import { PlayerAniState } from '../../../scripts/shared/types/RoomUserState';
 import { PlayerName } from '../PlayerName/PlayerName';
+import { PlayerAniState } from '../../../scripts/shared/types/RoomUserState';
 const { ccclass, property } = _decorator;
 
 const v3_1 = new Vec3;

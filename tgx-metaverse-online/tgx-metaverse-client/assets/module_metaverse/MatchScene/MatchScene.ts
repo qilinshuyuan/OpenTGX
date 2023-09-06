@@ -46,7 +46,7 @@ export class MatchScene extends Component {
 
     /** 刷新房间列表 */
     private async _reloadRoomList() {
-        let ret = await NetUtil.matchClient.callApi('ListRooms', {});
+        let ret = await NetUtil.callApiFromLobby('ListRooms', {});
         if (!ret.isSucc) {
             return;
         }
@@ -79,7 +79,7 @@ export class MatchScene extends Component {
         }
 
         tgxUIWaiting.show('创建房间中')
-        let ret = await NetUtil.matchClient.callApi('CreateRoom', {
+        let ret = await NetUtil.callApiFromLobby('CreateRoom', {
             roomName: `${this.inputNickname.string}的房间`
         });
         tgxUIWaiting.hide()
@@ -98,7 +98,7 @@ export class MatchScene extends Component {
 
     async onBtnMatch() {
         tgxUIWaiting.show('匹配中');
-        let ret = await NetUtil.matchClient.callApi('StartMatch', {}, { timeout: 10000 });
+        let ret = await NetUtil.callApiFromLobby('StartMatch', {}, { timeout: 10000 });
         tgxUIWaiting.hide();
 
         if (!ret.isSucc) {

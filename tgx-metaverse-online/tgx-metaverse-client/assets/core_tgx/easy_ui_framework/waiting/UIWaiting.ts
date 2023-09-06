@@ -5,7 +5,7 @@ import { Layout_UIWaiting } from "./Layout_UIWaiting";
 
 const loadingTxtArr = ['.', '..', '...'];
 
-let _inst = null;
+let _inst: UIWaiting = null;
 
 export class UIWaiting extends UIController {
 

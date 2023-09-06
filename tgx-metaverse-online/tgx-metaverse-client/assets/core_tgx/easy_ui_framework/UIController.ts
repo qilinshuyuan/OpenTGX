@@ -95,6 +95,7 @@ export class UIController extends AutoEventHandler {
     private _layer: number;
     private _layout: any;
     protected node: Node;
+    private _destroyed:boolean = false;
     constructor(prefab: string | Prefab, layer: number, layoutCls: any) {
         super();
         this._prefab = prefab;
@@ -162,8 +163,15 @@ export class UIController extends AutoEventHandler {
         if (this._layout) {
             this._layout = this.node.getComponent(this._layout);
         }
-        //结点创建完毕，调用子类的处理函数。
+        //notify sub class to handle something.
+        //节点创建完毕，调用子类的处理函数。
         this.onCreated();
+
+        //check whether it has been destroyed, if has, hide it.
+        //检查是否为已销毁，如果已销毁，则走销毁流程
+        if(this._destroyed){
+            this.hide();
+        }
     }
 
     /**
@@ -171,6 +179,10 @@ export class UIController extends AutoEventHandler {
      * @zh 隐藏并销毁此UI面板
      *  */
     public hide() {
+        this._destroyed = true;
+        if(!this.node){
+            return;
+        }
         this.node.removeFromParent();
         for (let i = 0; i < UIController._controllers.length; ++i) {
             if (UIController._controllers[i] == this) {

@@ -1,7 +1,10 @@
 import { ServiceProto } from 'tsrpc-proto';
 import { ReqRoomServerJoin, ResRoomServerJoin } from './matchServer/admin/PtlRoomServerJoin';
+import { ReqCreateRole, ResCreateRole } from './matchServer/PtlCreateRole';
 import { ReqCreateRoom, ResCreateRoom } from './matchServer/PtlCreateRoom';
 import { ReqListRooms, ResListRooms } from './matchServer/PtlListRooms';
+import { ReqLogin, ResLogin } from './matchServer/PtlLogin';
+import { ReqRegister, ResRegister } from './matchServer/PtlRegister';
 import { ReqStartMatch, ResStartMatch } from './matchServer/PtlStartMatch';
 
 export interface ServiceType {
@@ -10,6 +13,10 @@ export interface ServiceType {
             req: ReqRoomServerJoin,
             res: ResRoomServerJoin
         },
+        "CreateRole": {
+            req: ReqCreateRole,
+            res: ResCreateRole
+        },
         "CreateRoom": {
             req: ReqCreateRoom,
             res: ResCreateRoom
@@ -17,6 +24,14 @@ export interface ServiceType {
         "ListRooms": {
             req: ReqListRooms,
             res: ResListRooms
+        },
+        "Login": {
+            req: ReqLogin,
+            res: ResLogin
+        },
+        "Register": {
+            req: ReqRegister,
+            res: ResRegister
         },
         "StartMatch": {
             req: ReqStartMatch,
@@ -29,10 +44,16 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
+    "version": 1,
     "services": [
         {
             "id": 0,
             "name": "admin/RoomServerJoin",
+            "type": "api"
+        },
+        {
+            "id": 4,
+            "name": "CreateRole",
             "type": "api"
         },
         {
@@ -43,6 +64,16 @@ export const serviceProto: ServiceProto<ServiceType> = {
         {
             "id": 2,
             "name": "ListRooms",
+            "type": "api"
+        },
+        {
+            "id": 5,
+            "name": "Login",
+            "type": "api"
+        },
+        {
+            "id": 6,
+            "name": "Register",
             "type": "api"
         },
         {
@@ -73,6 +104,51 @@ export const serviceProto: ServiceProto<ServiceType> = {
         },
         "admin/PtlRoomServerJoin/ResRoomServerJoin": {
             "type": "Interface"
+        },
+        "PtlCreateRole/ReqCreateRole": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "visualId",
+                    "type": {
+                        "type": "Number"
+                    }
+                }
+            ]
+        },
+        "PtlCreateRole/ResCreateRole": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "visualId",
+                    "type": {
+                        "type": "Number"
+                    }
+                }
+            ]
         },
         "PtlCreateRoom/ReqCreateRoom": {
             "type": "Interface",
@@ -161,6 +237,75 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 }
             ]
+        },
+        "PtlLogin/ReqLogin": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "account",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "PtlLogin/ResLogin": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    },
+                    "optional": true
+                },
+                {
+                    "id": 2,
+                    "name": "visualId",
+                    "type": {
+                        "type": "Number"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "PtlRegister/ReqRegister": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "account",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "password",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "PtlRegister/ResRegister": {
+            "type": "Interface"
         },
         "PtlStartMatch/ReqStartMatch": {
             "type": "Interface"

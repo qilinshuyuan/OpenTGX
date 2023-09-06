@@ -6,12 +6,12 @@ import { Player } from './prefabs/Player/Player';
 import { PlayerName } from './prefabs/PlayerName/PlayerName';
 import { NetUtil } from '../scripts/models/NetUtil';
 import { SceneUtil } from '../scripts/models/SceneUtil';
+import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl } from '../../core_tgx/tgx';
 import { ResJoinRoom } from '../scripts/shared/protocols/roomServer/PtlJoinRoom';
 import { ServiceType } from '../scripts/shared/protocols/serviceProto_matchServer';
 import { RoomData } from '../scripts/shared/types/RoomData';
 import { RoomUserState } from '../scripts/shared/types/RoomUserState';
 import { UserInfo } from '../scripts/shared/types/UserInfo';
-import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl } from '../../core_tgx/tgx';
 const { ccclass, property } = _decorator;
 
 const q4_1 = new Quat;
