@@ -4,10 +4,12 @@ import { UserInfo } from "./UserInfo"
 export interface RoomData {
     id: string,
     name: string,
+    //分区
+    levelId:string,
     /** 房间可容纳的最大人数 */
     maxUser: uint,
     /** 房间内的用户 */
-    users: (UserInfo & { color: { r: uint, g: uint, b: uint } })[],
+    users: UserInfo[],
     /** 历史消息（只保留最近的 N 条） */
     messages: {
         user: UserInfo,

@@ -36,11 +36,11 @@ export class CreateRoleScene extends Component {
         if (!ret.isSucc) {
             return;
         }
-        else {
+        else if (ret.res.visualId) {
             //create role successfully, enter meta world
             //角色创建成功，进入场景
             tgxUIWaiting.show('进入世界');
-            let ret = await NetUtil.callApiFromLobby('StartMatch', {}, { timeout: 10000 });
+            let ret = await NetUtil.callApiFromLobby('EnterSubWorld', { token: UserMgr.inst.token, subWorldId: UserMgr.inst.subWorldId }, { timeout: 10000 });
             tgxUIWaiting.hide();
 
             if (!ret.isSucc) {
@@ -49,8 +49,9 @@ export class CreateRoleScene extends Component {
 
             tgxUIWaiting.show('进入世界');
             SceneUtil.loadScene('RoomScene', {
-                ...ret.res,
-                nickname: UserMgr.inst.name
+                token:ret.res.token,
+                time:ret.res.time,
+                worldServerUrl:ret.res.worldServerUrl,
             });
         }
     }

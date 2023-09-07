@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import path from "path";
-import { HttpClient, WsConnection, WsServer } from "tsrpc";
+import { ApiReturn, HttpClient, TransportOptions, WsConnection, WsServer } from "tsrpc";
 import { BackConfig } from "../models/BackConfig";
 import { useAdminToken } from "../models/flows/useAdminToken";
 import { serviceProto as serviceProto_matchServer } from "../shared/protocols/serviceProto_matchServer";
@@ -11,8 +11,15 @@ import { useSsoWs } from "./models/flows/useSsoWs";
 import { Room } from "./models/Room";
 
 export interface RoomServerOptions {
+    //端口号
     port: number,
+    //服务ID
+    roomServerId: number,
+    //需要负责的共公关卡场景列表
+    publicSubWorldList: string[],
+    //本机地址
     thisServerUrl: string,
+    //主服务器地址
     matchServerUrl: string
 }
 
@@ -28,6 +35,17 @@ export class RoomServer {
     id2Room = new Map<string, Room>();
     rooms: Room[] = [];
 
+    private _master = new HttpClient(serviceProto_matchServer, {
+        server: this.options.matchServerUrl
+    });
+
+    public async getUserInfoFromMaster(uid:string){
+        let ret = await this._master.callApi('admin/RequestUserInfo',{uid:uid});
+        if(ret.isSucc){
+            return ret.res.info;
+        }
+    }
+
     constructor(public readonly options: RoomServerOptions) {
         // Flows
         useAdminToken(this.server);
@@ -42,6 +60,12 @@ export class RoomServer {
 
     async init() {
         await this.server.autoImplementApi(path.resolve(__dirname, './api'));
+
+
+        for (let i = 0; i < this.options.publicSubWorldList.length; ++i) {
+            let subWorldId = this.options.publicSubWorldList[i];
+            this.createRoom(subWorldId, subWorldId, subWorldId);
+        }
     }
 
     async start() {
@@ -62,12 +86,11 @@ export class RoomServer {
         }
 
         this.logger.log(chalk.cyan('正在加入 MatchServer: ' + this.options.matchServerUrl));
-        let client = new HttpClient(serviceProto_matchServer, {
-            server: this.options.matchServerUrl
-        })
-        let ret = await client.callApi('admin/RoomServerJoin', {
+
+        let ret = await this._master.callApi('admin/RoomServerJoin', {
             adminToken: BackConfig.adminToken,
-            serverUrl: this.options.thisServerUrl
+            serverUrl: this.options.thisServerUrl,
+            publicSubWorldList: this.options.publicSubWorldList,
         });
         if (!ret.isSucc) {
             this.logger.error('MatchServer 加入失败', ret.err);
@@ -81,11 +104,11 @@ export class RoomServer {
     }
     private _isJoiningMatchServer?: boolean;
     matchServerConn?: RoomServerConn;
-
-    private _nextRoomId = 1;
-    createRoom(roomName: string): Room {
+    //
+    createRoom(roomName: string, roomId: string, levelId: string): Room {
         let room = new Room({
-            id: '' + this._nextRoomId++,
+            id: roomId,
+            levelId: levelId,
             maxUser: 50,
             name: roomName,
             users: [],

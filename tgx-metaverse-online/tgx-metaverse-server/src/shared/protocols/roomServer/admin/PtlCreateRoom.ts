@@ -2,7 +2,9 @@ import { BaseConf } from "../../base"
 
 export interface ReqCreateRoom {
     adminToken: string,
-    roomName: string
+    roomId:string,
+    roomName: string,
+    levelId:string,
 }
 
 export interface ResCreateRoom {

@@ -1,7 +1,9 @@
 import { ServiceProto } from 'tsrpc-proto';
+import { ReqRequestUserInfo, ResRequestUserInfo } from './matchServer/admin/PtlRequestUserInfo';
 import { ReqRoomServerJoin, ResRoomServerJoin } from './matchServer/admin/PtlRoomServerJoin';
 import { ReqCreateRole, ResCreateRole } from './matchServer/PtlCreateRole';
 import { ReqCreateRoom, ResCreateRoom } from './matchServer/PtlCreateRoom';
+import { ReqEnterSubWorld, ResEnterSubWorld } from './matchServer/PtlEnterSubWorld';
 import { ReqListRooms, ResListRooms } from './matchServer/PtlListRooms';
 import { ReqLogin, ResLogin } from './matchServer/PtlLogin';
 import { ReqRegister, ResRegister } from './matchServer/PtlRegister';
@@ -9,6 +11,10 @@ import { ReqStartMatch, ResStartMatch } from './matchServer/PtlStartMatch';
 
 export interface ServiceType {
     api: {
+        "admin/RequestUserInfo": {
+            req: ReqRequestUserInfo,
+            res: ResRequestUserInfo
+        },
         "admin/RoomServerJoin": {
             req: ReqRoomServerJoin,
             res: ResRoomServerJoin
@@ -20,6 +26,10 @@ export interface ServiceType {
         "CreateRoom": {
             req: ReqCreateRoom,
             res: ResCreateRoom
+        },
+        "EnterSubWorld": {
+            req: ReqEnterSubWorld,
+            res: ResEnterSubWorld
         },
         "ListRooms": {
             req: ReqListRooms,
@@ -47,12 +57,17 @@ export const serviceProto: ServiceProto<ServiceType> = {
     "version": 1,
     "services": [
         {
+            "id": 4,
+            "name": "admin/RequestUserInfo",
+            "type": "api"
+        },
+        {
             "id": 0,
             "name": "admin/RoomServerJoin",
             "type": "api"
         },
         {
-            "id": 4,
+            "id": 5,
             "name": "CreateRole",
             "type": "api"
         },
@@ -62,17 +77,22 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "api"
         },
         {
+            "id": 6,
+            "name": "EnterSubWorld",
+            "type": "api"
+        },
+        {
             "id": 2,
             "name": "ListRooms",
             "type": "api"
         },
         {
-            "id": 5,
+            "id": 7,
             "name": "Login",
             "type": "api"
         },
         {
-            "id": 6,
+            "id": 8,
             "name": "Register",
             "type": "api"
         },
@@ -83,6 +103,65 @@ export const serviceProto: ServiceProto<ServiceType> = {
         }
     ],
     "types": {
+        "admin/PtlRequestUserInfo/ReqRequestUserInfo": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "uid",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "inDetail",
+                    "type": {
+                        "type": "Boolean"
+                    },
+                    "optional": true
+                }
+            ]
+        },
+        "admin/PtlRequestUserInfo/ResRequestUserInfo": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "info",
+                    "type": {
+                        "type": "Reference",
+                        "target": "../../types/UserInfo/UserInfo"
+                    }
+                }
+            ]
+        },
+        "../../types/UserInfo/UserInfo": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "uid",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "name",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "visualId",
+                    "type": {
+                        "type": "Number"
+                    }
+                }
+            ]
+        },
         "admin/PtlRoomServerJoin/ReqRoomServerJoin": {
             "type": "Interface",
             "properties": [
@@ -98,6 +177,16 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "name": "adminToken",
                     "type": {
                         "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "publicSubWorldList",
+                    "type": {
+                        "type": "Array",
+                        "elementType": {
+                            "type": "String"
+                        }
                     }
                 }
             ]
@@ -175,6 +264,51 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 {
                     "id": 1,
                     "name": "roomId",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "PtlEnterSubWorld/ReqEnterSubWorld": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "subWorldId",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "PtlEnterSubWorld/ResEnterSubWorld": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "time",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "worldServerUrl",
                     "type": {
                         "type": "String"
                     }
@@ -269,6 +403,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 },
                 {
                     "id": 1,
+                    "name": "uid",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
                     "name": "name",
                     "type": {
                         "type": "String"
@@ -276,12 +417,19 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "optional": true
                 },
                 {
-                    "id": 2,
+                    "id": 3,
                     "name": "visualId",
                     "type": {
                         "type": "Number"
                     },
                     "optional": true
+                },
+                {
+                    "id": 4,
+                    "name": "subWorldId",
+                    "type": {
+                        "type": "String"
+                    }
                 }
             ]
         },

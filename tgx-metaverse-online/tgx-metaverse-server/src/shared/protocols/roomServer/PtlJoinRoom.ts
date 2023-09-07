@@ -3,8 +3,10 @@ import { UserInfo } from "../../types/UserInfo";
 import { BaseConf, BaseRequest, BaseResponse } from "./../base";
 
 export interface ReqJoinRoom extends BaseRequest {
-    nickname: string,
-    roomId: string
+    token:string,
+    uid:string,
+    time:number,
+    subWorldId:string,
 }
 
 export interface ResJoinRoom extends BaseResponse {

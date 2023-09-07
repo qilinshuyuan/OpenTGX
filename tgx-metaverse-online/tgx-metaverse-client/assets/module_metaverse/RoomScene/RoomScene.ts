@@ -6,21 +6,23 @@ import { Player } from './prefabs/Player/Player';
 import { PlayerName } from './prefabs/PlayerName/PlayerName';
 import { NetUtil } from '../scripts/models/NetUtil';
 import { SceneUtil } from '../scripts/models/SceneUtil';
-import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl } from '../../core_tgx/tgx';
+import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert } from '../../core_tgx/tgx';
 import { ResJoinRoom } from '../scripts/shared/protocols/roomServer/PtlJoinRoom';
 import { ServiceType } from '../scripts/shared/protocols/serviceProto_matchServer';
 import { RoomData } from '../scripts/shared/types/RoomData';
 import { RoomUserState } from '../scripts/shared/types/RoomUserState';
 import { UserInfo } from '../scripts/shared/types/UserInfo';
+import { SceneDef, SceneUtil2 } from '../../scripts/SceneDef';
+import { UserMgr } from '../../module_basic/scripts/UserMgr';
 const { ccclass, property } = _decorator;
 
 const q4_1 = new Quat;
 const v2_1 = new Vec2;
 
 export interface RoomSceneParams {
-    serverUrl: string,
-    roomId: string,
-    nickname?: string
+    worldServerUrl: string,
+    token: string,
+    time: number,
 }
 
 @ccclass('RoomScene')
@@ -29,7 +31,7 @@ export class RoomScene extends Component {
     params!: RoomSceneParams;
     client!: WsClient<ServiceType>;
     selfPlayer?: Player
-    currentUser!: UserInfo;
+    currentUser?: UserInfo;
     roomData!: RoomData;
 
     @property(Node)
@@ -61,7 +63,7 @@ export class RoomScene extends Component {
 
         // Clean
         this.labelRoomName.string = this.labelRoomState.string = '';
-        this.labelServerUrl.string = this.params.serverUrl;
+        this.labelServerUrl.string = this.params.worldServerUrl;
 
         // Init
         this._initClient();
@@ -85,19 +87,19 @@ export class RoomScene extends Component {
             })
         }, 0.1);
 
-        tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT,this.onMovement,this);
-        tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT_STOP,this.onMovmentStop,this);
+        tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT, this.onMovement, this);
+        tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT_STOP, this.onMovmentStop, this);
     }
 
-    onMovement(degree:number, strengthen:number){
+    onMovement(degree: number, strengthen: number) {
         if (!this.selfPlayer) {
             return;
         }
         this.selfPlayer.aniState = 'walking';
-        this.selfPlayer.node.setWorldRotationFromEuler(0,degree + this.followCamera.node.eulerAngles.y + 90,0);
+        this.selfPlayer.node.setWorldRotationFromEuler(0, degree + this.followCamera.node.eulerAngles.y + 90, 0);
     }
 
-    onMovmentStop(){
+    onMovmentStop() {
         if (!this.selfPlayer) {
             return;
         }
@@ -105,14 +107,14 @@ export class RoomScene extends Component {
     }
 
     private _initClient() {
-        this.client = NetUtil.createRoomClient(this.params.serverUrl);
+        this.client = NetUtil.createRoomClient(this.params.worldServerUrl);
 
         this.client.listenMsg('serverMsg/Chat', v => {
-            let playerName = this.players.getChildByName(v.user.id)?.getComponent(PlayerName);
+            let playerName = this.players.getChildByName(v.user.uid)?.getComponent(PlayerName);
             if (playerName) {
                 playerName.showChatMsg(v.content);
             }
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.nickname}</color> <color=#000000>${v.content}</color></o>`);
+            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#000000>${v.content}</color></o>`);
         })
         this.client.listenMsg('serverMsg/UserStates', v => {
             for (let uid in v.userStates) {
@@ -121,21 +123,21 @@ export class RoomScene extends Component {
         })
         this.client.listenMsg('serverMsg/UserJoin', v => {
             this.roomData.users.push({
-                ...v.user,
-                color: v.color
+                ...v.user
             });
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.nickname}</color> <color=#999999>加入了房间</color></o>`)
+            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>加入了房间</color></o>`)
         })
         this.client.listenMsg('serverMsg/UserExit', v => {
-            this.roomData.users.remove(v1 => v1.id === v.user.id);
-            this.playerNames.getChildByName(v.user.id)?.removeFromParent();
-            this.players.getChildByName(v.user.id)?.removeFromParent();
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.nickname}</color> <color=#999999>离开了房间</color></o>`)
+            this.roomData.users.remove(v1 => v1.uid === v.user.uid);
+            this.playerNames.getChildByName(v.user.uid)?.removeFromParent();
+            this.players.getChildByName(v.user.uid)?.removeFromParent();
+            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>离开了房间</color></o>`)
         })
         this.client.flows.postDisconnectFlow.push(v => {
             if (!v.isManual) {
-                alert('连接断开');
-                this.onBtnBack();
+                tgxUIAlert.show("链接已断开，请重新登录").onClick(() => {
+                    this.onBtnBack();
+                });
             }
             return v;
         })
@@ -144,8 +146,9 @@ export class RoomScene extends Component {
     private async _ensureConnected(): Promise<ResJoinRoom> {
         let ret = await this._connect();
         if (!ret.isSucc) {
-            alert(ret.errMsg);
-            this.onBtnBack();
+            tgxUIAlert.show(ret.errMsg).onClick(() => {
+                this.onBtnBack();
+            });
             return new Promise(rs => { });
         }
 
@@ -161,8 +164,10 @@ export class RoomScene extends Component {
 
         // JoinRoom
         let retJoin = await this.client.callApi('JoinRoom', {
-            roomId: this.params.roomId,
-            nickname: this.params.nickname || '无名氏'
+            token: this.params.token,
+            uid: UserMgr.inst.uid,
+            time: this.params.time,
+            subWorldId: UserMgr.inst.subWorldId,
         });
         if (!retJoin.isSucc) {
             return { isSucc: false, errMsg: '加入房间失败: ' + retJoin.err.message };
@@ -226,7 +231,8 @@ export class RoomScene extends Component {
 
     onBtnBack() {
         this.client.disconnect();
-        SceneUtil.loadScene('MatchScene', {});
+        //SceneUtil.loadScene('MatchScene', {});
+        SceneUtil2.loadScene(SceneDef.LOGIN);
     }
 
     private _updateUserState(state: RoomUserState) {
@@ -242,15 +248,17 @@ export class RoomScene extends Component {
             node.setRotation(state.rotation.x, state.rotation.y, state.rotation.z, state.rotation.w);
             const player = node.getComponent(Player)!;
             player.aniState = state.aniState;
-            let userInfo = this.roomData.users.find(v => v.id === state.uid);
+            let userInfo = this.roomData.users.find(v => v.uid === state.uid);
             if (userInfo) {
-                player.mesh.material?.setProperty('mainColor', new Color(userInfo.color.r, userInfo.color.g, userInfo.color.b, 255));
+                let color = new Color();
+                Color.fromUint32(color, userInfo.visualId);
+                player.mesh.material?.setProperty('mainColor', color);
             }
 
-            player.lblName.string = userInfo?.nickname || '???';
+            player.lblName.string = userInfo?.name || '???';
 
             // Set selfPlayer
-            if (state.uid === this.currentUser.id) {
+            if (state.uid === this.currentUser.uid) {
                 this.selfPlayer = player;
                 this.followCamera.target = node.getChildByName('focusTarget')!;
             }
@@ -259,7 +267,7 @@ export class RoomScene extends Component {
         }
 
         // 简单起见：自己以本地状态为主，不从服务端同步
-        if (state.uid === this.currentUser.id) {
+        if (state.uid === this.currentUser.uid) {
             return;
         }
 

@@ -11,6 +11,8 @@ const thisServerUrl = process.env['THIS_SERVER_URL'] || ('ws://127.0.0.1:' + por
 export const roomServer = new RoomServer({
     // 可改为通过环境变量调整配置参数
     port: port,
+    roomServerId:1,
+    publicSubWorldList:['level-001','level-002','level-003'],
     matchServerUrl: matchServerUrl,
     thisServerUrl: thisServerUrl
 });

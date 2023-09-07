@@ -2,6 +2,7 @@ import { ServiceProto } from 'tsrpc-proto';
 import { MsgUpdateRoomState } from './roomServer/admin/MsgUpdateRoomState';
 import { ReqAuth, ResAuth } from './roomServer/admin/PtlAuth';
 import { ReqCreateRoom, ResCreateRoom } from './roomServer/admin/PtlCreateRoom';
+import { ReqGetRoomList, ResGetRoomList } from './roomServer/admin/PtlGetRoomList';
 import { MsgUserState } from './roomServer/clientMsg/MsgUserState';
 import { ReqExitRoom, ResExitRoom } from './roomServer/PtlExitRoom';
 import { ReqJoinRoom, ResJoinRoom } from './roomServer/PtlJoinRoom';
@@ -20,6 +21,10 @@ export interface ServiceType {
         "admin/CreateRoom": {
             req: ReqCreateRoom,
             res: ResCreateRoom
+        },
+        "admin/GetRoomList": {
+            req: ReqGetRoomList,
+            res: ResGetRoomList
         },
         "ExitRoom": {
             req: ReqExitRoom,
@@ -45,7 +50,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 1,
+    "version": 2,
     "services": [
         {
             "id": 0,
@@ -67,6 +72,12 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "conf": {
                 "allowGuest": true
             }
+        },
+        {
+            "id": 11,
+            "name": "admin/GetRoomList",
+            "type": "api",
+            "conf": {}
         },
         {
             "id": 3,
@@ -219,8 +230,22 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
+                    "id": 2,
+                    "name": "roomId",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
                     "id": 1,
                     "name": "roomName",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "levelId",
                     "type": {
                         "type": "String"
                     }
@@ -238,6 +263,36 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 }
             ]
+        },
+        "admin/PtlGetRoomList/ReqGetRoomList": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "../base/BaseRequest"
+                    }
+                }
+            ]
+        },
+        "../base/BaseRequest": {
+            "type": "Interface"
+        },
+        "admin/PtlGetRoomList/ResGetRoomList": {
+            "type": "Interface",
+            "extends": [
+                {
+                    "id": 0,
+                    "type": {
+                        "type": "Reference",
+                        "target": "../base/BaseResponse"
+                    }
+                }
+            ]
+        },
+        "../base/BaseResponse": {
+            "type": "Interface"
         },
         "clientMsg/MsgUserState/MsgUserState": {
             "target": {
@@ -388,9 +443,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "../base/BaseRequest": {
-            "type": "Interface"
-        },
         "PtlExitRoom/ResExitRoom": {
             "type": "Interface",
             "extends": [
@@ -402,9 +454,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 }
             ]
-        },
-        "../base/BaseResponse": {
-            "type": "Interface"
         },
         "PtlJoinRoom/ReqJoinRoom": {
             "type": "Interface",
@@ -419,15 +468,29 @@ export const serviceProto: ServiceProto<ServiceType> = {
             ],
             "properties": [
                 {
-                    "id": 0,
-                    "name": "nickname",
+                    "id": 2,
+                    "name": "token",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
-                    "id": 1,
-                    "name": "roomId",
+                    "id": 3,
+                    "name": "uid",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "time",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 5,
+                    "name": "subWorldId",
                     "type": {
                         "type": "String"
                     }
@@ -468,17 +531,24 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "Interface",
             "properties": [
                 {
-                    "id": 0,
-                    "name": "id",
+                    "id": 2,
+                    "name": "uid",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
-                    "id": 1,
-                    "name": "nickname",
+                    "id": 3,
+                    "name": "name",
                     "type": {
                         "type": "String"
+                    }
+                },
+                {
+                    "id": 4,
+                    "name": "visualId",
+                    "type": {
+                        "type": "Number"
                     }
                 }
             ]
@@ -501,6 +571,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
+                    "id": 8,
+                    "name": "levelId",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
                     "id": 2,
                     "name": "maxUser",
                     "type": {
@@ -514,57 +591,8 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "type": {
                         "type": "Array",
                         "elementType": {
-                            "type": "Intersection",
-                            "members": [
-                                {
-                                    "id": 0,
-                                    "type": {
-                                        "type": "Reference",
-                                        "target": "../../types/UserInfo/UserInfo"
-                                    }
-                                },
-                                {
-                                    "id": 1,
-                                    "type": {
-                                        "type": "Interface",
-                                        "properties": [
-                                            {
-                                                "id": 0,
-                                                "name": "color",
-                                                "type": {
-                                                    "type": "Interface",
-                                                    "properties": [
-                                                        {
-                                                            "id": 0,
-                                                            "name": "r",
-                                                            "type": {
-                                                                "type": "Number",
-                                                                "scalarType": "uint"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 1,
-                                                            "name": "g",
-                                                            "type": {
-                                                                "type": "Number",
-                                                                "scalarType": "uint"
-                                                            }
-                                                        },
-                                                        {
-                                                            "id": 2,
-                                                            "name": "b",
-                                                            "type": {
-                                                                "type": "Number",
-                                                                "scalarType": "uint"
-                                                            }
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        ]
-                                    }
-                                }
-                            ]
+                            "type": "Reference",
+                            "target": "../../types/UserInfo/UserInfo"
                         }
                     }
                 },

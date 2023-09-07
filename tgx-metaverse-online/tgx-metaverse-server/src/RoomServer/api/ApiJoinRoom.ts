@@ -4,13 +4,24 @@ import { roomServer } from "../../roomServer";
 import { ReqJoinRoom, ResJoinRoom } from "../../shared/protocols/roomServer/PtlJoinRoom";
 import { UserInfo } from "../../shared/types/UserInfo";
 import { RoomServerConn } from "../RoomServer";
+import { TokenUtils } from "../../TokenUtils";
+
+let defaultUserInfo: UserInfo = {
+    uid: '',
+    name: '',
+    visualId: 0,
+}
 
 export async function ApiJoinRoom(call: ApiCall<ReqJoinRoom, ResJoinRoom>) {
-    // Login
-    const currentUser: UserInfo = {
-        id: uuid.v4(),
-        nickname: call.req.nickname
+
+    let req = call.req;
+    let serverToken = TokenUtils.genWorldServerLoginToken(req.uid,roomServer.options.thisServerUrl,req.time);
+    if(serverToken != req.token){
+        return call.error('AUTH_FAILED');
     }
+    // Login
+    const currentUser = await roomServer.getUserInfoFromMaster(call.req.uid) || defaultUserInfo;
+
     const userColor = {
         r: Math.random() * 256 | 0,
         g: Math.random() * 256 | 0,
@@ -19,7 +30,7 @@ export async function ApiJoinRoom(call: ApiCall<ReqJoinRoom, ResJoinRoom>) {
     const conn = call.conn as RoomServerConn;
     conn.currentUser = currentUser;
 
-    let room = roomServer.id2Room.get(call.req.roomId);
+    let room = roomServer.id2Room.get(call.req.subWorldId);
     if (!room) {
         return call.error('房间不存在', { code: 'ROOM_NOT_EXISTS' });
     }
@@ -29,7 +40,7 @@ export async function ApiJoinRoom(call: ApiCall<ReqJoinRoom, ResJoinRoom>) {
     }
 
     // 用户已经在本房间中，可能是通过其它设备登录，踢出旧连接
-    let existedConns = room.conns.filter(v => v.currentUser!.id === currentUser.id);
+    let existedConns = room.conns.filter(v => v.currentUser!.uid === currentUser.uid);
     existedConns.forEach(v => {
         room!.leave(v)
     });
@@ -41,10 +52,9 @@ export async function ApiJoinRoom(call: ApiCall<ReqJoinRoom, ResJoinRoom>) {
     room.conns.push(conn);
     room.data.users.push({
         ...currentUser,
-        color: userColor
     });
-    room.userStates[currentUser.id] = {
-        uid: currentUser.id,
+    room.userStates[currentUser.uid] = {
+        uid: currentUser.uid,
         pos: {
             x: Math.random() * 10,
             y: 0,

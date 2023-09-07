@@ -1,4 +1,5 @@
 export interface UserInfo {
-    id: string,
-    nickname: string
+    uid: string,
+    name: string,
+    visualId:number,
 }

@@ -1,16 +1,20 @@
 import fs from 'fs';
 import crypto from 'crypto';
+import * as uuid from 'uuid';
 
 export interface UserInfoItem {
     account?: string;
     password?: string;
+    uid?: string;
     token?: string;
     name?: string;
     visualId?: number;
+    subWorldId?: string;
 }
 
 let userDB = {} as any;
 let userDBToken = {} as any;
+let userDBUid = {} as any;
 if (fs.existsSync('./user_db.json')) {
     let f = fs.readFileSync('./user_db.json', { encoding: 'utf-8', flag: 'r' });
     if (f) {
@@ -24,6 +28,7 @@ Object.keys(userDB).forEach((key) => {
     if (userInfo.token) {
         userDBToken[userInfo.token] = userInfo;
     }
+    userDBUid[userInfo.uid] = userInfo;
 });
 
 function flushDB() {
@@ -64,8 +69,14 @@ export class UserDB {
     }
 
     public static insterNewUser(account: string, password: string) {
-
-        userDB[account] = { account: account, password: encodePassword(password) };
+        let newUser = {
+            account: account,
+            password: encodePassword(password),
+            uid: uuid.v4(),
+            subWorldId: '',
+        };
+        userDB[account] = newUser;
+        userDBUid[newUser.uid] = newUser;
         flushDB();
     }
 
@@ -74,13 +85,13 @@ export class UserDB {
         if (!dbData) {
             return;
         }
-        Object.keys(info).forEach(key=>{
-            if(key == 'token'){
+        Object.keys(info).forEach(key => {
+            if (key == 'token') {
                 this.clearUserData(account, 'token');
                 dbData.token = info.token;
                 userDBToken[dbData.token] = dbData;
             }
-            else{
+            else {
                 dbData[key] = (info as any)[key];
             }
         });
@@ -106,7 +117,7 @@ export class UserDB {
     public static updateUserDataByToken(token: string, info: UserInfoItem) {
         let userInfo = userDBToken[token];
         if (!userInfo) {
-           // return;
+            return;
         }
         this.updateUserData(userInfo.account, info);
     }
@@ -117,6 +128,30 @@ export class UserDB {
         }
 
         let userInfo = userDBToken[token];
+        if (!userInfo) {
+            return;
+        }
+        this.clearUserData(userInfo.account, key);
+    }
+
+    public static getUserInfoByUid(uid: string): Readonly<any> {
+        return userDBUid[uid];
+    }
+
+    public static updateUserDataByUid(uid: string, info: UserInfoItem) {
+        let userInfo = userDBUid[uid];
+        if (!userInfo) {
+            return;
+        }
+        this.updateUserData(userInfo.account, info);
+    }
+
+    public static clearUserDataByUid(uid: string, key: string) {
+        if (key == 'uid') {
+            return;
+        }
+
+        let userInfo = userDBUid[uid];
         if (!userInfo) {
             return;
         }

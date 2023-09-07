@@ -52,8 +52,8 @@ export class Room {
     listenMsgs(conn: RoomServerConn) {
         conn.listenMsg('clientMsg/UserState', call => {
             const conn = call.conn as RoomServerConn;
-            this.userStates[conn.currentUser.id] = {
-                uid: conn.currentUser.id,
+            this.userStates[conn.currentUser.uid] = {
+                uid: conn.currentUser.uid,
                 ...call.msg
             }
         })
@@ -64,11 +64,11 @@ export class Room {
 
     leave(conn: RoomServerConn) {
         const currentUser = conn.currentUser;
-        this.logger.log('[UserLeave]', currentUser?.id);
+        this.logger.log('[UserLeave]', currentUser?.uid);
 
         this.conns.removeOne(v => v === conn);
-        this.data.users.removeOne(v => v.id === currentUser.id);
-        delete this.userStates[currentUser.id]
+        this.data.users.removeOne(v => v.uid === currentUser.uid);
+        delete this.userStates[currentUser.uid]
         this.data.updateTime = Date.now();
 
         if (conn) {

@@ -9,6 +9,6 @@ export async function ApiRoomServerJoin(call: ApiCall<ReqRoomServerJoin, ResRoom
         return call.error('非法操作');
     }
 
-    await matchServer.joinRoomServer(call.req.serverUrl);
+    await matchServer.joinRoomServer(call.req.serverUrl,call.req.publicSubWorldList);
     call.succ({})
 }

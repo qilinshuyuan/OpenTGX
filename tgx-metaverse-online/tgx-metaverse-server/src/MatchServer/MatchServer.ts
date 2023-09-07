@@ -24,7 +24,8 @@ export class MatchServer {
     readonly roomServers: {
         url: string,
         client: WsClient<ServiceType_Room>,
-        state?: MsgUpdateRoomState
+        state?: MsgUpdateRoomState,
+        subWorldMap: Map<string, string>,
     }[] = [];
 
     private _nextRoomIndex = 1;
@@ -50,13 +51,14 @@ export class MatchServer {
   - 房间总数=${this.roomServers.sum(v => v.state?.rooms.length ?? 0)}
   - 房内用户数=${this.roomServers.sum(v => v.state?.rooms.sum(v => v.userNum) ?? 0)}
 `);
-        }, 5000);
+        }, 15000);
 
         // 定时执行匹配
         this.startMatch();
     }
 
-    async joinRoomServer(serverUrl: string): Promise<void> {
+    //the world servers call this to register themselves.
+    async joinRoomServer(serverUrl: string, publicSubWorldList: string[]): Promise<void> {
         // 已经注册过
         if (this.roomServers.some(v => v.url === serverUrl)) {
             return;
@@ -76,10 +78,19 @@ export class MatchServer {
             logMsg: false
         });
 
+        let publicSubWorldMap = new Map<string, string>();
+        for (let i = 0; i < publicSubWorldList.length; ++i) {
+            let subWorldId = publicSubWorldList[i];
+            publicSubWorldMap.set(subWorldId, subWorldId);
+        }
+
+        this.logger.log(`子世界列表:${publicSubWorldList}`);
+
         // Push
         let roomServer: MatchServer['roomServers'][number] = {
             url: serverUrl,
-            client: client
+            client: client,
+            subWorldMap: publicSubWorldMap
         }
         this.roomServers.push(roomServer);
 
@@ -115,6 +126,11 @@ export class MatchServer {
         }
 
         this.logger.log(chalk.green(`Room server joined: ${serverUrl}, roomServers.length=${this.roomServers.length}`))
+    }
+
+    public getPublicSubWorldServers(subWorldId: string) {
+        let worldServers = this.roomServers.filter(s => s.subWorldMap.has(subWorldId));
+        return worldServers;
     }
 
     // #region 匹配相关
@@ -196,6 +212,9 @@ export class MatchServer {
     }
     // #endregion
 
+    // 10000 以下为系统保留.
+    private _nextRoomId = 10000;
+
     async createRoom(roomName: string): Promise<ApiReturn<ResCreateRoom>> {
         // 挑选一个人数最少的 RoomServer
         let roomServer = this.roomServers.filter(v => v.state).orderBy(v => v.state!.connNum)[0];
@@ -206,7 +225,9 @@ export class MatchServer {
         // RPC -> RoomServer
         let op = await roomServer.client.callApi('admin/CreateRoom', {
             adminToken: BackConfig.adminToken,
-            roomName: roomName
+            roomName: roomName,
+            roomId: '' + this._nextRoomId++,
+            levelId: 'level-001',
         })
         if (!op.isSucc) {
             return { isSucc: false, err: new TsrpcError(op.err) };

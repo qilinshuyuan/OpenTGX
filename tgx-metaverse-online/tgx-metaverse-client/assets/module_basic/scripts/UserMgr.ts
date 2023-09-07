@@ -11,12 +11,17 @@ export class UserMgr {
 
     private _token: string;
 
+    private _uid:string;
     private _name: string;
     private _visualId: number;
-    private _regionId: number;
+    private _subWorldId: string;
 
     public get token(): string {
         return this._token;
+    }
+
+    public get uid():string{
+        return this._uid;
     }
 
     public get name(): string {
@@ -27,16 +32,18 @@ export class UserMgr {
         return this._visualId;
     }
 
-    public get regionId(): number {
-        return this._regionId;
+    public get subWorldId(): string {
+        return this._subWorldId;
     }
 
     async doLogin(account: string, password: string) {
         let ret = await NetUtil.callApiFromLobby('Login', { account: account, password: password });
         if (ret.isSucc) {
             this._token = ret.res.token;
+            this._uid = ret.res.uid;
             this._name = ret.res.name;
             this._visualId = ret.res.visualId;
+            this._subWorldId = ret.res.subWorldId;
         }
         return ret;
     }

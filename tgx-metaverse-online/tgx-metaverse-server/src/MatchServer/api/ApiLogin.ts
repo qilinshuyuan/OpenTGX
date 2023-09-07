@@ -15,5 +15,5 @@ export async function ApiLogin(call: ApiCall<ReqLogin, ResLogin>) {
 
     UserDB.updateUserData(call.req.account, { token: token });
 
-    call.succ({ token: token, name: userInfo.name, visualId: userInfo.visualId });
+    call.succ({ token: token, name: userInfo.name, visualId: userInfo.visualId, uid: userInfo.uid, subWorldId: userInfo.subWorldId });
 }

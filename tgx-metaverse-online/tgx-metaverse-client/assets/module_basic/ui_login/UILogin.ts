@@ -80,7 +80,7 @@ export class UILogin extends tgxUIController {
             else {
                 //有名字，则进入对应场景，如果没有对应场景，则进入默认场景
                 tgxUIWaiting.show('进入世界');
-                let ret = await NetUtil.callApiFromLobby('StartMatch', {}, { timeout: 10000 });
+                let ret = await NetUtil.callApiFromLobby('EnterSubWorld', { token: UserMgr.inst.token, subWorldId: UserMgr.inst.subWorldId }, { timeout: 10000 });
                 tgxUIWaiting.hide();
 
                 if (ret.isSucc) {
