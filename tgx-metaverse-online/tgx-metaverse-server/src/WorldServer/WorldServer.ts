@@ -40,7 +40,10 @@ export class WorldServer {
     });
 
     public async getUserInfoFromMaster(uid:string){
-        let ret = await this._master.callApi('admin/RequestUserInfo',{uid:uid});
+        let ret = await this._master.callApi('admin/RequestUserInfo',{
+            adminToken: BackConfig.adminToken,
+            uid:uid,
+        });
         if(ret.isSucc){
             return ret.res.info;
         }

@@ -1,9 +1,8 @@
 import { _decorator, Color, Component, EditBox, MeshRenderer, Node } from 'cc';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
 import { tgxUIAlert, tgxUIWaiting } from '../../core_tgx/tgx';
-import { SceneDef, SceneUtil2 } from '../../scripts/SceneDef';
+import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
 import { NetUtil } from '../scripts/models/NetUtil';
-import { SceneUtil } from '../scripts/models/SceneUtil';
 const { ccclass, property } = _decorator;
 
 const LAST_NAMES = ['赵', '李', '张', '王', '姜', '刘', '孙', '吴', '上官', '欧阳', '百里', '武', '西门', '陈', '潘', '东方', '唐'];
@@ -48,7 +47,8 @@ export class CreateRoleScene extends Component {
             }
 
             tgxUIWaiting.show('进入世界');
-            SceneUtil.loadScene('RoomScene', {
+            
+            SceneUtil.loadScene(SceneDef.WORLD, {
                 token:ret.res.token,
                 time:ret.res.time,
                 worldServerUrl:ret.res.worldServerUrl,

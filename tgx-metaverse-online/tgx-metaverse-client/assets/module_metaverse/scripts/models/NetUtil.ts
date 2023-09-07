@@ -1,8 +1,8 @@
 import { WECHAT } from 'cc/env';
 import { ApiReturn, HttpClientTransportOptions, HttpClient as HttpClient_Browser, TsrpcError, WsClient as WsClient_Browser } from 'tsrpc-browser';
 import { HttpClient as HttpClient_Miniapp, WsClient as WsClient_Miniapp } from 'tsrpc-miniapp';
-import { ServiceType, serviceProto as serviceProto_match } from '../shared/protocols/serviceProto_matchServer';
-import { serviceProto as serviceProto_room, ServiceType as ServiceType_Room } from '../shared/protocols/serviceProto_roomServer';
+import { ServiceType, serviceProto as serviceProto_master } from '../shared/protocols/serviceProto_masterServer';
+import { serviceProto as serviceProto_world, ServiceType as ServiceType_World } from '../shared/protocols/serviceProto_worldServer';
 import { FrontConfig } from './FrontConfig';
 
 /** 网络请求相关 */
@@ -15,7 +15,7 @@ export class NetUtil {
     }
 
     /** Match Server */
-    static matchClient = new (WECHAT ? HttpClient_Miniapp : HttpClient_Browser)(serviceProto_match, {
+    static matchClient = new (WECHAT ? HttpClient_Miniapp : HttpClient_Browser)(serviceProto_master, {
         server: FrontConfig.matchServer,
         // json: true,
         logger: console
@@ -40,9 +40,9 @@ export class NetUtil {
         return this.matchClient.sendMsg(msgName, msg, options);
     }
 
-    /** Room Server */
-    static createRoomClient(serverUrl: string): WsClient_Browser<ServiceType_Room> | WsClient_Miniapp<ServiceType_Room> {
-        let client = new (WECHAT ? WsClient_Miniapp : WsClient_Browser)(serviceProto_room, {
+    /** World Server */
+    static createWorldClient(serverUrl: string): WsClient_Browser<ServiceType_World> | WsClient_Miniapp<ServiceType_World> {
+        let client = new (WECHAT ? WsClient_Miniapp : WsClient_Browser)(serviceProto_world, {
             server: serverUrl,
             heartbeat: {
                 interval: 5000,

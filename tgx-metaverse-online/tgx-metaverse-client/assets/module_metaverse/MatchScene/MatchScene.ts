@@ -2,8 +2,8 @@
 import { Component, EditBox, instantiate, Label, Node, Prefab, ScrollView, UITransform, view, _decorator } from 'cc';
 import { RoomListItem } from './prefabs/RoomListItem/RoomListItem';
 import { NetUtil } from '../scripts/models/NetUtil';
-import { SceneUtil } from '../scripts/models/SceneUtil';
 import { tgxUIWaiting } from '../../core_tgx/tgx';
+import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
 const { ccclass, property } = _decorator;
 
 @ccclass('MatchScene')
@@ -27,7 +27,6 @@ export class MatchScene extends Component {
         // Clean
         this.labelRoomSummary.string = '';
         this.labelNoRoom.active = false;
-        this.inputNickname.string = RANDOM_NAMES[RANDOM_NAMES.length * Math.random() | 0];
 
         // 因为是按高度适配，所以在屏幕宽度小于设计宽度时，自动缩窄 UI
         const visibleSize = view.getVisibleSize();
@@ -64,9 +63,8 @@ export class MatchScene extends Component {
                 room: roomInfo,
                 onClick: v => {
                     tgxUIWaiting.show('加入房间中');
-                    SceneUtil.loadScene('RoomScene', {
+                    SceneUtil.loadScene(SceneDef.WORLD, {
                         ...v,
-                        nickname: this.inputNickname.string
                     });
                 }
             };
@@ -90,9 +88,8 @@ export class MatchScene extends Component {
         }
 
         tgxUIWaiting.show('加入房间中');
-        SceneUtil.loadScene('RoomScene', {
+        SceneUtil.loadScene(SceneDef.WORLD, {
             ...ret.res,
-            nickname: this.inputNickname.string
         });
     }
 
@@ -106,12 +103,9 @@ export class MatchScene extends Component {
         }
 
         tgxUIWaiting.show('加入房间中');
-        SceneUtil.loadScene('RoomScene', {
+        SceneUtil.loadScene(SceneDef.WORLD, {
             ...ret.res,
-            nickname: this.inputNickname.string
         });
     }
 
 }
-
-const RANDOM_NAMES = ['孙悟空', '诸葛亮', '乔布斯', '罗永浩', '林志玲', '新垣结衣', '加藤鹰', '影魔', '草薙京', '老男孩', '汪汪队', '特朗普', '武大郎', '西门庆', '陈世美', '潘金莲']

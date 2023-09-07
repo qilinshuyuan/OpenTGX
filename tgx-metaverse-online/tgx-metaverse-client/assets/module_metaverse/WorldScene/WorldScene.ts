@@ -1,38 +1,36 @@
-
 import { Camera, Color, Component, EditBox, instantiate, Label, Node, Prefab, Quat, RichText, tween, TweenSystem, Vec2, _decorator, find } from 'cc';
 import { WsClientStatus } from 'tsrpc-base-client';
 import { WsClient } from 'tsrpc-browser';
 import { Player } from './prefabs/Player/Player';
 import { PlayerName } from './prefabs/PlayerName/PlayerName';
 import { NetUtil } from '../scripts/models/NetUtil';
-import { SceneUtil } from '../scripts/models/SceneUtil';
 import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert } from '../../core_tgx/tgx';
-import { ResJoinRoom } from '../scripts/shared/protocols/roomServer/PtlJoinRoom';
-import { ServiceType } from '../scripts/shared/protocols/serviceProto_matchServer';
-import { RoomData } from '../scripts/shared/types/RoomData';
-import { RoomUserState } from '../scripts/shared/types/RoomUserState';
+import { ResJoinSubWorld } from '../scripts/shared/protocols/worldServer/PtlJoinSubWorld';
+import { ServiceType } from '../scripts/shared/protocols/serviceProto_masterServer';
+import { SubWorldData } from '../scripts/shared/types/SubWorldData';
+import { SubWorldUserState } from '../scripts/shared/types/SubWorldUserState';
 import { UserInfo } from '../scripts/shared/types/UserInfo';
-import { SceneDef, SceneUtil2 } from '../../scripts/SceneDef';
+import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
 const { ccclass, property } = _decorator;
 
 const q4_1 = new Quat;
 const v2_1 = new Vec2;
 
-export interface RoomSceneParams {
+export interface SubWorldSceneParams {
     worldServerUrl: string,
     token: string,
     time: number,
 }
 
-@ccclass('RoomScene')
-export class RoomScene extends Component {
+@ccclass('SubWorldScene')
+export class SubWorldScene extends Component {
 
-    params!: RoomSceneParams;
+    params!: SubWorldSceneParams;
     client!: WsClient<ServiceType>;
     selfPlayer?: Player
     currentUser?: UserInfo;
-    roomData!: RoomData;
+    subWorldData!: SubWorldData;
 
     @property(Node)
     players!: Node;
@@ -59,7 +57,7 @@ export class RoomScene extends Component {
     prefabPlayerName!: Prefab;
 
     onLoad() {
-        this.params = SceneUtil.sceneParams as RoomSceneParams;
+        this.params = SceneUtil.sceneParams as SubWorldSceneParams;
 
         // Clean
         this.labelRoomName.string = this.labelRoomState.string = '';
@@ -72,8 +70,8 @@ export class RoomScene extends Component {
         this._ensureConnected();
 
         // 定时刷新右上角房间状态
-        this.schedule(() => { this._resetRoomState() }, 3)
-        this._resetRoomState()
+        this.schedule(() => { this._resetSubWorldState() }, 3)
+        this._resetSubWorldState()
 
         // 定时向服务器上报状态
         this.schedule(() => {
@@ -107,7 +105,7 @@ export class RoomScene extends Component {
     }
 
     private _initClient() {
-        this.client = NetUtil.createRoomClient(this.params.worldServerUrl);
+        this.client = NetUtil.createWorldClient(this.params.worldServerUrl);
 
         this.client.listenMsg('serverMsg/Chat', v => {
             let playerName = this.players.getChildByName(v.user.uid)?.getComponent(PlayerName);
@@ -122,13 +120,13 @@ export class RoomScene extends Component {
             }
         })
         this.client.listenMsg('serverMsg/UserJoin', v => {
-            this.roomData.users.push({
+            this.subWorldData.users.push({
                 ...v.user
             });
             this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>加入了房间</color></o>`)
         })
         this.client.listenMsg('serverMsg/UserExit', v => {
-            this.roomData.users.remove(v1 => v1.uid === v.user.uid);
+            this.subWorldData.users.remove(v1 => v1.uid === v.user.uid);
             this.playerNames.getChildByName(v.user.uid)?.removeFromParent();
             this.players.getChildByName(v.user.uid)?.removeFromParent();
             this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>离开了房间</color></o>`)
@@ -143,7 +141,7 @@ export class RoomScene extends Component {
         })
     }
 
-    private async _ensureConnected(): Promise<ResJoinRoom> {
+    private async _ensureConnected(): Promise<ResJoinSubWorld> {
         let ret = await this._connect();
         if (!ret.isSucc) {
             tgxUIAlert.show(ret.errMsg).onClick(() => {
@@ -152,18 +150,18 @@ export class RoomScene extends Component {
             return new Promise(rs => { });
         }
 
-        this._resetRoomState()
+        this._resetSubWorldState()
         return ret.res;
     }
-    private async _connect(): Promise<{ isSucc: true, res: ResJoinRoom } | { isSucc: false, errMsg: string }> {
+    private async _connect(): Promise<{ isSucc: true, res: ResJoinSubWorld } | { isSucc: false, errMsg: string }> {
         // Connect
         let resConnect = await this.client.connect();
         if (!resConnect.isSucc) {
             return { isSucc: false, errMsg: '连接到服务器失败: ' + resConnect.errMsg };
         }
 
-        // JoinRoom
-        let retJoin = await this.client.callApi('JoinRoom', {
+        // JoinSubWorld
+        let retJoin = await this.client.callApi('JoinSubWorld', {
             token: this.params.token,
             uid: UserMgr.inst.uid,
             time: this.params.time,
@@ -174,13 +172,13 @@ export class RoomScene extends Component {
         }
 
         this.currentUser = retJoin.res.currentUser;
-        this.roomData = retJoin.res.roomData;
-        this.labelRoomName.string = retJoin.res.roomData.name;
+        this.subWorldData = retJoin.res.subWorldData;
+        this.labelRoomName.string = retJoin.res.subWorldData.name;
 
         return { isSucc: true, res: retJoin.res };
     }
 
-    private _resetRoomState() {
+    private _resetSubWorldState() {
         if (this.client.status === WsClientStatus.Opened) {
             this.labelRoomState.string = `人数: ${this.players.children.length}\nPing: ${this.client.lastHeartbeatLatency}ms`
         }
@@ -231,11 +229,10 @@ export class RoomScene extends Component {
 
     onBtnBack() {
         this.client.disconnect();
-        //SceneUtil.loadScene('MatchScene', {});
-        SceneUtil2.loadScene(SceneDef.LOGIN);
+        SceneUtil.loadScene(SceneDef.LOGIN);
     }
 
-    private _updateUserState(state: RoomUserState) {
+    private _updateUserState(state: SubWorldUserState) {
         let node = this.players.getChildByName(state.uid);
 
         // Create Player
@@ -248,7 +245,7 @@ export class RoomScene extends Component {
             node.setRotation(state.rotation.x, state.rotation.y, state.rotation.z, state.rotation.w);
             const player = node.getComponent(Player)!;
             player.aniState = state.aniState;
-            let userInfo = this.roomData.users.find(v => v.uid === state.uid);
+            let userInfo = this.subWorldData.users.find(v => v.uid === state.uid);
             if (userInfo) {
                 let color = new Color();
                 Color.fromUint32(color, userInfo.visualId);

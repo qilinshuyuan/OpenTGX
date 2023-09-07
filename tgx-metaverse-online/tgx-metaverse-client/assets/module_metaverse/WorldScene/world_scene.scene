@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "RoomScene",
+    "_name": "world_scene",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",

@@ -8,7 +8,7 @@ export function useSsoWs(server: WsServer) {
     server.flows.preApiCallFlow.push(async call => {
         const conn = call.conn as WorldServerConn;
         // 部分接口需要登录和加入子世界后才可使用
-        if (!call.service.name.startsWith('admin/') && call.service.name !== 'JoinRoom') {
+        if (!call.service.name.startsWith('admin/') && call.service.name !== 'JoinSubWorld') {
             if (!conn.currentUser) {
                 call.error('你还未登录', { code: 'NEED_LOGIN' });
                 return undefined;

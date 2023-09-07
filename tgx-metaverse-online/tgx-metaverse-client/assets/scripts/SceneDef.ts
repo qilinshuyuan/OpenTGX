@@ -11,12 +11,13 @@ export class SceneDef {
     public static START = { name: 'start' };
     public static LOGIN = { name: 'login', bundle: ModuleDef.BASIC };
     public static CREATE_ROLE = { name: 'create_role', bundle: ModuleDef.METAVERSE };
-    public static LOBBY = { name: 'MatchScene', bundle: ModuleDef.METAVERSE };
-    public static WORLD = { name: 'RoomScene', bundle: ModuleDef.METAVERSE };
+    public static WORLD = { name: 'world_scene', bundle: ModuleDef.METAVERSE };
 }
 
-export class SceneUtil2 {
-    static loadScene(scene: ISceneInfo) {
+export class SceneUtil {
+    static sceneParams: any;
+    static loadScene(scene: ISceneInfo, params?:any) {
+        this.sceneParams = params;
         let bundle = assetManager.getBundle(scene.bundle);
         if (bundle) {
             director.loadScene(scene.name, () => {

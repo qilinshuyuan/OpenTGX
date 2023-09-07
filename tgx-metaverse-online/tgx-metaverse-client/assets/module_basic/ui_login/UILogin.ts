@@ -4,9 +4,8 @@ import { UserLocalCache } from "../scripts/UserLocalCache";
 import { UserMgr } from "../scripts/UserMgr";
 import { UIRegister } from "../ui_register/UIRegister";
 import { Layout_UILogin } from "./Layout_UILogin";
-import { SceneDef, SceneUtil2 } from "../../scripts/SceneDef";
+import { SceneDef, SceneUtil } from "../../scripts/SceneDef";
 import { NetUtil } from "../../module_metaverse/scripts/models/NetUtil";
-import { SceneUtil } from "../../module_metaverse/scripts/models/SceneUtil";
 
 export class UILogin extends tgxUIController {
     constructor() {
@@ -75,7 +74,7 @@ export class UILogin extends tgxUIController {
             //没有名字，表示还未创建角色，则进入角色创建流程
             if (!UserMgr.inst.name) {
                 tgxUIWaiting.show('角色准备中');
-                SceneUtil2.loadScene(SceneDef.CREATE_ROLE);
+                SceneUtil.loadScene(SceneDef.CREATE_ROLE);
             }
             else {
                 //有名字，则进入对应场景，如果没有对应场景，则进入默认场景
@@ -85,11 +84,10 @@ export class UILogin extends tgxUIController {
 
                 if (ret.isSucc) {
                     tgxUIWaiting.show('进入世界');
-                    SceneUtil.sceneParams = {
+                    SceneUtil.loadScene(SceneDef.WORLD,{
                         ...ret.res,
-                        nickname: UserMgr.inst.name
-                    };
-                    SceneUtil2.loadScene(SceneDef.WORLD);
+                        uid: UserMgr.inst.uid
+                    });
                 }
             }
 

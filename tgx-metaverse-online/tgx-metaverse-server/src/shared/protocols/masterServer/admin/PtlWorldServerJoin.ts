@@ -1,9 +1,10 @@
 
 export interface ReqWorldServerJoin {
-    /** WorldServer 的连接地址 */
-    serverUrl: string,
     /** Token 用于鉴权 */
     adminToken: string,
+    
+    /** WorldServer 的连接地址 */
+    serverUrl: string,
     //
     publicSubWorldList:string[]
 }
