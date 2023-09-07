@@ -1,17 +1,16 @@
-import { Camera, Color, Component, EditBox, instantiate, Label, Node, Prefab, Quat, RichText, tween, TweenSystem, Vec2, _decorator, find } from 'cc';
-import { WsClientStatus } from 'tsrpc-base-client';
-import { WsClient } from 'tsrpc-browser';
-import { Player } from './prefabs/Player/Player';
-import { PlayerName } from './prefabs/PlayerName/PlayerName';
-import { NetUtil } from '../scripts/models/NetUtil';
-import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert } from '../../core_tgx/tgx';
+import { Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
+import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
 import { ResJoinSubWorld } from '../scripts/shared/protocols/worldServer/PtlJoinSubWorld';
-import { ServiceType } from '../scripts/shared/protocols/serviceProto_masterServer';
 import { SubWorldData } from '../scripts/shared/types/SubWorldData';
-import { SubWorldUserState } from '../scripts/shared/types/SubWorldUserState';
+import { PlayerAniState, SubWorldUserState } from '../scripts/shared/types/SubWorldUserState';
 import { UserInfo } from '../scripts/shared/types/UserInfo';
 import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
+import { WorldMgr } from './WorldMgr';
+import { UIChat } from '../ui_chat/UIChat';
+import { Player } from '../prefabs/Player/Player';
+import { PlayerName } from '../prefabs/PlayerName/PlayerName';
+import { UIWorldHUD } from '../ui_world_hud/UIWorldHUD';
 const { ccclass, property } = _decorator;
 
 const q4_1 = new Quat;
@@ -27,41 +26,22 @@ export interface SubWorldSceneParams {
 export class SubWorldScene extends Component {
 
     params!: SubWorldSceneParams;
-    client!: WsClient<ServiceType>;
     selfPlayer?: Player
     currentUser?: UserInfo;
     subWorldData!: SubWorldData;
 
     @property(Node)
     players!: Node;
-    @property(Node)
-    chatMsgs!: Node;
     @property(tgxThirdPersonCameraCtrl)
     followCamera!: tgxThirdPersonCameraCtrl;
-    @property(EditBox)
-    inputChat!: EditBox;
-    @property(Node)
-    playerNames!: Node;
-    @property(Label)
-    labelRoomName!: Label;
-    @property(Label)
-    labelRoomState!: Label;
-    @property(Label)
-    labelServerUrl!: Label;
 
     @property(Prefab)
     prefabPlayer!: Prefab;
-    @property(Prefab)
-    prefabChatMsgItem!: Prefab;
-    @property(Prefab)
-    prefabPlayerName!: Prefab;
 
-    onLoad() {
+    private _playerLastState: string = '';
+
+    start() {
         this.params = SceneUtil.sceneParams as SubWorldSceneParams;
-
-        // Clean
-        this.labelRoomName.string = this.labelRoomState.string = '';
-        this.labelServerUrl.string = this.params.worldServerUrl;
 
         // Init
         this._initClient();
@@ -69,24 +49,32 @@ export class SubWorldScene extends Component {
         // 开始连接
         this._ensureConnected();
 
-        // 定时刷新右上角房间状态
-        this.schedule(() => { this._resetSubWorldState() }, 3)
-        this._resetSubWorldState()
-
         // 定时向服务器上报状态
         this.schedule(() => {
             if (!this.selfPlayer) {
                 return;
             }
-            this.client.sendMsg('clientMsg/UserState', {
-                aniState: this.selfPlayer.aniState,
-                pos: this.selfPlayer.node.position,
-                rotation: this.selfPlayer.node.rotation
-            })
+
+            let curState = this.selfPlayer.aniState;
+            if (curState == 'walking' || curState != this._playerLastState) {
+                WorldMgr.worldConn.sendMsg('clientMsg/UserState', {
+                    aniState: this.selfPlayer.aniState,
+                    pos: this.selfPlayer.node.position,
+                    rotation: this.selfPlayer.node.rotation
+                });
+                this._playerLastState = curState;
+            }
         }, 0.1);
 
         tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT, this.onMovement, this);
         tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT_STOP, this.onMovmentStop, this);
+
+        tgxUIMgr.inst.showUI(UIChat);
+        tgxUIMgr.inst.showUI(UIWorldHUD);
+
+        director.getScene().on('event_player_action', (act: 'wave' | 'punch' | 'dance') => {
+            this.onPlayerAction(act);
+        });
     }
 
     onMovement(degree: number, strengthen: number) {
@@ -105,63 +93,53 @@ export class SubWorldScene extends Component {
     }
 
     private _initClient() {
-        this.client = NetUtil.createWorldClient(this.params.worldServerUrl);
 
-        this.client.listenMsg('serverMsg/Chat', v => {
+        WorldMgr.createWorldConnection(this.params.worldServerUrl);
+
+        WorldMgr.worldConn.listenMsg('serverMsg/Chat', v => {
             let playerName = this.players.getChildByName(v.user.uid)?.getComponent(PlayerName);
             if (playerName) {
                 playerName.showChatMsg(v.content);
             }
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#000000>${v.content}</color></o>`);
         })
-        this.client.listenMsg('serverMsg/UserStates', v => {
+        WorldMgr.worldConn.listenMsg('serverMsg/UserStates', v => {
             for (let uid in v.userStates) {
                 this._updateUserState(v.userStates[uid]);
             }
+            WorldMgr.playerNum = this.players.children.length;
         })
-        this.client.listenMsg('serverMsg/UserJoin', v => {
+        WorldMgr.worldConn.listenMsg('serverMsg/UserJoin', v => {
             this.subWorldData.users.push({
                 ...v.user
             });
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>加入了房间</color></o>`)
+            WorldMgr.playerNum = this.players.children.length;
         })
-        this.client.listenMsg('serverMsg/UserExit', v => {
+        WorldMgr.worldConn.listenMsg('serverMsg/UserExit', v => {
             this.subWorldData.users.remove(v1 => v1.uid === v.user.uid);
-            this.playerNames.getChildByName(v.user.uid)?.removeFromParent();
             this.players.getChildByName(v.user.uid)?.removeFromParent();
-            this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>离开了房间</color></o>`)
-        })
-        this.client.flows.postDisconnectFlow.push(v => {
-            if (!v.isManual) {
-                tgxUIAlert.show("链接已断开，请重新登录").onClick(() => {
-                    this.onBtnBack();
-                });
-            }
-            return v;
-        })
+            WorldMgr.playerNum = this.players.children.length;
+        });
     }
 
     private async _ensureConnected(): Promise<ResJoinSubWorld> {
         let ret = await this._connect();
         if (!ret.isSucc) {
             tgxUIAlert.show(ret.errMsg).onClick(() => {
-                this.onBtnBack();
+                WorldMgr.backToLogin();
             });
             return new Promise(rs => { });
         }
-
-        this._resetSubWorldState()
         return ret.res;
     }
-    private async _connect(): Promise<{ isSucc: true, res: ResJoinSubWorld } | { isSucc: false, errMsg: string }> {
+    private async _connect(): Promise<{ isSucc: boolean, res?: ResJoinSubWorld, errMsg?: string }> {
         // Connect
-        let resConnect = await this.client.connect();
+        let resConnect = await WorldMgr.worldConn.connect();
         if (!resConnect.isSucc) {
             return { isSucc: false, errMsg: '连接到服务器失败: ' + resConnect.errMsg };
         }
 
         // JoinSubWorld
-        let retJoin = await this.client.callApi('JoinSubWorld', {
+        let retJoin = await WorldMgr.worldConn.callApi('JoinSubWorld', {
             token: this.params.token,
             uid: UserMgr.inst.uid,
             time: this.params.time,
@@ -173,63 +151,15 @@ export class SubWorldScene extends Component {
 
         this.currentUser = retJoin.res.currentUser;
         this.subWorldData = retJoin.res.subWorldData;
-        this.labelRoomName.string = retJoin.res.subWorldData.name;
 
         return { isSucc: true, res: retJoin.res };
     }
 
-    private _resetSubWorldState() {
-        if (this.client.status === WsClientStatus.Opened) {
-            this.labelRoomState.string = `人数: ${this.players.children.length}\nPing: ${this.client.lastHeartbeatLatency}ms`
-        }
-        else {
-            this.labelRoomState.string = '连接中...'
-        }
-    }
-
-    onBtnAction(e: any, state: 'wave' | 'punch') {
+    onPlayerAction(state: 'wave' | 'punch' | 'dance') {
         if (!this.selfPlayer) {
             return;
         }
         this.selfPlayer.aniState = state;
-    }
-
-    async onBtnSendChat() {
-        if (!this.inputChat.string) {
-            return;
-        }
-
-        const content = this.inputChat.string;
-        this.inputChat.string = '';
-        let ret = await this.client.callApi('SendChat', {
-            content: content
-        });
-        this.inputChat.string = '';
-
-        if (!ret.isSucc) {
-            this.inputChat.string = content;
-            return;
-        }
-    }
-    async onInputChatReturn() {
-        await this.onBtnSendChat();
-        this.inputChat.focus();
-    }
-
-    private _pushChatMsg(richText: string) {
-        let node = instantiate(this.prefabChatMsgItem);
-        this.chatMsgs.addChild(node);
-        node.getComponent(RichText)!.string = richText;
-
-        // 最多保留 7 条记录
-        while (this.chatMsgs.children.length > 7) {
-            this.chatMsgs.children[0].removeFromParent();
-        }
-    }
-
-    onBtnBack() {
-        this.client.disconnect();
-        SceneUtil.loadScene(SceneDef.LOGIN);
     }
 
     private _updateUserState(state: SubWorldUserState) {

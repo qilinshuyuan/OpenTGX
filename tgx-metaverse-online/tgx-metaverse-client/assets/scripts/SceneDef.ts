@@ -11,7 +11,7 @@ export class SceneDef {
     public static START = { name: 'start' };
     public static LOGIN = { name: 'login', bundle: ModuleDef.BASIC };
     public static CREATE_ROLE = { name: 'create_role', bundle: ModuleDef.METAVERSE };
-    public static WORLD = { name: 'world_scene', bundle: ModuleDef.METAVERSE };
+    public static WORLD = { name: 'world', bundle: ModuleDef.METAVERSE };
 }
 
 export class SceneUtil {
