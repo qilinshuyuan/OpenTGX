@@ -2,14 +2,14 @@ export const BackConfig = {
 
     adminToken: 'AAABBBCCC',
 
-    roomServer: {
-        /** 发送房间状态的时间间隔 */
+    worldServer: {
+        /** 发送状态的时间间隔 */
         intervalSendState: 3000,
-        /** 每个房间的最大人数 */
-        maxRoomUserNum: 10
+        /** 每个子世界的最大人数 */
+        maxSubWorldUserNum: 10
     },
 
-    matchServer: {
+    masterServer: {
         /** 执行匹配的间隔 */
         intervalMatch: 3000
     }

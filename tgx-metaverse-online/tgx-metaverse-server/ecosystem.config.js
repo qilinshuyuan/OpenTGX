@@ -5,27 +5,27 @@ module.exports = {
    */
   apps : [
     {
-      name      : 'match-server',
-      script    : 'matchServer.js',
+      name      : 'master-server',
+      script    : 'MasterServerMain.js',
       env: {
         PORT: '3200'
       }
     },
     {
-      name      : 'room-server-1',
-      script    : 'roomServer.js',
+      name      : 'world-server-1',
+      script    : 'WorldServerMain.js',
       env: {
         PORT: '3201',
-        MATCH_SERVER_URL: 'http://127.0.0.1:3200',
+        MASTER_SERVER_URL: 'http://127.0.0.1:3200',
         THIS_SERVER_URL: 'wss://你的域名:3201'
       }
     },
     {
-      name      : 'room-server-2',
-      script    : 'roomServer.js',
+      name      : 'world-server-2',
+      script    : 'WorldServerMain.js',
       env: {
         PORT: '3202',
-        MATCH_SERVER_URL: 'http://127.0.0.1:3200',
+        MASTER_SERVER_URL: 'http://127.0.0.1:3200',
         THIS_SERVER_URL: 'wss://你的域名:3202'
       }
     },

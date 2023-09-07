@@ -4,18 +4,18 @@ const tsrpcConf: TsrpcConfig = {
     // Generate ServiceProto
     proto: [
         {
-            ptlDir: 'src/shared/protocols/matchServer', // Protocol dir
-            output: 'src/shared/protocols/serviceProto_matchServer.ts', // Path for generated ServiceProto
-            apiDir: 'src/MatchServer/api',   // API dir
-            docDir: 'docs/matchServer',     // API documents dir
+            ptlDir: 'src/shared/protocols/masterServer', // Protocol dir
+            output: 'src/shared/protocols/serviceProto_masterServer.ts', // Path for generated ServiceProto
+            apiDir: 'src/MasterServer/api',   // API dir
+            docDir: 'docs/masterServer',     // API documents dir
             // ptlTemplate: CodeTemplate.getExtendedPtl(),
             // msgTemplate: CodeTemplate.getExtendedMsg(),
         },
         {
-            ptlDir: 'src/shared/protocols/roomServer', // Protocol dir
-            output: 'src/shared/protocols/serviceProto_roomServer.ts', // Path for generated ServiceProto
-            apiDir: 'src/RoomServer/api',   // API dir
-            docDir: 'docs/roomServer',     // API documents dir
+            ptlDir: 'src/shared/protocols/worldServer', // Protocol dir
+            output: 'src/shared/protocols/serviceProto_worldServer.ts', // Path for generated ServiceProto
+            apiDir: 'src/WorldServer/api',   // API dir
+            docDir: 'docs/worldServer',     // API documents dir
             ptlTemplate: CodeTemplate.getExtendedPtl(),
             // msgTemplate: CodeTemplate.getExtendedMsg(),
         },

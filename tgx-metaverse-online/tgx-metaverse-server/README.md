@@ -2,22 +2,22 @@
 
 ## 介绍
 
-- MatchServer：房间管理服务（开房间、随机匹配），HTTP
-- RoomServer：房间服务（运行实际房间逻辑），WebSocket
+- MasterServer：主管服务器（登录、匹配、各类系统），HTTP
+- WorldServer：世界服务（玩家同步、关卡、游戏逻辑），WebSocket
 
-MatchServer 和 RoomServer 为一对多的关系，保持长连接 RPC
+MasterServer 和 WorldServer 为一对多的关系，保持长连接 RPC
 
 ## 启动
 
 ```shell
-# 启动 MatchServer
-npm run dev:match
+# 启动 MasterServer
+npm run dev:master
 
-# 启动 RoomServer
-npm run dev:room
+# 启动 WorldServer
+npm run dev:world
 
-# 再启动一个 RoomServer （测试分布式）
-npm run dev:room2
+# 再启动一个 WorldServer （测试分布式）
+npm run dev:world2
 ```
 
 ## 构建
