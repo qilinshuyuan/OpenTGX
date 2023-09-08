@@ -24,7 +24,7 @@ const tsrpcConf: TsrpcConfig = {
     sync: [
         {
             from: 'src/shared',
-            to: '../tgx-metaverse-client/assets/module_metaverse/scripts/shared',
+            to: '../tgx-metaverse-client/assets/module_basic/shared',
             type: 'symlink'     // Change this to 'copy' if your environment not support symlink
         }
     ],
