@@ -1,16 +1,16 @@
 import { Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
 import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
-import { ResJoinSubWorld } from '../scripts/shared/protocols/worldServer/PtlJoinSubWorld';
-import { SubWorldData } from '../scripts/shared/types/SubWorldData';
-import { PlayerAniState, SubWorldUserState } from '../scripts/shared/types/SubWorldUserState';
-import { UserInfo } from '../scripts/shared/types/UserInfo';
-import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
+import { SceneUtil } from '../../scripts/SceneDef';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
 import { WorldMgr } from './WorldMgr';
 import { UIChat } from '../ui_chat/UIChat';
 import { Player } from '../prefabs/Player/Player';
 import { PlayerName } from '../prefabs/PlayerName/PlayerName';
 import { UIWorldHUD } from '../ui_world_hud/UIWorldHUD';
+import { ResJoinSubWorld } from '../../module_basic/shared/protocols/worldServer/PtlJoinSubWorld';
+import { SubWorldData } from '../../module_basic/shared/types/SubWorldData';
+import { SubWorldUserState } from '../../module_basic/shared/types/SubWorldUserState';
+import { UserInfo } from '../../module_basic/shared/types/UserInfo';
 const { ccclass, property } = _decorator;
 
 const q4_1 = new Quat;

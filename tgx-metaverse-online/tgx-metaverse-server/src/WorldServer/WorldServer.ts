@@ -39,12 +39,12 @@ export class WorldServer {
         server: this.options.masterServerUrl
     });
 
-    public async getUserInfoFromMaster(uid:string){
-        let ret = await this._master.callApi('admin/RequestUserInfo',{
+    public async getUserInfoFromMaster(uid: string) {
+        let ret = await this._master.callApi('admin/RequestUserInfo', {
             adminToken: BackConfig.adminToken,
-            uid:uid,
+            uid: uid,
         });
-        if(ret.isSucc){
+        if (ret.isSucc) {
             return ret.res.info;
         }
     }
@@ -67,7 +67,7 @@ export class WorldServer {
 
         for (let i = 0; i < this.options.publicSubWorldList.length; ++i) {
             let subWorldId = this.options.publicSubWorldList[i];
-            this.createSubWorld(subWorldId, subWorldId, subWorldId);
+            this.createSubWorld(subWorldId, subWorldId, subWorldId, true);
         }
     }
 
@@ -108,12 +108,13 @@ export class WorldServer {
     private _isJoiningMasterServer?: boolean;
     masterServerConn?: WorldServerConn;
     //
-    createSubWorld(subWorldName: string, subWorldId: string, levelId: string): SubWorld {
+    createSubWorld(subWorldName: string, subWorldId: string, levelId: string, isPublic: boolean): SubWorld {
         let subWorld = new SubWorld({
             id: subWorldId,
             levelId: levelId,
             maxUser: 50,
             name: subWorldName,
+            isPublic: isPublic,
             users: [],
             messages: [],
             startMatchTime: Date.now(),
@@ -129,9 +130,9 @@ export class WorldServer {
     private _clearIdleSubWorlds() {
         const now = Date.now();
         // 清除超过 5 秒没有玩家的子世界
-        this.subWorlds.filter(v => v.data.lastEmptyTime && now - v.data.lastEmptyTime >= 10000).forEach(subWorld => {
+        this.subWorlds.filter(v => (!v.data.isPublic) && v.data.lastEmptyTime && (now - v.data.lastEmptyTime >= 10000)).forEach(subWorld => {
             subWorld.destroy();
-        })
+        });
     }
 }
 

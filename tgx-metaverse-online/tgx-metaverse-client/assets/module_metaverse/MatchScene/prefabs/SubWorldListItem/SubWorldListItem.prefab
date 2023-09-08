@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "RoomListItem",
+    "_name": "SubWorldListItem",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RoomListItem",
+    "_name": "SubWorldListItem",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,

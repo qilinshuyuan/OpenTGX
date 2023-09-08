@@ -3,7 +3,7 @@ import { ReqCreateSubWorld, ResCreateSubWorld } from "../../../shared/protocols/
 import { worldServer } from "../../../WorldServerMain";
 
 export async function ApiCreateSubWorld(call: ApiCall<ReqCreateSubWorld, ResCreateSubWorld>) {
-    let subWorld = worldServer.createSubWorld(call.req.subWorldName,call.req.subWorldId,call.req.levelId);
+    let subWorld = worldServer.createSubWorld(call.req.subWorldName, call.req.subWorldId, call.req.levelId, false);
 
     call.succ({
         subWorldId: subWorld.data.id

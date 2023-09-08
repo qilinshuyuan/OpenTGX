@@ -1,9 +1,9 @@
 
 import { Component, EditBox, instantiate, Label, Node, Prefab, ScrollView, UITransform, view, _decorator } from 'cc';
-import { RoomListItem } from './prefabs/RoomListItem/RoomListItem';
 import { NetUtil } from '../scripts/models/NetUtil';
 import { tgxUIWaiting } from '../../core_tgx/tgx';
 import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
+import { SubWorldListItem } from './prefabs/SubWorldListItem/SubWorldListItem';
 const { ccclass, property } = _decorator;
 
 @ccclass('MatchScene')
@@ -14,19 +14,19 @@ export class MatchScene extends Component {
     @property(EditBox)
     inputNickname!: EditBox;
     @property(ScrollView)
-    roomList!: ScrollView;
+    subWorldList!: ScrollView;
     @property(Label)
-    labelRoomSummary!: Label;
+    labelSummary!: Label;
     @property(Node)
-    labelNoRoom!: Node;
+    labelEmpty!: Node;
 
     @property(Prefab)
-    prefabRoomListItem!: Prefab;
+    prefabSubWorldListItem!: Prefab;
 
     onLoad() {
         // Clean
-        this.labelRoomSummary.string = '';
-        this.labelNoRoom.active = false;
+        this.labelSummary.string = '';
+        this.labelEmpty.active = false;
 
         // 因为是按高度适配，所以在屏幕宽度小于设计宽度时，自动缩窄 UI
         const visibleSize = view.getVisibleSize();
@@ -38,29 +38,29 @@ export class MatchScene extends Component {
 
         // 轮询刷新房间列表
         this.schedule(() => {
-            this._reloadRoomList();
+            this._reloadSubWorldList();
         }, 1);
-        this._reloadRoomList();
+        this._reloadSubWorldList();
     }
 
     /** 刷新房间列表 */
-    private async _reloadRoomList() {
-        let ret = await NetUtil.callApiFromLobby('ListRooms', {});
+    private async _reloadSubWorldList() {
+        let ret = await NetUtil.callApiFromLobby('ListSubWorlds', {});
         if (!ret.isSucc) {
             return;
         }
 
         // Labels
-        this.labelNoRoom.active = ret.res.rooms.length === 0;
-        this.labelRoomSummary.string = `${ret.res.rooms.sum(v => v.userNum)} 人在线`
+        this.labelEmpty.active = ret.res.subWorlds.length === 0;
+        this.labelSummary.string = `${ret.res.subWorlds.sum(v => v.userNum)} 人在线`
 
         // List
-        this.roomList.content!.removeAllChildren();
-        for (let roomInfo of ret.res.rooms) {
-            let node = instantiate(this.prefabRoomListItem);
-            this.roomList.content!.addChild(node);
-            node.getComponent(RoomListItem)!.options = {
-                room: roomInfo,
+        this.subWorldList.content!.removeAllChildren();
+        for (let subWorldInfo of ret.res.subWorlds) {
+            let node = instantiate(this.prefabSubWorldListItem);
+            this.subWorldList.content!.addChild(node);
+            node.getComponent(SubWorldListItem)!.options = {
+                subWorlds: subWorldInfo,
                 onClick: v => {
                     tgxUIWaiting.show('加入房间中');
                     SceneUtil.loadScene(SceneDef.WORLD, {
@@ -71,14 +71,14 @@ export class MatchScene extends Component {
         }
     }
 
-    async onBtnCreateRoom() {
+    async onBtnCreateSubWorld() {
         if (!this.inputNickname.string) {
             return alert('先给自己取个名字吧~');
         }
 
         tgxUIWaiting.show('创建房间中')
-        let ret = await NetUtil.callApiFromLobby('CreateRoom', {
-            roomName: `${this.inputNickname.string}的房间`
+        let ret = await NetUtil.callApiFromLobby('CreateSubWorld', {
+            subWorldName: `${this.inputNickname.string}的房间`
         });
         tgxUIWaiting.hide()
 

@@ -7,7 +7,7 @@ import { ResCreateSubWorld } from "../shared/protocols/masterServer/PtlCreateSub
 import { ReqStartMatch, ResStartMatch } from "../shared/protocols/masterServer/PtlStartMatch";
 import { MsgUpdateSubWorldState } from "../shared/protocols/worldServer/admin/MsgUpdateSubWorldState";
 import { serviceProto } from "../shared/protocols/serviceProto_masterServer";
-import { serviceProto as serviceProto_worldServer, ServiceType as ServiceType_Room } from "../shared/protocols/serviceProto_worldServer";
+import { serviceProto as serviceProto_worldServer, ServiceType as ServiceType_World } from "../shared/protocols/serviceProto_worldServer";
 
 export interface MasterServerOptions {
     port: number
@@ -23,12 +23,12 @@ export class MasterServer {
     /** 已注册的 WorldServer */
     readonly worldServers: {
         url: string,
-        client: WsClient<ServiceType_Room>,
+        client: WsClient<ServiceType_World>,
         state?: MsgUpdateSubWorldState,
         subWorldMap: Map<string, string>,
     }[] = [];
 
-    private _nextRoomIndex = 1;
+    private _nextSubWorldIndex = 1;
 
     constructor(public readonly options: MasterServerOptions) {
         // Flows
@@ -125,7 +125,7 @@ export class MasterServer {
             throw e;
         }
 
-        this.logger.log(chalk.green(`Room server joined: ${serverUrl}, worldServers.length=${this.worldServers.length}`))
+        this.logger.log(chalk.green(`World server joined: ${serverUrl}, worldServers.length=${this.worldServers.length}`))
     }
 
     public getPublicSubWorldServers(subWorldId: string) {
@@ -191,7 +191,7 @@ export class MasterServer {
             }
             // 没有合适的子世界，那么创建一个子世界
             else {
-                let retCreateSubWorld = await this.createSubWorld('公共子世界 ' + (this._nextRoomIndex++));
+                let retCreateSubWorld = await this.createSubWorld('公共子世界 ' + (this._nextSubWorldIndex++));
                 if (retCreateSubWorld.isSucc) {
                     matchingSubWorlds.push({
                         id: retCreateSubWorld.res.subWorldId,
@@ -213,7 +213,7 @@ export class MasterServer {
     // #endregion
 
     // 10000 以下为系统保留.
-    private _nextRoomId = 10000;
+    private _nextSubWorldId = 10000;
 
     async createSubWorld(subWorldName: string): Promise<ApiReturn<ResCreateSubWorld>> {
         // 挑选一个人数最少的 WorldServer
@@ -226,7 +226,7 @@ export class MasterServer {
         let op = await worldServer.client.callApi('admin/CreateSubWorld', {
             adminToken: BackConfig.adminToken,
             subWorldName: subWorldName,
-            subWorldId: '' + this._nextRoomId++,
+            subWorldId: '' + this._nextSubWorldId++,
             levelId: 'level-001',
         })
         if (!op.isSucc) {

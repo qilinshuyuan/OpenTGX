@@ -2,7 +2,7 @@ import { WsClient } from "tsrpc-browser";
 import { tgxUIAlert } from "../../core_tgx/tgx";
 import { SceneDef, SceneUtil } from "../../scripts/SceneDef";
 import { NetUtil } from "../scripts/models/NetUtil";
-import { ServiceType } from "../scripts/shared/protocols/serviceProto_worldServer";
+import { ServiceType } from "../../module_basic/shared/protocols/serviceProto_worldServer";
 
 let _worldConn: WsClient<ServiceType> = null;
 let _worldServerUrl = '';
