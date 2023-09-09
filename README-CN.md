@@ -30,7 +30,7 @@
 - [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
 - [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
 
-> 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
+> 案例收集中，有基于 OpenTGX 开发的项目想要在此展示的，可以联系麒麟子。
 
 ## 客户端特性
 
