@@ -26,6 +26,7 @@
 
 - [3D 跑酷 - Jare 大冒险](https://store.cocos.com/app/detail/4241)
 - [3D 多人在线元宇宙模板](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-metaverse-online)
+- 3D MMORPG 模板 - 即将上线
 - 桌球女孩-多人联机桌球游戏-即将上线
 - [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
 - [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
