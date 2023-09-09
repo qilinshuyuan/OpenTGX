@@ -21,6 +21,17 @@
 
 环境搭建和开发指南，请查看：[开发者文档](docs-cn/developer-guide.md)
 
+
+## 项目模板/产品示例
+
+- [3D 跑酷- Jare 大冒险](https://store.cocos.com/app/detail/4241)
+- [3D 多人在线元宇宙案例]((https://github.com/MrKylinGithub/OpenTGX/tgx-metaverse-online)
+- 桌球女孩-即将上线
+- [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
+- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
+
+> 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
+
 ## 客户端特性
 
 - **首包优化**、**分包策略**
@@ -57,15 +68,6 @@
 - 每一滴干货都源自商业项目实践
 - 用技术资源赋能行业商机落地
 - 交个朋友，你不亏！
-
-## 项目模板/产品示例
-
-- [3D 跑酷- Jare 大冒险](https://store.cocos.com/app/detail/4241)
-- 桌球女孩-即将上线
-- [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
-- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
-
-> 案例收集中，有基于 KylinsToolkit&KFC 开发的项目想要在此展示的，可以联系麒麟子。
 
 ## OpenTGX-Cocos-Client
 
