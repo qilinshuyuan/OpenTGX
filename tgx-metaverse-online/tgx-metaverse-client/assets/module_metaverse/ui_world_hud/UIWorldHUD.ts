@@ -9,7 +9,7 @@ import { WorldMgr } from "../scene_world/WorldMgr";
 
 export class UIWorldHUD extends tgxUIController {
     constructor() {
-        super('ui_world_hud/ui_world_hud', GameUILayers.HUD, Layout_UIWorldHUD);
+        super('ui_world_hud/ui_world_hud', GameUILayers.GAME, Layout_UIWorldHUD);
     }
 
     protected onCreated(): void {
@@ -19,7 +19,7 @@ export class UIWorldHUD extends tgxUIController {
         // Clean
         layout.labelTitle.string = layout.labelState.string = '';
         layout.labelServerUrl.string = WorldMgr.worldServerUrl;
-        layout.labelTitle.string = director.getScene().name;
+        layout.labelTitle.string = WorldMgr.subWorldConfig.name;
 
 
         this.onButtonEvent(layout.btnBack, () => {

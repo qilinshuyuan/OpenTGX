@@ -7,17 +7,17 @@ import { Layout_UIChat } from "./Layout_UIChat";
 
 export class UIChat extends tgxUIController{
     constructor(){
-        super('ui_chat/ui_chat',GameUILayers.GAME,Layout_UIChat);
+        super('ui_chat/ui_chat',GameUILayers.HUD,Layout_UIChat);
     }
     protected onCreated(): void {
-        WorldMgr.worldConn.listenMsg('serverMsg/Chat', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/Chat', v => {
             this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#000000>${v.content}</color></o>`);
         });
 
-        WorldMgr.worldConn.listenMsg('serverMsg/UserJoin', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/UserJoin', v => {
             this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>加入了房间</color></o>`);
         });
-        WorldMgr.worldConn.listenMsg('serverMsg/UserExit', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/UserExit', v => {
             this._pushChatMsg(`<outline width=2><color=#00C113>${v.user.name}</color> <color=#999999>离开了房间</color></o>`);
         });
 
@@ -25,6 +25,12 @@ export class UIChat extends tgxUIController{
         layout.cbInputChatReturn = this.onInputChatReturn.bind(this);
 
         layout.cbBtnSendChat = this.onBtnSendChat.bind(this);
+    }
+
+    protected onDispose(): void {
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/Chat');
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/UserJoin');
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/UserExit');
     }
 
     async onBtnSendChat() {

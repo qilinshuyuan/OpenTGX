@@ -3,7 +3,11 @@ import { ReqCreateSubWorld, ResCreateSubWorld } from "../../../shared/protocols/
 import { worldServer } from "../../../WorldServerMain";
 
 export async function ApiCreateSubWorld(call: ApiCall<ReqCreateSubWorld, ResCreateSubWorld>) {
-    let subWorld = worldServer.createSubWorld(call.req.subWorldName, call.req.subWorldId, call.req.levelId, false);
+    let subWorld = worldServer.createSubWorld(call.req.subWorldId, call.req.subWorldName, call.req.subWorldConfigId);
+
+    if(!subWorld){
+        return call.error('INVALID_CONFIG_ID');
+    }
 
     call.succ({
         subWorldId: subWorld.data.id

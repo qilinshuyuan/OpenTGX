@@ -1,10 +1,11 @@
 import chalk from "chalk";
 import path from "path";
-import { ApiReturn, HttpClient, TransportOptions, WsConnection, WsServer } from "tsrpc";
+import { HttpClient, WsConnection, WsServer } from "tsrpc";
 import { BackConfig } from "../models/BackConfig";
 import { useAdminToken } from "../models/flows/useAdminToken";
 import { serviceProto as serviceProto_masterServer } from "../shared/protocols/serviceProto_masterServer";
 import { serviceProto, ServiceType } from "../shared/protocols/serviceProto_worldServer";
+import { SubWorldConfig } from "../shared/SubWorldConfig";
 import { UserInfo } from "../shared/types/UserInfo";
 import { useCleanConn } from "./models/flows/useCleanConn";
 import { useSsoWs } from "./models/flows/useSsoWs";
@@ -67,7 +68,8 @@ export class WorldServer {
 
         for (let i = 0; i < this.options.publicSubWorldList.length; ++i) {
             let subWorldId = this.options.publicSubWorldList[i];
-            this.createSubWorld(subWorldId, subWorldId, subWorldId, true);
+            //公共子世界的id直接使用配置里的ID，因为只有一份，可确保唯一
+            this.createSubWorld(subWorldId, '', subWorldId);
         }
     }
 
@@ -90,11 +92,18 @@ export class WorldServer {
 
         this.logger.log(chalk.cyan('正在加入 MasterServer: ' + this.options.masterServerUrl));
 
+        let subWorldList: { subWorldId: string, subWorldConfigId: string }[] = [];
+        for (let i = 0; i < this.subWorlds.length; ++i) {
+            let subWorld = this.subWorlds[i];
+            subWorldList.push({ subWorldId: subWorld.data.id, subWorldConfigId: subWorld.config.id });
+        }
+
         let ret = await this._master.callApi('admin/WorldServerJoin', {
             adminToken: BackConfig.adminToken,
             serverUrl: this.options.thisServerUrl,
-            publicSubWorldList: this.options.publicSubWorldList,
+            subWorldList: subWorldList,
         });
+
         if (!ret.isSucc) {
             this.logger.error('MasterServer 加入失败', ret.err);
             return;
@@ -108,18 +117,21 @@ export class WorldServer {
     private _isJoiningMasterServer?: boolean;
     masterServerConn?: WorldServerConn;
     //
-    createSubWorld(subWorldName: string, subWorldId: string, levelId: string, isPublic: boolean): SubWorld {
+    createSubWorld(subWorldId: string, subWorldName: string, subWorldConfigId: string): SubWorld | null {
+        let config = SubWorldConfig.getSubWorldConfig(subWorldConfigId);
+        if (!config) {
+            return null;
+        }
+        if (!subWorldName) {
+            subWorldName = config.name;
+        }
         let subWorld = new SubWorld({
             id: subWorldId,
-            levelId: levelId,
             maxUser: 50,
             name: subWorldName,
-            isPublic: isPublic,
             users: [],
             messages: [],
-            startMatchTime: Date.now(),
-            updateTime: Date.now()
-        });
+        }, config);
 
         this.subWorlds.push(subWorld);
         this.id2SubWorld.set(subWorld.data.id, subWorld);
@@ -130,7 +142,7 @@ export class WorldServer {
     private _clearIdleSubWorlds() {
         const now = Date.now();
         // 清除超过 5 秒没有玩家的子世界
-        this.subWorlds.filter(v => (!v.data.isPublic) && v.data.lastEmptyTime && (now - v.data.lastEmptyTime >= 10000)).forEach(subWorld => {
+        this.subWorlds.filter(v => (!v.config.isPublic) && v.lastEmptyTime && (now - v.lastEmptyTime >= 10000)).forEach(subWorld => {
             subWorld.destroy();
         });
     }

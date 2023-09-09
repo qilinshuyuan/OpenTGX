@@ -1,5 +1,6 @@
 export interface ReqCreateSubWorld {
-    subWorldName: string
+    subWorldName: string,
+    subWorldConfigId:string,
 }
 
 export interface ResCreateSubWorld {

@@ -25,10 +25,8 @@ export class MasterServer {
         url: string,
         client: WsClient<ServiceType_World>,
         state?: MsgUpdateSubWorldState,
-        subWorldMap: Map<string, string>,
+        subWorldMap: Map<string, { subWorldId: string, subWorldConfigId: string }>,
     }[] = [];
-
-    private _nextSubWorldIndex = 1;
 
     constructor(public readonly options: MasterServerOptions) {
         // Flows
@@ -58,7 +56,7 @@ export class MasterServer {
     }
 
     //the world servers call this to register themselves.
-    async joinWorldServer(serverUrl: string, publicSubWorldList: string[]): Promise<void> {
+    async joinWorldServer(serverUrl: string, subWorldList: { subWorldId: string, subWorldConfigId: string }[]): Promise<void> {
         // 已经注册过
         if (this.worldServers.some(v => v.url === serverUrl)) {
             return;
@@ -78,19 +76,19 @@ export class MasterServer {
             logMsg: false
         });
 
-        let publicSubWorldMap = new Map<string, string>();
-        for (let i = 0; i < publicSubWorldList.length; ++i) {
-            let subWorldId = publicSubWorldList[i];
-            publicSubWorldMap.set(subWorldId, subWorldId);
+        let subWorldMap = new Map<string, { subWorldId: string, subWorldConfigId: string }>();
+        for (let i = 0; i < subWorldList.length; ++i) {
+            let subWorldInfo = subWorldList[i];
+            subWorldMap.set(subWorldInfo.subWorldId, subWorldInfo);
         }
 
-        this.logger.log(`子世界列表:${publicSubWorldList}`);
+        //this.logger.log(`子世界列表:${subWorldInfo}`);
 
         // Push
         let worldServer: MasterServer['worldServers'][number] = {
             url: serverUrl,
             client: client,
-            subWorldMap: publicSubWorldMap
+            subWorldMap: subWorldMap
         }
         this.worldServers.push(worldServer);
 
@@ -191,7 +189,8 @@ export class MasterServer {
             }
             // 没有合适的子世界，那么创建一个子世界
             else {
-                let retCreateSubWorld = await this.createSubWorld('公共子世界 ' + (this._nextSubWorldIndex++));
+                /*
+                let retCreateSubWorld = await this.createSubWorld('','default');
                 if (retCreateSubWorld.isSucc) {
                     matchingSubWorlds.push({
                         id: retCreateSubWorld.res.subWorldId,
@@ -205,6 +204,7 @@ export class MasterServer {
                         serverUrl: retCreateSubWorld.res.serverUrl,
                     })
                 }
+                */
             }
         }
 
@@ -215,7 +215,7 @@ export class MasterServer {
     // 10000 以下为系统保留.
     private _nextSubWorldId = 10000;
 
-    async createSubWorld(subWorldName: string): Promise<ApiReturn<ResCreateSubWorld>> {
+    async createSubWorld(subWorldName: string, subWorldConfigId: string): Promise<ApiReturn<ResCreateSubWorld>> {
         // 挑选一个人数最少的 WorldServer
         let worldServer = this.worldServers.filter(v => v.state).orderBy(v => v.state!.connNum)[0];
         if (!worldServer) {
@@ -227,7 +227,7 @@ export class MasterServer {
             adminToken: BackConfig.adminToken,
             subWorldName: subWorldName,
             subWorldId: '' + this._nextSubWorldId++,
-            levelId: 'level-001',
+            subWorldConfigId: ''
         })
         if (!op.isSucc) {
             return { isSucc: false, err: new TsrpcError(op.err) };

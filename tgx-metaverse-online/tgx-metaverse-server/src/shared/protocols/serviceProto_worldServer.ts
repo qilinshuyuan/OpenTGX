@@ -2,14 +2,14 @@ import { ServiceProto } from 'tsrpc-proto';
 import { MsgUpdateSubWorldState } from './worldServer/admin/MsgUpdateSubWorldState';
 import { ReqAuth, ResAuth } from './worldServer/admin/PtlAuth';
 import { ReqCreateSubWorld, ResCreateSubWorld } from './worldServer/admin/PtlCreateSubWorld';
-import { MsgUserState } from './worldServer/clientMsg/MsgUserState';
+import { MsgUserState } from './worldServer/c2sMsg/MsgUserState';
 import { ReqExitSubWorld, ResExitSubWorld } from './worldServer/PtlExitSubWorld';
 import { ReqJoinSubWorld, ResJoinSubWorld } from './worldServer/PtlJoinSubWorld';
 import { ReqSendChat, ResSendChat } from './worldServer/PtlSendChat';
-import { MsgChat } from './worldServer/serverMsg/MsgChat';
-import { MsgUserExit } from './worldServer/serverMsg/MsgUserExit';
-import { MsgUserJoin } from './worldServer/serverMsg/MsgUserJoin';
-import { MsgUserStates } from './worldServer/serverMsg/MsgUserStates';
+import { MsgChat } from './worldServer/s2cMsg/MsgChat';
+import { MsgUserExit } from './worldServer/s2cMsg/MsgUserExit';
+import { MsgUserJoin } from './worldServer/s2cMsg/MsgUserJoin';
+import { MsgUserStates } from './worldServer/s2cMsg/MsgUserStates';
 
 export interface ServiceType {
     api: {
@@ -36,16 +36,16 @@ export interface ServiceType {
     },
     msg: {
         "admin/UpdateSubWorldState": MsgUpdateSubWorldState,
-        "clientMsg/UserState": MsgUserState,
-        "serverMsg/Chat": MsgChat,
-        "serverMsg/UserExit": MsgUserExit,
-        "serverMsg/UserJoin": MsgUserJoin,
-        "serverMsg/UserStates": MsgUserStates
+        "c2sMsg/UserState": MsgUserState,
+        "s2cMsg/Chat": MsgChat,
+        "s2cMsg/UserExit": MsgUserExit,
+        "s2cMsg/UserJoin": MsgUserJoin,
+        "s2cMsg/UserStates": MsgUserStates
     }
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 6,
+    "version": 10,
     "services": [
         {
             "id": 13,
@@ -70,7 +70,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
         },
         {
             "id": 3,
-            "name": "clientMsg/UserState",
+            "name": "c2sMsg/UserState",
             "type": "msg"
         },
         {
@@ -93,22 +93,22 @@ export const serviceProto: ServiceProto<ServiceType> = {
         },
         {
             "id": 7,
-            "name": "serverMsg/Chat",
+            "name": "s2cMsg/Chat",
             "type": "msg"
         },
         {
             "id": 8,
-            "name": "serverMsg/UserExit",
+            "name": "s2cMsg/UserExit",
             "type": "msg"
         },
         {
             "id": 9,
-            "name": "serverMsg/UserJoin",
+            "name": "s2cMsg/UserJoin",
             "type": "msg"
         },
         {
             "id": 10,
-            "name": "serverMsg/UserStates",
+            "name": "s2cMsg/UserStates",
             "type": "msg"
         }
     ],
@@ -233,8 +233,8 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 3,
-                    "name": "levelId",
+                    "id": 6,
+                    "name": "subWorldConfigId",
                     "type": {
                         "type": "String"
                     }
@@ -253,7 +253,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "clientMsg/MsgUserState/MsgUserState": {
+        "c2sMsg/MsgUserState/MsgUserState": {
             "target": {
                 "type": "Reference",
                 "target": "../../types/SubWorldUserState/SubWorldUserState"
@@ -536,13 +536,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 2,
-                    "name": "levelId",
-                    "type": {
-                        "type": "String"
-                    }
-                },
-                {
                     "id": 3,
                     "name": "maxUser",
                     "type": {
@@ -594,36 +587,6 @@ export const serviceProto: ServiceProto<ServiceType> = {
                             ]
                         }
                     }
-                },
-                {
-                    "id": 9,
-                    "name": "isPublic",
-                    "type": {
-                        "type": "Boolean"
-                    }
-                },
-                {
-                    "id": 6,
-                    "name": "lastEmptyTime",
-                    "type": {
-                        "type": "Number"
-                    },
-                    "optional": true
-                },
-                {
-                    "id": 7,
-                    "name": "startMatchTime",
-                    "type": {
-                        "type": "Number"
-                    },
-                    "optional": true
-                },
-                {
-                    "id": 8,
-                    "name": "updateTime",
-                    "type": {
-                        "type": "Number"
-                    }
                 }
             ]
         },
@@ -660,7 +623,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "serverMsg/MsgChat/MsgChat": {
+        "s2cMsg/MsgChat/MsgChat": {
             "type": "Interface",
             "properties": [
                 {
@@ -687,7 +650,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "serverMsg/MsgUserExit/MsgUserExit": {
+        "s2cMsg/MsgUserExit/MsgUserExit": {
             "type": "Interface",
             "properties": [
                 {
@@ -707,7 +670,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "serverMsg/MsgUserJoin/MsgUserJoin": {
+        "s2cMsg/MsgUserJoin/MsgUserJoin": {
             "type": "Interface",
             "properties": [
                 {
@@ -760,7 +723,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 }
             ]
         },
-        "serverMsg/MsgUserStates/MsgUserStates": {
+        "s2cMsg/MsgUserStates/MsgUserStates": {
             "type": "Interface",
             "properties": [
                 {

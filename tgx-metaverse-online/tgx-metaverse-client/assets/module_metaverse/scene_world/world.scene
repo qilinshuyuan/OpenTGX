@@ -368,9 +368,9 @@
       "z": 0
     },
     "zoomSensitivity": 1,
-    "lenMin": 1,
-    "lenMax": 10,
-    "len": 5,
+    "lenMin": 5,
+    "lenMax": 15,
+    "len": 10,
     "rotateVHSeparately": false,
     "tweenTime": 0.2,
     "_id": "c1Puv9wXZHvrkHcV09gjLc"
@@ -575,10 +575,6 @@
     },
     "prefabPlayer": {
       "__uuid__": "196b4802-0153-43b4-a6bf-69cc56e5c414",
-      "__expectedType__": "cc.Prefab"
-    },
-    "prefabPlayerName": {
-      "__uuid__": "a8e1f408-3840-4650-8a71-444e119f48c2",
       "__expectedType__": "cc.Prefab"
     },
     "_id": "8an9DzEadI8rfRv15js5ww"

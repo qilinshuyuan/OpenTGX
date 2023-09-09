@@ -4,7 +4,7 @@ export interface ReqCreateSubWorld {
     adminToken: string,
     subWorldId:string,
     subWorldName: string,
-    levelId:string,
+    subWorldConfigId:string,
 }
 
 export interface ResCreateSubWorld {

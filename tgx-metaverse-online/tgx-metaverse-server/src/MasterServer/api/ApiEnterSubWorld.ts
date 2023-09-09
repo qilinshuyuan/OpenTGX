@@ -18,13 +18,17 @@ export async function ApiEnterSubWorld(call: ApiCall<ReqEnterSubWorld, ResEnterS
         return;
     }
 
+    let worldServer = worldServers[0];
+
     let uid = info.uid;
-    let url = worldServers[0].url;
+    let url = worldServer.url;
     let time = Math.floor(Date.now() / 1000);
 
-    let token = TokenUtils.genWorldServerLoginToken(uid, url, time);
+    let token = TokenUtils.genWorldServerLoginToken(uid, url, req.subWorldId, time);
 
-    UserDB.updateUserData(info.token,{subWorldId:req.subWorldId});
+    UserDB.updateUserData(info.token, { subWorldId: req.subWorldId });
 
-    call.succ({ worldServerUrl: url, token: token, time: time });
+    let subWorldConfigId = worldServer.subWorldMap.get(req.subWorldId)?.subWorldConfigId || '';
+    
+    call.succ({ subWorldId: req.subWorldId, subWorldConfigId: subWorldConfigId, worldServerUrl: url, token: token, time: time });
 }

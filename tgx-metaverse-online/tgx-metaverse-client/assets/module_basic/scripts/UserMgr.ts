@@ -1,4 +1,8 @@
+import { tgxUIWaiting, tgxUIAlert } from "../../core_tgx/tgx";
 import { NetUtil } from "../../module_metaverse/scripts/models/NetUtil";
+import { ModuleDef } from "../../scripts/ModuleDef";
+import { SceneUtil, SceneDef } from "../../scripts/SceneDef";
+import { SubWorldConfig } from "../shared/SubWorldConfig";
 
 export class UserMgr {
     private static _inst: UserMgr;
@@ -11,7 +15,7 @@ export class UserMgr {
 
     private _token: string;
 
-    private _uid:string;
+    private _uid: string;
     private _name: string;
     private _visualId: number;
     private _subWorldId: string;
@@ -20,7 +24,7 @@ export class UserMgr {
         return this._token;
     }
 
-    public get uid():string{
+    public get uid(): string {
         return this._uid;
     }
 
@@ -55,5 +59,29 @@ export class UserMgr {
             this._visualId = ret.res.visualId;
         }
         return ret;
+    }
+
+    async doEnterSubWorld(subWorldId: string) {
+        tgxUIWaiting.show('进入世界');
+        let ret = await NetUtil.callApiFromLobby('EnterSubWorld', { token: UserMgr.inst.token, subWorldId: subWorldId }, { timeout: 10000 });
+        tgxUIWaiting.hide();
+
+        if (ret.isSucc) {
+            tgxUIWaiting.show('进入世界');
+            //有名字，则进入对应场景，如果没有对应场景，则进入默认场景
+            let config = SubWorldConfig.getSubWorldConfig(subWorldId);
+            if (!config) {
+                tgxUIWaiting.show('未找到子世界配置');
+                return;
+            }
+            let sceneInfo = { name: config.scene, bundle: ModuleDef.METAVERSE };
+            SceneUtil.loadScene(sceneInfo, {
+                ...ret.res,
+                uid: UserMgr.inst.uid
+            });
+        }
+        else {
+            tgxUIAlert.show(ret.err.message);
+        }
     }
 }

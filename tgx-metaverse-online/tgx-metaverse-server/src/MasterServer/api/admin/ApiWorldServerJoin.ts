@@ -9,6 +9,6 @@ export async function ApiWorldServerJoin(call: ApiCall<ReqWorldServerJoin, ResWo
         return call.error('非法操作');
     }
 
-    await masterServer.joinWorldServer(call.req.serverUrl,call.req.publicSubWorldList);
+    await masterServer.joinWorldServer(call.req.serverUrl,call.req.subWorldList);
     call.succ({});
 }

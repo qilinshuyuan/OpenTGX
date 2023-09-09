@@ -2,12 +2,12 @@
   "ver": "1.1.45",
   "importer": "prefab",
   "imported": true,
-  "uuid": "b019de5a-7dfa-4bec-9c23-d657f32cf608",
+  "uuid": "d8beef6d-69b6-436c-a0ed-365046115e0d",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "SubWorldListItem"
+    "syncNodeName": "level-chengdu"
   }
 }

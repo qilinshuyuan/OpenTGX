@@ -15,12 +15,12 @@ let defaultUserInfo: UserInfo = {
 export async function ApiJoinSubWorld(call: ApiCall<ReqJoinSubWorld, ResJoinSubWorld>) {
 
     let req = call.req;
-    let serverToken = TokenUtils.genWorldServerLoginToken(req.uid,worldServer.options.thisServerUrl,req.time);
-    if(serverToken != req.token){
+    let serverToken = TokenUtils.genWorldServerLoginToken(req.uid, worldServer.options.thisServerUrl, req.subWorldId, req.time);
+    if (serverToken != req.token) {
         return call.error('AUTH_FAILED');
     }
     // Login
-    const currentUser = await worldServer.getUserInfoFromMaster(call.req.uid) || defaultUserInfo;
+    const currentUser = await worldServer.getUserInfoFromMaster(req.uid) || defaultUserInfo;
 
     const userColor = {
         r: Math.random() * 256 | 0,
@@ -30,7 +30,7 @@ export async function ApiJoinSubWorld(call: ApiCall<ReqJoinSubWorld, ResJoinSubW
     const conn = call.conn as WorldServerConn;
     conn.currentUser = currentUser;
 
-    let subWorld = worldServer.id2SubWorld.get(call.req.subWorldId);
+    let subWorld = worldServer.id2SubWorld.get(req.subWorldId);
     if (!subWorld) {
         return call.error('子世界不存在', { code: 'SUB_WORLD_NOT_EXISTS' });
     }
@@ -70,17 +70,17 @@ export async function ApiJoinSubWorld(call: ApiCall<ReqJoinSubWorld, ResJoinSubW
     }
     conn.currentSubWorld = subWorld;
     subWorld.listenMsgs(conn);
-    subWorld.data.lastEmptyTime = undefined;
-    subWorld.data.updateTime = Date.now();
+    subWorld.lastEmptyTime = undefined;
+    subWorld.updateTime = Date.now();
 
     call.succ({
         subWorldData: subWorld.data,
         currentUser: currentUser
     });
 
-    subWorld.broadcastMsg('serverMsg/UserJoin', {
+    subWorld.broadcastMsg('s2cMsg/UserJoin', {
         time: new Date,
         user: currentUser,
         color: userColor
-    })
+    });
 }

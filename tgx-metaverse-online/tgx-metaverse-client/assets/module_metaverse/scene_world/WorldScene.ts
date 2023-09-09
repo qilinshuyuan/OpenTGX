@@ -1,6 +1,6 @@
-import { Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
+import { AssetManager, assetManager, Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
 import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
-import { SceneUtil } from '../../scripts/SceneDef';
+import { SceneUtil, SubWorldSceneParams } from '../../scripts/SceneDef';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
 import { WorldMgr } from './WorldMgr';
 import { UIChat } from '../ui_chat/UIChat';
@@ -11,16 +11,8 @@ import { ResJoinSubWorld } from '../../module_basic/shared/protocols/worldServer
 import { SubWorldData } from '../../module_basic/shared/types/SubWorldData';
 import { SubWorldUserState } from '../../module_basic/shared/types/SubWorldUserState';
 import { UserInfo } from '../../module_basic/shared/types/UserInfo';
+import { SubWorldConfig } from '../../module_basic/shared/SubWorldConfig';
 const { ccclass, property } = _decorator;
-
-const q4_1 = new Quat;
-const v2_1 = new Vec2;
-
-export interface SubWorldSceneParams {
-    worldServerUrl: string,
-    token: string,
-    time: number,
-}
 
 @ccclass('SubWorldScene')
 export class SubWorldScene extends Component {
@@ -57,7 +49,7 @@ export class SubWorldScene extends Component {
 
             let curState = this.selfPlayer.aniState;
             if (curState == 'walking' || curState != this._playerLastState) {
-                WorldMgr.worldConn.sendMsg('clientMsg/UserState', {
+                WorldMgr.worldConn.sendMsg('c2sMsg/UserState', {
                     aniState: this.selfPlayer.aniState,
                     pos: this.selfPlayer.node.position,
                     rotation: this.selfPlayer.node.rotation
@@ -69,8 +61,8 @@ export class SubWorldScene extends Component {
         tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT, this.onMovement, this);
         tgxEasyController.on(tgxEasyControllerEvent.MOVEMENT_STOP, this.onMovmentStop, this);
 
-        tgxUIMgr.inst.showUI(UIChat);
         tgxUIMgr.inst.showUI(UIWorldHUD);
+        tgxUIMgr.inst.showUI(UIChat);
 
         director.getScene().on('event_player_action', (act: 'wave' | 'punch' | 'dance') => {
             this.onPlayerAction(act);
@@ -95,26 +87,36 @@ export class SubWorldScene extends Component {
     private _initClient() {
 
         WorldMgr.createWorldConnection(this.params.worldServerUrl);
+        WorldMgr.subWorldConfig = SubWorldConfig.getSubWorldConfig(this.params.subWorldConfigId);
 
-        WorldMgr.worldConn.listenMsg('serverMsg/Chat', v => {
+        let levelData = WorldMgr.subWorldConfig.levelData;
+        if(levelData && levelData.bundle && levelData.prefab){
+            assetManager.loadBundle(levelData.bundle,(err,bundle:AssetManager.Bundle)=>{
+                bundle.load(levelData.prefab,(err,prefab:Prefab)=>{
+                    director.getScene().addChild(instantiate(prefab));
+                });
+            });
+        }
+
+        WorldMgr.worldConn.listenMsg('s2cMsg/Chat', v => {
             let playerName = this.players.getChildByName(v.user.uid)?.getComponent(PlayerName);
             if (playerName) {
                 playerName.showChatMsg(v.content);
             }
         })
-        WorldMgr.worldConn.listenMsg('serverMsg/UserStates', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/UserStates', v => {
             for (let uid in v.userStates) {
                 this._updateUserState(v.userStates[uid]);
             }
             WorldMgr.playerNum = this.players.children.length;
         })
-        WorldMgr.worldConn.listenMsg('serverMsg/UserJoin', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/UserJoin', v => {
             this.subWorldData.users.push({
                 ...v.user
             });
             WorldMgr.playerNum = this.players.children.length;
         })
-        WorldMgr.worldConn.listenMsg('serverMsg/UserExit', v => {
+        WorldMgr.worldConn.listenMsg('s2cMsg/UserExit', v => {
             this.subWorldData.users.remove(v1 => v1.uid === v.user.uid);
             this.players.getChildByName(v.user.uid)?.removeFromParent();
             WorldMgr.playerNum = this.players.children.length;
@@ -143,7 +145,7 @@ export class SubWorldScene extends Component {
             token: this.params.token,
             uid: UserMgr.inst.uid,
             time: this.params.time,
-            subWorldId: UserMgr.inst.subWorldId,
+            subWorldId: this.params.subWorldId,
         });
         if (!retJoin.isSucc) {
             return { isSucc: false, errMsg: '加入房间失败: ' + retJoin.err.message };
@@ -187,6 +189,7 @@ export class SubWorldScene extends Component {
             // Set selfPlayer
             if (state.uid === this.currentUser.uid) {
                 this.selfPlayer = player;
+                this.selfPlayer.node['_isMyPlayer_'] = true;
                 this.followCamera.target = node.getChildByName('focusTarget')!;
             }
 
@@ -211,6 +214,11 @@ export class SubWorldScene extends Component {
     }
 
     onDestroy() {
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/Chat');
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/UserStates');
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/UserJoin');
+        WorldMgr.worldConn.unlistenMsgAll('s2cMsg/UserExit');
+        WorldMgr.worldConn.disconnect(3456,'normal');
         TweenSystem.instance.ActionManager.removeAllActionsByTag(99);
     }
 

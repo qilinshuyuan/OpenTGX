@@ -1,4 +1,4 @@
-import { _decorator, Node, EventTouch, Touch, Component, UITransform, Input, EventKeyboard, KeyCode, v2, Vec3, input, Scene, director, EventMouse, macro, view, screen } from 'cc';
+import { _decorator, Node, EventTouch, Touch, Component, UITransform, Input, EventKeyboard, KeyCode, v2, Vec3, input, Scene, director, EventMouse, macro, view, screen, isValid } from 'cc';
 import { EasyControllerEvent } from './EasyController';
 const { ccclass, property } = _decorator;
 
@@ -20,8 +20,8 @@ const { ccclass, property } = _decorator;
 @ccclass('tgxUI_Joystick')
 export class UI_Joystick extends Component {
 
-    private static _inst:UI_Joystick = null;
-    public static get inst():UI_Joystick{
+    private static _inst: UI_Joystick = null;
+    public static get inst(): UI_Joystick {
         return this._inst;
     }
 
@@ -76,7 +76,7 @@ export class UI_Joystick extends Component {
 
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
-        input.on(Input.EventType.MOUSE_WHEEL,this.onMouseWheel, this);
+        input.on(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
 
         this._scene = director.getScene();
     }
@@ -84,23 +84,24 @@ export class UI_Joystick extends Component {
     onDestroy() {
         input.off(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         input.off(Input.EventType.KEY_UP, this.onKeyUp, this);
-        input.off(Input.EventType.MOUSE_WHEEL,this.onMouseWheel, this);
+        input.off(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
+        this._scene = null;
 
         UI_Joystick._inst = null;
     }
 
-    bindKeyToButton(keyCode:KeyCode, btnName:string){
+    bindKeyToButton(keyCode: KeyCode, btnName: string) {
         this._key2buttonMap[keyCode] = btnName;
     }
 
-    setButtonVisible(btnName:string, visible:boolean){
+    setButtonVisible(btnName: string, visible: boolean) {
         let node = this._buttons?.getChildByName(btnName);
-        if(node){
+        if (node) {
             node.active = visible;
         }
     }
 
-    getButtonByName(btnName:string):Node{
+    getButtonByName(btnName: string): Node {
         return this._buttons.getChildByName(btnName);
     }
 
@@ -165,7 +166,7 @@ export class UI_Joystick extends Component {
                     degree += 360;
                 }
 
-                this._scene.emit(EasyControllerEvent.MOVEMENT, degree, len / radius);
+                this.emitEvent(EasyControllerEvent.MOVEMENT, degree, len / radius);
             }
         }
     }
@@ -175,7 +176,7 @@ export class UI_Joystick extends Component {
         for (let i = 0; i < touches.length; ++i) {
             let touch = touches[i];
             if (this._movementTouch && touch.getID() == this._movementTouch.getID()) {
-                this._scene.emit(EasyControllerEvent.MOVEMENT_STOP);
+                this.emitEvent(EasyControllerEvent.MOVEMENT_STOP);
                 this._movementTouch = null;
                 this._ctrlRoot.node.active = false;
             }
@@ -194,7 +195,7 @@ export class UI_Joystick extends Component {
         let dy = touchB.getLocationY() - touchB.getLocationY();
         return Math.sqrt(dx * dx + dy * dy);
     }
-    
+
     private onTouchStart_CameraCtrl(event: EventTouch) {
         let touches = event.getAllTouches();
         this._cameraTouchA = null;
@@ -236,7 +237,7 @@ export class UI_Joystick extends Component {
                 if (needZoom) {
                     let newDist = this.getDistOfTwoTouchPoints();
                     let delta = this._distanceOfTwoTouchPoint - newDist;
-                    this._scene.emit(EasyControllerEvent.CAMERA_ZOOM, delta);
+                    this.emitEvent(EasyControllerEvent.CAMERA_ZOOM, delta);
                     this._distanceOfTwoTouchPoint = newDist;
                 }
             }
@@ -245,7 +246,7 @@ export class UI_Joystick extends Component {
                 let dt = touch.getDelta();
                 let rx = dt.y * this._cameraSensitivity;
                 let ry = -dt.x * this._cameraSensitivity;
-                this._scene.emit(EasyControllerEvent.CAMERA_ROTATE, rx, ry);
+                this.emitEvent(EasyControllerEvent.CAMERA_ROTATE, rx, ry);
             }
         }
     }
@@ -284,10 +285,10 @@ export class UI_Joystick extends Component {
                 this.updateDirection();
             }
         }
-        else{
+        else {
             let btnName = this._key2buttonMap[keyCode];
-            if(btnName){
-                this._scene.emit(EasyControllerEvent.BUTTON,btnName);
+            if (btnName) {
+                this.emitEvent(EasyControllerEvent.BUTTON, btnName);
             }
         }
     }
@@ -303,15 +304,15 @@ export class UI_Joystick extends Component {
         }
     }
 
-    onMouseWheel(event:EventMouse){
+    onMouseWheel(event: EventMouse) {
         let delta = event.getScrollY() * 0.1;
-        console.log(delta);
-        this._scene.emit(EasyControllerEvent.CAMERA_ZOOM, delta);
+        //console.log(delta);
+        this.emitEvent(EasyControllerEvent.CAMERA_ZOOM, delta);
     }
 
-    onButtonSlot(event){
+    onButtonSlot(event) {
         let btnName = event.target.name;
-        this._scene.emit(EasyControllerEvent.BUTTON,btnName);
+        this.emitEvent(EasyControllerEvent.BUTTON, btnName);
     }
 
     private _key2dirMap = null;
@@ -339,10 +340,19 @@ export class UI_Joystick extends Component {
         let keyCode1 = this._keys[this._keys.length - 2] || 0;
         this._degree = this._key2dirMap[keyCode1 * 1000 + keyCode0];
         if (this._degree == null || this._degree < 0) {
-            this._scene.emit(EasyControllerEvent.MOVEMENT_STOP);
+            this.emitEvent(EasyControllerEvent.MOVEMENT_STOP);
         }
         else {
-            this._scene.emit(EasyControllerEvent.MOVEMENT, this._degree, 1.0);
+            this.emitEvent(EasyControllerEvent.MOVEMENT, this._degree, 1.0);
+        }
+    }
+
+    private emitEvent(type: string, arg0?: any, arg1?: any, arg2?: any, arg3?: any, arg4?: any) {
+        if (isValid(this._scene)) {
+            this._scene.emit(type, arg0, arg1, arg2, arg3, arg4);
+        }
+        else{
+            console.log('oops!');
         }
     }
 }

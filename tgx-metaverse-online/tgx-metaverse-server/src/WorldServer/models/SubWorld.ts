@@ -5,19 +5,40 @@ import { SubWorldData } from "../../shared/types/SubWorldData";
 import { SubWorldUserState } from "../../shared/types/SubWorldUserState";
 import { worldServer } from "../../WorldServerMain";
 import { WorldServerConn } from "../WorldServer";
+import { SubWorldConfigItem } from "../../shared/SubWorldConfig";
 
 export class SubWorld {
 
     data: SubWorldData;
+    //配置ID
+    config: SubWorldConfigItem;
+
     conns: WorldServerConn[] = [];
     userStates: {
         [uid: string]: SubWorldUserState
     } = {};
     logger: PrefixLogger;
 
-    constructor(data: SubWorldData) {
-        this.data = data;
+    /**
+     * 上一次空房的时间（undefined 代表房内有人）
+     * 用于定时解散无人的子世界
+     */
+    lastEmptyTime?: number;
 
+    /**
+     * 开始匹配的时间，`undefined` 代表不在匹配中
+     */
+    startMatchTime?: number;
+
+    /** 信息的最后更新时间 */
+    updateTime: number;
+
+    constructor(data: SubWorldData, config: SubWorldConfigItem) {
+        this.data = data;
+        this.config = config;
+        this.updateTime = Date.now();
+        this.startMatchTime = Date.now();
+        this.updateTime = Date.now();
         this.logger = new PrefixLogger({
             logger: worldServer.logger,
             prefixs: [`[SubWorld ${data.id}]`],
@@ -25,7 +46,7 @@ export class SubWorld {
 
         // 每 100ms 同步一次 UserState
         this._setInterval(() => {
-            this.broadcastMsg('serverMsg/UserStates', {
+            this.broadcastMsg('s2cMsg/UserStates', {
                 userStates: this.userStates
             })
         }, 100);
@@ -38,9 +59,9 @@ export class SubWorld {
             userNum: this.conns.length,
             maxUserNum: this.data.maxUser,
             /** 为 undefined 代表不在匹配中 */
-            startMatchTime: this.data.startMatchTime,
+            startMatchTime: this.startMatchTime,
             // 信息的最后更新时间
-            updateTime: this.data.updateTime
+            updateTime: this.updateTime
         }
     }
 
@@ -50,7 +71,7 @@ export class SubWorld {
     }
 
     listenMsgs(conn: WorldServerConn) {
-        conn.listenMsg('clientMsg/UserState', call => {
+        conn.listenMsg('c2sMsg/UserState', call => {
             const conn = call.conn as WorldServerConn;
             this.userStates[conn.currentUser.uid] = {
                 uid: conn.currentUser.uid,
@@ -59,7 +80,7 @@ export class SubWorld {
         })
     }
     unlistenMsgs(conn: WorldServerConn) {
-        conn.unlistenMsgAll('clientMsg/UserState');
+        conn.unlistenMsgAll('c2sMsg/UserState');
     }
 
     leave(conn: WorldServerConn) {
@@ -69,7 +90,7 @@ export class SubWorld {
         this.conns.removeOne(v => v === conn);
         this.data.users.removeOne(v => v.uid === currentUser.uid);
         delete this.userStates[currentUser.uid]
-        this.data.updateTime = Date.now();
+        this.updateTime = Date.now();
 
         if (conn) {
             conn.close();
@@ -77,14 +98,14 @@ export class SubWorld {
         }
 
         if (currentUser) {
-            this.broadcastMsg('serverMsg/UserExit', {
+            this.broadcastMsg('s2cMsg/UserExit', {
                 time: new Date,
                 user: currentUser!
             })
         }
 
         if (this.conns.length === 0) {
-            this.data.lastEmptyTime = Date.now();
+            this.lastEmptyTime = Date.now();
         }
     }
 

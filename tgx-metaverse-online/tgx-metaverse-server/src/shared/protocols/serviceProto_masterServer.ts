@@ -8,6 +8,7 @@ import { ReqListSubWorlds, ResListSubWorlds } from './masterServer/PtlListSubWor
 import { ReqLogin, ResLogin } from './masterServer/PtlLogin';
 import { ReqRegister, ResRegister } from './masterServer/PtlRegister';
 import { ReqStartMatch, ResStartMatch } from './masterServer/PtlStartMatch';
+import { MsgEnterSubWorld } from './masterServer/s2cMsg/MsgEnterSubWorld';
 
 export interface ServiceType {
     api: {
@@ -49,12 +50,12 @@ export interface ServiceType {
         }
     },
     msg: {
-
+        "s2cMsg/EnterSubWorld": MsgEnterSubWorld
     }
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 5,
+    "version": 9,
     "services": [
         {
             "id": 4,
@@ -77,7 +78,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "api"
         },
         {
-            "id": 6,
+            "id": 13,
             "name": "EnterSubWorld",
             "type": "api"
         },
@@ -100,6 +101,11 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "id": 3,
             "name": "StartMatch",
             "type": "api"
+        },
+        {
+            "id": 11,
+            "name": "s2cMsg/EnterSubWorld",
+            "type": "msg"
         }
     ],
     "types": {
@@ -187,12 +193,28 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     }
                 },
                 {
-                    "id": 2,
-                    "name": "publicSubWorldList",
+                    "id": 3,
+                    "name": "subWorldList",
                     "type": {
                         "type": "Array",
                         "elementType": {
-                            "type": "String"
+                            "type": "Interface",
+                            "properties": [
+                                {
+                                    "id": 0,
+                                    "name": "subWorldId",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                },
+                                {
+                                    "id": 1,
+                                    "name": "subWorldConfigId",
+                                    "type": {
+                                        "type": "String"
+                                    }
+                                }
+                            ]
                         }
                     }
                 }
@@ -255,6 +277,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "type": {
                         "type": "String"
                     }
+                },
+                {
+                    "id": 2,
+                    "name": "subWorldConfigId",
+                    "type": {
+                        "type": "String"
+                    }
                 }
             ]
         },
@@ -301,20 +330,34 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "properties": [
                 {
                     "id": 0,
-                    "name": "token",
+                    "name": "subWorldId",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
                     "id": 1,
+                    "name": "subWorldConfigId",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 3,
                     "name": "time",
                     "type": {
                         "type": "Number"
                     }
                 },
                 {
-                    "id": 2,
+                    "id": 4,
                     "name": "worldServerUrl",
                     "type": {
                         "type": "String"
@@ -478,6 +521,39 @@ export const serviceProto: ServiceProto<ServiceType> = {
                 {
                     "id": 2,
                     "name": "subWorldId",
+                    "type": {
+                        "type": "String"
+                    }
+                }
+            ]
+        },
+        "s2cMsg/MsgEnterSubWorld/MsgEnterSubWorld": {
+            "type": "Interface",
+            "properties": [
+                {
+                    "id": 0,
+                    "name": "subWorldId",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 1,
+                    "name": "token",
+                    "type": {
+                        "type": "String"
+                    }
+                },
+                {
+                    "id": 2,
+                    "name": "time",
+                    "type": {
+                        "type": "Number"
+                    }
+                },
+                {
+                    "id": 3,
+                    "name": "worldServerUrl",
                     "type": {
                         "type": "String"
                     }

@@ -14,9 +14,19 @@ export class SceneDef {
     public static WORLD = { name: 'world', bundle: ModuleDef.METAVERSE };
 }
 
+export interface SubWorldSceneParams {
+    uid: string,
+    subWorldId: string,
+    subWorldConfigId:string,
+    worldServerUrl: string,
+    token: string,
+    time: number,
+}
+
+
 export class SceneUtil {
-    static sceneParams: any;
-    static loadScene(scene: ISceneInfo, params?:any) {
+    static sceneParams: SubWorldSceneParams;
+    static loadScene(scene: ISceneInfo, params?: SubWorldSceneParams) {
         this.sceneParams = params;
         let bundle = assetManager.getBundle(scene.bundle);
         if (bundle) {
