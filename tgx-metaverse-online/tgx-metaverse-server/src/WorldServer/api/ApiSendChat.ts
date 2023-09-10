@@ -2,6 +2,8 @@ import { ApiCall } from "tsrpc";
 import { ReqSendChat, ResSendChat } from "../../shared/protocols/worldServer/PtlSendChat";
 import { WorldServerConn } from "../WorldServer";
 
+const MAX_CACHED_MESSAGES = 20;
+
 export async function ApiSendChat(call: ApiCall<ReqSendChat, ResSendChat>) {
     const conn = call.conn as WorldServerConn;
     const subWorld = conn.currentSubWorld;
@@ -14,7 +16,7 @@ export async function ApiSendChat(call: ApiCall<ReqSendChat, ResSendChat>) {
     };
 
     let len = subWorld.data.messages.push(msg);
-    if(len > 20){
+    if(len >= MAX_CACHED_MESSAGES){
         subWorld.data.messages.shift();
     }
 

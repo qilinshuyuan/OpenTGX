@@ -25,6 +25,14 @@ export class UIChat extends tgxUIController{
         layout.cbInputChatReturn = this.onInputChatReturn.bind(this);
 
         layout.cbBtnSendChat = this.onBtnSendChat.bind(this);
+
+        let messages = WorldMgr.subWorldData.messages;
+        if(messages && messages.length){
+            for(let i = 0; i < messages.length; ++i){
+                let msg = messages[i];
+                this._pushChatMsg(`<outline width=2><color=#00C113>${msg.user.name}</color> <color=#000000>${msg.content}</color></o>`);
+            }
+        }
     }
 
     protected onDispose(): void {

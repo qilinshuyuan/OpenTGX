@@ -1,27 +1,18 @@
 import { AssetManager, assetManager, Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
 import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
-import { SceneUtil, SubWorldSceneParams } from '../../scripts/SceneDef';
-import { UserMgr } from '../../module_basic/scripts/UserMgr';
+import { SceneUtil} from '../../scripts/SceneDef';
 import { WorldMgr } from './WorldMgr';
 import { UIChat } from '../ui_chat/UIChat';
 import { Player } from '../prefabs/Player/Player';
 import { PlayerName } from '../prefabs/PlayerName/PlayerName';
 import { UIWorldHUD } from '../ui_world_hud/UIWorldHUD';
-import { ResJoinSubWorld } from '../../module_basic/shared/protocols/worldServer/PtlJoinSubWorld';
-import { SubWorldData } from '../../module_basic/shared/types/SubWorldData';
 import { SubWorldUserState } from '../../module_basic/shared/types/SubWorldUserState';
-import { UserInfo } from '../../module_basic/shared/types/UserInfo';
-import { SubWorldConfig } from '../../module_basic/shared/SubWorldConfig';
 const { ccclass, property } = _decorator;
 
 @ccclass('SubWorldScene')
 export class SubWorldScene extends Component {
 
-    params!: SubWorldSceneParams;
     selfPlayer?: Player
-    currentUser?: UserInfo;
-    subWorldData!: SubWorldData;
-
     @property(Node)
     players!: Node;
     @property(tgxThirdPersonCameraCtrl)
@@ -32,14 +23,12 @@ export class SubWorldScene extends Component {
 
     private _playerLastState: string = '';
 
-    start() {
-        this.params = SceneUtil.sceneParams as SubWorldSceneParams;
-
+    async start() {
         // Init
         this._initClient();
 
         // 开始连接
-        this._ensureConnected();
+        await WorldMgr.ensureConnected();
 
         // 定时向服务器上报状态
         this.schedule(() => {
@@ -86,8 +75,7 @@ export class SubWorldScene extends Component {
 
     private _initClient() {
 
-        WorldMgr.createWorldConnection(this.params.worldServerUrl);
-        WorldMgr.subWorldConfig = SubWorldConfig.getSubWorldConfig(this.params.subWorldConfigId);
+        WorldMgr.createWorldConnection(SceneUtil.sceneParams);
 
         let levelData = WorldMgr.subWorldConfig.levelData;
         if(levelData && levelData.bundle && levelData.prefab){
@@ -111,50 +99,16 @@ export class SubWorldScene extends Component {
             WorldMgr.playerNum = this.players.children.length;
         })
         WorldMgr.worldConn.listenMsg('s2cMsg/UserJoin', v => {
-            this.subWorldData.users.push({
+            WorldMgr.subWorldData.users.push({
                 ...v.user
             });
             WorldMgr.playerNum = this.players.children.length;
         })
         WorldMgr.worldConn.listenMsg('s2cMsg/UserExit', v => {
-            this.subWorldData.users.remove(v1 => v1.uid === v.user.uid);
+            WorldMgr.subWorldData.users.remove(v1 => v1.uid === v.user.uid);
             this.players.getChildByName(v.user.uid)?.removeFromParent();
             WorldMgr.playerNum = this.players.children.length;
         });
-    }
-
-    private async _ensureConnected(): Promise<ResJoinSubWorld> {
-        let ret = await this._connect();
-        if (!ret.isSucc) {
-            tgxUIAlert.show(ret.errMsg).onClick(() => {
-                WorldMgr.backToLogin();
-            });
-            return new Promise(rs => { });
-        }
-        return ret.res;
-    }
-    private async _connect(): Promise<{ isSucc: boolean, res?: ResJoinSubWorld, errMsg?: string }> {
-        // Connect
-        let resConnect = await WorldMgr.worldConn.connect();
-        if (!resConnect.isSucc) {
-            return { isSucc: false, errMsg: '连接到服务器失败: ' + resConnect.errMsg };
-        }
-
-        // JoinSubWorld
-        let retJoin = await WorldMgr.worldConn.callApi('JoinSubWorld', {
-            token: this.params.token,
-            uid: UserMgr.inst.uid,
-            time: this.params.time,
-            subWorldId: this.params.subWorldId,
-        });
-        if (!retJoin.isSucc) {
-            return { isSucc: false, errMsg: '加入房间失败: ' + retJoin.err.message };
-        }
-
-        this.currentUser = retJoin.res.currentUser;
-        this.subWorldData = retJoin.res.subWorldData;
-
-        return { isSucc: true, res: retJoin.res };
     }
 
     onPlayerAction(state: 'wave' | 'punch' | 'dance') {
@@ -177,7 +131,7 @@ export class SubWorldScene extends Component {
             node.setRotation(state.rotation.x, state.rotation.y, state.rotation.z, state.rotation.w);
             const player = node.getComponent(Player)!;
             player.aniState = state.aniState;
-            let userInfo = this.subWorldData.users.find(v => v.uid === state.uid);
+            let userInfo = WorldMgr.subWorldData.users.find(v => v.uid === state.uid);
             if (userInfo) {
                 let color = new Color();
                 Color.fromUint32(color, userInfo.visualId);
@@ -187,7 +141,7 @@ export class SubWorldScene extends Component {
             player.lblName.string = userInfo?.name || '???';
 
             // Set selfPlayer
-            if (state.uid === this.currentUser.uid) {
+            if (state.uid === WorldMgr.currentUser.uid) {
                 this.selfPlayer = player;
                 this.selfPlayer.node['_isMyPlayer_'] = true;
                 this.followCamera.target = node.getChildByName('focusTarget')!;
@@ -197,7 +151,7 @@ export class SubWorldScene extends Component {
         }
 
         // 简单起见：自己以本地状态为主，不从服务端同步
-        if (state.uid === this.currentUser.uid) {
+        if (state.uid === WorldMgr.currentUser.uid) {
             return;
         }
 
