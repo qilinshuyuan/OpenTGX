@@ -24,7 +24,7 @@ OpenTGX: 根目录
   - 基于 OpenTGX 的 TypeScript 全栈多人在线元宇宙模板，联机元宇宙可从它开始。
   - 拥有公共子世界管理、私人子世界管理、聊天系统、角色状态同步等机制，能够很好地划分世界空间，实现项目内容。
   - 前端基于 tgx-core-cocos，能够快速处理各类问题并发布到各个平台。
-  - 后端基于 [tsrpc]()，一个便捷轻量的 NodeJS 服务器框架，由众多项目实践提炼而成，
+  - 后端基于 [tsrpc](https://tsrpc.cn/)，一个便捷轻量的 NodeJS 服务器框架，由众多项目实践提炼而成，
   - 多进程架构，可通过集群部署实现扩容，充分利用多核和多机能力。
   - 更多详情请参考文档 [tgx-metaverse-online](./tgx-metaverse-online.md)。
 - tgx-rpg3d-online - 即将上线
