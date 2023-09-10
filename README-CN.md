@@ -19,7 +19,9 @@
 
 根据你的自身需求，客户端和服务端可以分开使用。
 
-环境搭建和开发指南，请查看：[开发者文档](docs-cn/developer-guide.md)
+迫不及待想要尝试的朋友，可以参考文档 [快速开始](./docs-cn/quick-start.md)。
+
+相关了解整个 OpenTGX 技术细节和开发流程的朋友，请查看：[OpenTGX 开发者文档](docs-cn/developer-guide.md)。
 
 
 ## 项目模板/产品示例
