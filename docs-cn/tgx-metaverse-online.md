@@ -7,13 +7,13 @@ tgx-metaverse-online 是一个基于 OpenTGX 的 TypeScript 全栈多人在线�
 
 ## 环境配置与启动
 
-tgx-metaverse-online 基客户端基于 Cocos Creator，服务器基于 TSRPC，前后端编程语言统一为 TypeScript。
+tgx-metaverse-online 客户端基于 [Cocos Creator](https://www.cocos.com/)，服务端基于 [TSRPC](https://tsrpc.cn/)，前后端编程语言统一为 TypeScript。
 
 请先参考 [快速开始](./quick-start.md) 配置相关环境。
 
 ### 服务器配置与启动
 `tgx-metaverse-server` 目录下为服务端项目源码，完整的配置和启动流程如下：
-1. 进入 tgx-metaverse-server 目录，启动控制台
+1. 进入 `tgx-metaverse-server` 目录，启动控制台
 2. 执行 `npm install`，安装相关依赖
 3. 执行 `npm run dev:master` 启动主管服进程
 4. 在 `tgx-metaverse-server` 目录下启动一个新的控制台
@@ -46,15 +46,15 @@ tgx-metaverse-online 基客户端基于 Cocos Creator，服务器基于 TSRPC，
 相关命令请查看 `tgx-metaverse-server/pacakge.json` 中的　`scripts` 部分。
 
 ## 共享目录
-客户端与服务器共享的代码放在下面位置：
-- 服务器：tgx-metaverse-server/src/shared/
-- 客户端：tgx-metaverse-client/assets/module_basic/shared
+一些客户端与服务器需要共享的协议、代码和配置，均放在下面位置：
+- 服务器：`tgx-metaverse-server/src/shared/`
+- 客户端：`tgx-metaverse-client/assets/module_basic/shared/`
 
-客户端的代码是从服务器目录软链或者 copy 过来的，推荐使用软链(symlink)方式，这样两端都可以修改。
+客户端的 shared 是从服务器目录软链或者 copy 过来的。推荐使用软链(symlink)方式，这样两端都可以修改。
 
 修改完毕后，执行 `npm run sync` 即可完成同步。
 
-如果想要修改客户端shared目录位置或者同步方式，请前往：`tgx-metaverse-server/tsrpc.config.ts` 中的 `sync` 字段。
+如果想要修改客户端 shared 目录位置或者同步方式，请前往：`tgx-metaverse-server/tsrpc.config.ts` 中的 `sync` 字段。
 
 ## 服务器编码与编译
 如果服务器进程处于运行状态（在控制台中运行或者调试运行），当我们按下 `CTRL + S` 后，会自动执行 编译、同步、重启进程操作，很方便。
@@ -81,13 +81,12 @@ const thisServerUrl = process.env['THIS_SERVER_URL'] || ('ws://127.0.0.1:' + por
 ### 局域网访问
 如果需要局域网访问，比如用手机和其他机器一起调试。则所有 `127.0.0.1` 都需要改为对应机器的 IP。
 
-### 外网部署
-#### 直接访问
+### 外网直接访问
 直接访问的情况下，把所有 `127.0.0.1` 相关的改为 `0.0.0.0`。
-#### nginx 反向代理
+### nginx 反向代理
 如果需要 nginx 等反向代理（一般都需要的，方便配置安全策略和 wss,https），则不需要配置为 `0.0.0.0`，如果 nginx 在本机，就保持 `127.0.0.1`，如果 nginx 不在本机，则配置为局域网 IP 即可。
 
-## 服务器进阶
+## 服务端架构与子世界浅析
 
 ### 进程架构
 
