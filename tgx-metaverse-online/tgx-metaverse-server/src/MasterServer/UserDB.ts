@@ -2,7 +2,7 @@ import fs from 'fs';
 import crypto from 'crypto';
 import * as uuid from 'uuid';
 
-export interface UserInfoItem {
+export interface DBUserInfo {
     account?: string;
     password?: string;
     uid?: string;
@@ -80,7 +80,7 @@ export class UserDB {
         flushDB();
     }
 
-    public static updateUserData(account: string, info: UserInfoItem) {
+    public static updateUserData(account: string, info: DBUserInfo) {
         let dbData = this.getUserInfo(account);
         if (!dbData) {
             return;
@@ -114,7 +114,7 @@ export class UserDB {
         return userDBToken[token];
     }
 
-    public static updateUserDataByToken(token: string, info: UserInfoItem) {
+    public static updateUserDataByToken(token: string, info: DBUserInfo) {
         let userInfo = userDBToken[token];
         if (!userInfo) {
             return;
@@ -138,7 +138,7 @@ export class UserDB {
         return userDBUid[uid];
     }
 
-    public static updateUserDataByUid(uid: string, info: UserInfoItem) {
+    public static updateUserDataByUid(uid: string, info: DBUserInfo) {
         let userInfo = userDBUid[uid];
         if (!userInfo) {
             return;

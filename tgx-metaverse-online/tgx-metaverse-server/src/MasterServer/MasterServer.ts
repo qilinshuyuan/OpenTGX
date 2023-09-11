@@ -1,13 +1,15 @@
 import chalk from "chalk";
 import path from "path";
-import { ApiCallHttp, ApiReturn, ConnectionStatus, HttpServer, PrefixLogger, TsrpcError, WsClient } from "tsrpc";
+import { ApiCallHttp, ApiReturn, BaseConnection, ConnectionStatus, HttpServer, PrefixLogger, TsrpcError, WsClient } from "tsrpc";
 import { BackConfig } from "../models/BackConfig";
 import { useAdminToken } from "../models/flows/useAdminToken";
 import { ResCreateSubWorld } from "../shared/protocols/masterServer/PtlCreateSubWorld";
 import { ReqStartMatch, ResStartMatch } from "../shared/protocols/masterServer/PtlStartMatch";
 import { MsgUpdateSubWorldState } from "../shared/protocols/worldServer/admin/MsgUpdateSubWorldState";
-import { serviceProto } from "../shared/protocols/serviceProto_masterServer";
+import { serviceProto, ServiceType } from "../shared/protocols/serviceProto_masterServer";
 import { serviceProto as serviceProto_worldServer, ServiceType as ServiceType_World } from "../shared/protocols/serviceProto_worldServer";
+import { useSsoWs } from "../models/flows/useToken";
+import { DBUserInfo, UserDB } from "./UserDB";
 
 export interface MasterServerOptions {
     port: number
@@ -31,6 +33,7 @@ export class MasterServer {
     constructor(public readonly options: MasterServerOptions) {
         // Flows
         useAdminToken(this.server);
+        useSsoWs(this.server);
     }
 
     async init() {
@@ -243,3 +246,7 @@ export class MasterServer {
         }
     }
 }
+
+export type MasterServerConn = BaseConnection<ServiceType> & {
+    userInfo: DBUserInfo;
+};
