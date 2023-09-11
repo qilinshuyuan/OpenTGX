@@ -1,8 +1,8 @@
 import { tgxUIWaiting, tgxUIAlert } from "../../core_tgx/tgx";
-import { NetUtil } from "../../module_metaverse/scripts/models/NetUtil";
 import { ModuleDef } from "../../scripts/ModuleDef";
 import { SceneUtil, SceneDef } from "../../scripts/SceneDef";
 import { SubWorldConfig } from "../shared/SubWorldConfig";
+import { NetUtil } from "./NetUtil";
 
 export class UserMgr {
     private static _inst: UserMgr;

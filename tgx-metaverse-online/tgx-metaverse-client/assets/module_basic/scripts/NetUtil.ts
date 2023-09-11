@@ -1,8 +1,8 @@
 import { WECHAT } from 'cc/env';
 import { ApiReturn, HttpClientTransportOptions, HttpClient as HttpClient_Browser, TsrpcError, WsClient as WsClient_Browser } from 'tsrpc-browser';
 import { HttpClient as HttpClient_Miniapp, WsClient as WsClient_Miniapp } from 'tsrpc-miniapp';
-import { ServiceType, serviceProto as serviceProto_master } from '../../../module_basic/shared/protocols/serviceProto_masterServer';
-import { serviceProto as serviceProto_world, ServiceType as ServiceType_World } from '../../../module_basic/shared/protocols/serviceProto_worldServer';
+import { ServiceType, serviceProto as serviceProto_master } from '../shared/protocols/serviceProto_masterServer';
+import { serviceProto as serviceProto_world, ServiceType as ServiceType_World } from '../shared/protocols/serviceProto_worldServer';
 import { FrontConfig } from './FrontConfig';
 
 /** 网络请求相关 */

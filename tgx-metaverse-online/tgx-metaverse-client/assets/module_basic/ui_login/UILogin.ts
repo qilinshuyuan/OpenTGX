@@ -5,7 +5,6 @@ import { UserMgr } from "../scripts/UserMgr";
 import { UIRegister } from "../ui_register/UIRegister";
 import { Layout_UILogin } from "./Layout_UILogin";
 import { SceneDef, SceneUtil } from "../../scripts/SceneDef";
-import { NetUtil } from "../../module_metaverse/scripts/models/NetUtil";
 
 export class UILogin extends tgxUIController {
     constructor() {

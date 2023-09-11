@@ -1,8 +1,8 @@
 import { _decorator, Component, Node } from 'cc';
 import { tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
 import { UILogin } from '../ui_login/UILogin';
-import { NetUtil } from '../../module_metaverse/scripts/models/NetUtil';
 import { SceneUtil, SceneDef } from '../../scripts/SceneDef';
+import { NetUtil } from '../scripts/NetUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('LoginScene')

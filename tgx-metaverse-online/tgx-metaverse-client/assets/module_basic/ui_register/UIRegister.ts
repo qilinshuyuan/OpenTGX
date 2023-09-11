@@ -1,8 +1,8 @@
 
 import { UIMgr } from "../../core_tgx/easy_ui_framework/UIMgr";
 import { tgxUIAlert, tgxUIController, tgxUIMgr, tgxUIWaiting } from "../../core_tgx/tgx";
-import { NetUtil } from "../../module_metaverse/scripts/models/NetUtil";
 import { GameUILayers } from "../../scripts/GameUILayers";
+import { NetUtil } from "../scripts/NetUtil";
 import { UILogin } from "../ui_login/UILogin";
 import { Layout_UIRegister } from "./Layout_UIRegister";
 

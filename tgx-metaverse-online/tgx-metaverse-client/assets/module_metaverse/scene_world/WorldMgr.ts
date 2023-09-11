@@ -1,13 +1,13 @@
 import { WsClient } from "tsrpc-browser";
 import { tgxUIAlert } from "../../core_tgx/tgx";
 import { SceneDef, SceneUtil, SubWorldSceneParams } from "../../scripts/SceneDef";
-import { NetUtil } from "../scripts/models/NetUtil";
 import { ServiceType } from "../../module_basic/shared/protocols/serviceProto_worldServer";
 import { SubWorldConfig, SubWorldConfigItem } from "../../module_basic/shared/SubWorldConfig";
 import { SubWorldData } from "../../module_basic/shared/types/SubWorldData";
 import { UserInfo } from "../../module_basic/shared/types/UserInfo";
 import { UserMgr } from "../../module_basic/scripts/UserMgr";
 import { ResJoinSubWorld } from "../../module_basic/shared/protocols/worldServer/PtlJoinSubWorld";
+import { NetUtil } from "../../module_basic/scripts/NetUtil";
 
 let _worldConn: WsClient<ServiceType> = null;
 let _worldServerUrl = '';

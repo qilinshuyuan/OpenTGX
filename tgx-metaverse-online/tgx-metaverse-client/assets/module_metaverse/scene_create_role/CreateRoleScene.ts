@@ -1,8 +1,5 @@
 import { _decorator, Color, Component, EditBox, MeshRenderer, Node } from 'cc';
 import { UserMgr } from '../../module_basic/scripts/UserMgr';
-import { tgxUIAlert, tgxUIWaiting } from '../../core_tgx/tgx';
-import { SceneDef, SceneUtil } from '../../scripts/SceneDef';
-import { NetUtil } from '../scripts/models/NetUtil';
 const { ccclass, property } = _decorator;
 
 const LAST_NAMES = ['赵', '李', '张', '王', '姜', '刘', '孙', '吴', '上官', '欧阳', '百里', '武', '西门', '陈', '潘', '东方', '唐'];

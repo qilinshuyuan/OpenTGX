@@ -1,5 +1,5 @@
 import { Component, Node, Tween, Vec3, _decorator } from "cc";
-import { MathUtil } from '../models/MathUtil';
+import { MathUtil } from "../../../module_basic/scripts/MathUtil";
 const { ccclass, property } = _decorator;
 
 const v3_1 = new Vec3;
