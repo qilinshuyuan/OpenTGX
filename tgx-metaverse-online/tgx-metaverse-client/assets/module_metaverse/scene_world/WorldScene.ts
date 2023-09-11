@@ -1,4 +1,4 @@
-import { AssetManager, assetManager, Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator } from 'cc';
+import { AssetManager, assetManager, Color, Component, director, instantiate, Label, Node, Prefab, Quat, tween, TweenSystem, Vec2, _decorator, quat } from 'cc';
 import { tgxEasyController, tgxEasyControllerEvent, tgxThirdPersonCameraCtrl, tgxUIAlert, tgxUIMgr } from '../../core_tgx/tgx';
 import { SceneUtil} from '../../scripts/SceneDef';
 import { WorldMgr } from './WorldMgr';
@@ -8,6 +8,8 @@ import { PlayerName } from '../prefabs/PlayerName/PlayerName';
 import { UIWorldHUD } from '../ui_world_hud/UIWorldHUD';
 import { SubWorldUserState } from '../../module_basic/shared/types/SubWorldUserState';
 const { ccclass, property } = _decorator;
+
+const tmpQuat = quat();
 
 @ccclass('SubWorldScene')
 export class SubWorldScene extends Component {
@@ -158,11 +160,10 @@ export class SubWorldScene extends Component {
         // 插值其它 Player 的状态
         node.getComponent(Player)!.aniState = state.aniState;
         TweenSystem.instance.ActionManager.removeAllActionsFromTarget(node.position as any);
-        const startRot = node!.rotation.clone();
         tween(node.position).to(0.1, state.pos, {
             onUpdate: (v, ratio) => {
                 node!.position = node!.position;
-                node!.rotation = Quat.slerp(node!.rotation, startRot, state.rotation, ratio!)
+                node!.rotation = Quat.slerp(tmpQuat, node!.rotation, state.rotation, ratio!)
             }
         }).tag(99).start();
     }

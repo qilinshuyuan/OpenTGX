@@ -30,11 +30,20 @@
       "gfx-webgl2": {
         "_value": true
       },
+      "animation": {
+        "_value": true
+      },
+      "skeletal-animation": {
+        "_value": true
+      },
       "3d": {
         "_value": true
       },
       "2d": {
         "_value": true
+      },
+      "xr": {
+        "_value": false
       },
       "ui": {
         "_value": true
@@ -77,6 +86,15 @@
       "profiler": {
         "_value": true
       },
+      "occlusion-query": {
+        "_value": false
+      },
+      "geometry-renderer": {
+        "_value": false
+      },
+      "debug-renderer": {
+        "_value": false
+      },
       "particle-2d": {
         "_value": false
       },
@@ -92,8 +110,17 @@
       "tween": {
         "_value": true
       },
+      "websocket": {
+        "_value": true
+      },
+      "websocket-server": {
+        "_value": false
+      },
       "terrain": {
         "_value": false
+      },
+      "light-probe": {
+        "_value": true
       },
       "tiled-map": {
         "_value": false
@@ -107,11 +134,11 @@
       "marionette": {
         "_value": false
       },
-      "animation": {
-        "_value": true
+      "procedural-animation": {
+        "_value": false
       },
-      "skeletal-animation": {
-        "_value": true
+      "custom-pipeline": {
+        "_value": false
       }
     },
     "flags": {},

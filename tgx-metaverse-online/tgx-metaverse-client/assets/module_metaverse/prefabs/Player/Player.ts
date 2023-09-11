@@ -1,5 +1,5 @@
 
-import { Camera, Color, Component, Node, SkeletalAnimation, SkinnedMeshRenderer, Vec3, view, _decorator, Label } from 'cc';
+import { Camera, Color, Component, Node, SkeletalAnimation, SkinnedMeshRenderer, Vec3, view, _decorator, Label, RigidBody, v3 } from 'cc';
 import { PlayerName } from '../PlayerName/PlayerName';
 import { PlayerAniState } from '../../../module_basic/shared/types/SubWorldUserState';
 const { ccclass, property } = _decorator;

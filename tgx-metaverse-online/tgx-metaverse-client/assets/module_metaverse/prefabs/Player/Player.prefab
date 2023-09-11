@@ -2438,7 +2438,7 @@
     "_allowSleep": true,
     "_linearDamping": 0.1,
     "_angularDamping": 0.1,
-    "_useGravity": false,
+    "_useGravity": true,
     "_linearFactor": {
       "__type__": "cc.Vec3",
       "x": 1,
@@ -2469,7 +2469,10 @@
     "__prefab": {
       "__id__": 106
     },
-    "_material": null,
+    "_material": {
+      "__uuid__": "1081a5a7-f2c5-477d-84e4-fa89808386b1",
+      "__expectedType__": "cc.PhysicsMaterial"
+    },
     "_isTrigger": false,
     "_center": {
       "__type__": "cc.Vec3",
