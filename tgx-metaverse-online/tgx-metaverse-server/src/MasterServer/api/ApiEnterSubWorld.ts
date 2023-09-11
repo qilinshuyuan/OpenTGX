@@ -9,7 +9,6 @@ export async function ApiEnterSubWorld(call: ApiCall<ReqEnterSubWorld, ResEnterS
     let req = call.req;
     let info = (call.conn as MasterServerConn).userInfo;
 
-
     let worldServers = masterServer.getPublicSubWorldServers(req.subWorldId);
     if (!worldServers || !worldServers.length) {
         call.error('OUT_OF_SERVICE');
