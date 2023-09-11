@@ -42,7 +42,9 @@ export async function ApiJoinSubWorld(call: ApiCall<ReqJoinSubWorld, ResJoinSubW
     // 用户已经在本子世界中，可能是通过其它设备登录，踢出旧连接
     let existedConns = subWorld.conns.filter(v => v.currentUser!.uid === currentUser.uid);
     existedConns.forEach(v => {
-        subWorld!.leave(v)
+        subWorld!.leave(v);
+        v.currentSubWorld = undefined;
+        v.currentUser = undefined;
     });
     // 用户正在其它子世界中，从之前的子世界中退出
     if (conn.currentSubWorld) {

@@ -73,9 +73,11 @@ export class SubWorld {
     listenMsgs(conn: WorldServerConn) {
         conn.listenMsg('c2sMsg/UserState', call => {
             const conn = call.conn as WorldServerConn;
-            this.userStates[conn.currentUser.uid] = {
-                uid: conn.currentUser.uid,
-                ...call.msg
+            if(conn.currentUser){
+                this.userStates[conn.currentUser.uid] = {
+                    uid: conn.currentUser.uid,
+                    ...call.msg
+                }
             }
         })
     }
@@ -85,6 +87,9 @@ export class SubWorld {
 
     leave(conn: WorldServerConn) {
         const currentUser = conn.currentUser;
+        if(!currentUser){
+            return;
+        }
         this.logger.log('[UserLeave]', currentUser?.uid);
 
         this.conns.removeOne(v => v === conn);

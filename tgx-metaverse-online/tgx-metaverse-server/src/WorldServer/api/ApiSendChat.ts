@@ -9,6 +9,10 @@ export async function ApiSendChat(call: ApiCall<ReqSendChat, ResSendChat>) {
     const subWorld = conn.currentSubWorld;
     const currentUser = conn.currentUser;
 
+    if(!subWorld || !currentUser){
+        return undefined;
+    }
+
     let msg = {
         time: new Date,
         content: call.req.content,

@@ -12,6 +12,10 @@ export function useCleanConn(server: WsServer<any>) {
             conn.currentSubWorld.leave(conn);
         }
 
+        if(conn.currentUser){
+            conn.currentUser = undefined;
+        }
+
         // MasterServer 清空定时器
         if (conn.masterServer) {
             clearInterval(conn.masterServer.intervalSendState)

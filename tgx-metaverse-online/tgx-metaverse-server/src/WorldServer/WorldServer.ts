@@ -149,8 +149,8 @@ export class WorldServer {
 }
 
 export type WorldServerConn = WsConnection<ServiceType> & {
-    currentUser: UserInfo;
-    currentSubWorld: SubWorld;
+    currentUser?: UserInfo;
+    currentSubWorld?: SubWorld;
     masterServer?: {
         intervalSendState: ReturnType<typeof setInterval>;
     }
