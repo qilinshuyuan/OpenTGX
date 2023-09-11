@@ -57,6 +57,7 @@ export class UserMgr {
         if (ret.isSucc) {
             this._name = ret.res.name;
             this._visualId = ret.res.visualId;
+            this._subWorldId = ret.res.subWorldId;
         }
         return ret;
     }

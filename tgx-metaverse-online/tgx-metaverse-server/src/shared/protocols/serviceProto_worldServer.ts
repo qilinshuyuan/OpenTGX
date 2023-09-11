@@ -45,7 +45,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 10,
+    "version": 7,
     "services": [
         {
             "id": 13,
@@ -69,7 +69,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
             }
         },
         {
-            "id": 3,
+            "id": 16,
             "name": "c2sMsg/UserState",
             "type": "msg"
         },
@@ -92,22 +92,22 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "conf": {}
         },
         {
-            "id": 7,
+            "id": 17,
             "name": "s2cMsg/Chat",
             "type": "msg"
         },
         {
-            "id": 8,
+            "id": 18,
             "name": "s2cMsg/UserExit",
             "type": "msg"
         },
         {
-            "id": 9,
+            "id": 19,
             "name": "s2cMsg/UserJoin",
             "type": "msg"
         },
         {
-            "id": 10,
+            "id": 20,
             "name": "s2cMsg/UserStates",
             "type": "msg"
         }

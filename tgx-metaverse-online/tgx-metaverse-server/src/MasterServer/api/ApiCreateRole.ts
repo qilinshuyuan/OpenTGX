@@ -10,6 +10,7 @@ export async function ApiCreateRole(call: ApiCall<ReqCreateRole, ResCreateRole>)
         return;
     }
 
-    UserDB.updateUserDataByToken(req.token, { name: req.name, visualId: req.visualId, subWorldId: 'level-001' });
-    call.succ({ name: req.name, visualId: req.visualId });
+    let subWorldId = 'world-001';
+    UserDB.updateUserDataByToken(req.token, { name: req.name, visualId: req.visualId, subWorldId: subWorldId });
+    call.succ({ name: req.name, visualId: req.visualId, subWorldId:subWorldId });
 }

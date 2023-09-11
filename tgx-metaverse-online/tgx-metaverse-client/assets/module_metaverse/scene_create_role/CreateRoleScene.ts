@@ -38,21 +38,7 @@ export class CreateRoleScene extends Component {
         else if (ret.res.visualId) {
             //create role successfully, enter meta world
             //角色创建成功，进入场景
-            tgxUIWaiting.show('进入世界');
-            let ret = await NetUtil.callApiFromLobby('EnterSubWorld', { token: UserMgr.inst.token, subWorldId: UserMgr.inst.subWorldId }, { timeout: 10000 });
-            tgxUIWaiting.hide();
-
-            if (!ret.isSucc) {
-                return alert('服务不可用，稍后再试试吧~');
-            }
-
-            tgxUIWaiting.show('进入世界');
-            
-            SceneUtil.loadScene(SceneDef.WORLD, {
-                token:ret.res.token,
-                time:ret.res.time,
-                worldServerUrl:ret.res.worldServerUrl,
-            });
+            UserMgr.inst.doEnterSubWorld(ret.res.subWorldId);
         }
     }
 

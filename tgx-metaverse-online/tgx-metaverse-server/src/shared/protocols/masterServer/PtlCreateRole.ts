@@ -7,4 +7,5 @@ export interface ReqCreateRole {
 export interface ResCreateRole {
     name:string;
     visualId:number;
+    subWorldId:string;
 }

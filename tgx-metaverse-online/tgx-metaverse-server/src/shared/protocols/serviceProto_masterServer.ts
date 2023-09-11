@@ -55,7 +55,7 @@ export interface ServiceType {
 }
 
 export const serviceProto: ServiceProto<ServiceType> = {
-    "version": 9,
+    "version": 6,
     "services": [
         {
             "id": 4,
@@ -78,7 +78,7 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "api"
         },
         {
-            "id": 13,
+            "id": 6,
             "name": "EnterSubWorld",
             "type": "api"
         },
@@ -265,6 +265,13 @@ export const serviceProto: ServiceProto<ServiceType> = {
                     "type": {
                         "type": "Number"
                     }
+                },
+                {
+                    "id": 2,
+                    "name": "subWorldId",
+                    "type": {
+                        "type": "String"
+                    }
                 }
             ]
         },
@@ -329,35 +336,35 @@ export const serviceProto: ServiceProto<ServiceType> = {
             "type": "Interface",
             "properties": [
                 {
-                    "id": 0,
+                    "id": 3,
                     "name": "subWorldId",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
-                    "id": 1,
+                    "id": 4,
                     "name": "subWorldConfigId",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
-                    "id": 2,
+                    "id": 0,
                     "name": "token",
                     "type": {
                         "type": "String"
                     }
                 },
                 {
-                    "id": 3,
+                    "id": 1,
                     "name": "time",
                     "type": {
                         "type": "Number"
                     }
                 },
                 {
-                    "id": 4,
+                    "id": 2,
                     "name": "worldServerUrl",
                     "type": {
                         "type": "String"
