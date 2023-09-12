@@ -23,7 +23,6 @@
 
 相关了解整个 OpenTGX 技术细节和开发流程的朋友，请查看：[OpenTGX 开发者文档](docs-cn/developer-guide.md)。
 
-
 ## 项目模板/产品示例
 
 - [3D 跑酷 - Jare 大冒险](https://store.cocos.com/app/detail/4241)
