@@ -172,6 +172,14 @@ tgxUIAlert.show('你确定要继续吗？',true).onClick((isOK:boolean)=>{
 
 > 每调用一次 show 就会产生一个新的 UIAlert 实例。
 
+UIAlert 的基类定义在 [core_tgx/easy_ui_framework/alert](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-core-cocos/assets/core_tgx/easy_ui_framework/alert)  中，实现类由各游戏自行负责，请参考：[UIAlert_Impl](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-core-cocos/assets/module_basic/ui_alert)。
+
+1. 我们需要在项目中自行实现 Prefab 的编辑，并挂接 `tgxLayout_UIAlert`。
+2. 需要新建一个类（比如：`UIAlert_Impl` ）继承自 `tgxUIAlert` ，并在构造函数中指定 Prefab 的路径和相关参数。
+3. 需要使用 `tgxModuleContext.attachImplClass(tgxUIAlert, UIAlert_Impl);` 将 `tgxUIAlert` 的实现类指定为 `UIAlert_Impl`，这样 `tgxUIMgr` 在创建 UIAlert 的时候就会使用 `UIAlert_Impl` 类。
+
+`tgxModuleContext` 的内容请参考 [分包、模块与类](./tgx-core-module-class.md)。
+
 ## 锁屏等待（Waiting）
 
 有时候，我们需要锁定用户操作，或者等待某个操作完成。则需要用到锁屏等待功能。
@@ -187,5 +195,8 @@ tgxUIWaiting.show();
 ```ts
 tgxUIWaiting.hide();
 ```
+
+`tgxUIWaiting` 的实现方式请参考 `UIAlert_Impl` 进行 `UIWaiting_Impl` 的实现。
+
 
 更多细节，请参考项目：[tgx-core-cocos](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-core-cocos)。
