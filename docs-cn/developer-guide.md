@@ -25,35 +25,36 @@ OpenTGX 是一个基于 TypeScript 的全栈游戏开发技术方案。它基于
 
 ### 客户端
 
-- 分辨率适配
+- [自适应分辨率适配](./tgx-core-auto-resolution-policy.md)
   - 分辨率选择
   - 自动适配机制
-- UI
-  - UI 管理器
+- [UI 管理器](./tgx-core-ui-management.md)
+  - UI 分层
   - 常驻与场景切换
   - UILayout
   - UIController
   - 资源加载
   - 事件监听
-- 虚拟摇杆
+- [虚拟摇杆](./EasyController/EasyController.md)
   - 2D 虚拟摇杆
   - 3D 虚拟摇杆
   - 摄像机缩放与旋转控制
-- 音频管理器
+- [音频管理器](./tgx-core-audio-mgr.md)
   - 音乐播放
   - 音效播放
   - 非 resources 分包中的音乐播放
-- 摄像机组件
+- [摄像机组件](./tgx-core-camera-components.md)
   - 自由摄像机
   - 第三人称摄像机
   - 2D 跟随摄像机
   
 ## 服务器
 
-- 消息响应
-- 链接管理
+服务器基础架构采用开源免费的 TSRPC，请前往 [TSRPC 官网](https://tsrpc.cn/) 了解详情。
+
+- 主进程+世界进程架构
 - 用户管理
-- 房间/区域管理
+- 子世界/房间/区域管理
 
 ## 网络通信
 
