@@ -2,11 +2,11 @@
 
 ## About `OpenTGX`
 
-![](./open-tgx-logo-txt.png)
+![open-tgx-logo-txt.png](./open-tgx-logo-txt.png)
 
 `OpenTGX` is a free and open-source game development solution using typescript for both client and server sides.
 
-The biggest difference compared to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has a plenty of examples and cases to meet the project's requirements and solve problems.
+The biggest difference compared to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has plenty of examples and cases to meet the project's requirements and solve problems.
 
 - `Open` = open source and open-minded
 - `T` = TypeScript, both client and server are written by TS
@@ -15,8 +15,7 @@ The biggest difference compared to the other frameworks is that `OpenGTX` is not
 
 > Open is the attitude, T is the interacting interface, G is the technical basis, and X is the plan and objective.
 
-
-`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular js server-side programming platform).
+`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform).
 
 It targets to be a solution that can solve the daily development requirements and issues.
 
@@ -25,6 +24,7 @@ The client and server sides can be used separately, you can use only one of them
 The **Get Started** will come soon.
 
 ## Client-Side Features
+
 - **First Loading Time**、**Bundle Management**
 - **Module Management**、**UI Management**
 - **Network**、**Communication with Platform**
@@ -36,12 +36,15 @@ The **Get Started** will come soon.
 ## Contact Me
 
 Welcome to following my LinkedIn:
+
 - [https://www.linkedin.com/in/mrkylin/](https://www.linkedin.com/in/mrkylin/)
  
 So that you can message me directly and get the latest information about OpenTGX.
 
 ## Examples/Products
+
 Here are some examples and products based on OpenTGX, you can get them as references.
+
 - [Jare Adventure](https://store.cocos.com/app/en/detail/4241)
 - Billiards Girl-Coming soon
 - [Joystick - Tank Game 2D](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
@@ -49,12 +52,13 @@ Here are some examples and products based on OpenTGX, you can get them as refere
 > If you have examples and products based on KylinsToolkit and want to be listed here, please contact me.
 
 ## OpenTGX-Cocos-Client
-- `base`: some basic components, such as resolution fit, resource loading queue, audio play, input management, etc.
-- `easy_camera`: free camera, fps camera, third person camera, 2d following camera and so on.
-- `easy_controller`: virtual joysitck, supports 2D and 3D projects, buttons, and camera controllers.
-- `easy_ui_framework`: a simple MVVM style UI framework, that supports ui layer management, resouces load, events auto management, etc.
 
-## Why You Need It?
+- `base`: Some basic components, such as resolution fit, resource loading queue, audio play, input management, etc.
+- `easy_camera`: Free camera, fps camera, third person camera, 2D following camera and so on.
+- `easy_controller`: Virtual joysitck, supports 2D and 3D projects, buttons, and camera controllers.
+- `easy_ui_framework`: A simple MVVM style UI framework, that supports UI layer management, resouces load, events auto management, etc.
+
+## Why Do You Need It?
 
 After communicating with thousands of developers, I found many strong needs as below.
 
@@ -70,4 +74,4 @@ More and more components will be added in the future, such as networking, 2d gam
 
 From this, Mr Kylin(me) will work together with other developers based on `OpenTGX` to give you more projects, examples, and tutorials which we think can help you a lot.
 
-I hope more and more developers join us to make `OpenTGX` better. 
+I hope more and more developers join us to make `OpenTGX` better.
