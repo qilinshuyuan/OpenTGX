@@ -37,7 +37,11 @@ OpenTGX 是一个基于 TypeScript 的全栈游戏开发技术方案。它基于
   - 事件监听
   - UIAlert
   - UIWaiting
-  - [普通人不用看]跨分包加载界面
+- [分包与类](./tgx-core-module-class.md)
+  - 代码分包
+  - 模块标记
+  - 接口类与实现类
+  - 跨分包加载界面<普通人不用看>
 - [虚拟摇杆](./EasyController/EasyController.md)
   - 2D 虚拟摇杆
   - 3D 虚拟摇杆
@@ -50,10 +54,6 @@ OpenTGX 是一个基于 TypeScript 的全栈游戏开发技术方案。它基于
   - 自由摄像机
   - 第三人称摄像机
   - 2D 跟随摄像机
-- [分包与类](./tgx-core-module-class.md)
-  - 代码分包
-  - 模块标记
-  - 接口类与实现类
   
 ## 服务器
 
