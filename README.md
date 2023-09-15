@@ -1,4 +1,4 @@
-[中文](./README-CN.md) | *English
+[OpenTGX 中文文档](./README-CN.md)
 
 ## About `OpenTGX`
 

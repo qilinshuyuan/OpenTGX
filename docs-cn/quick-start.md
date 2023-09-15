@@ -11,29 +11,6 @@
 
 可以免费从 [https://store.cocos.com/app/en/detail/2787](https://github.com/MrKylinGithub/OpenTGX) 获取。
 
-## 目录介绍
-
-OpenTGX: 根目录
-
-- docs：文档
-- tgx-core-cocos
-  - OpenTGX 客户端内核框架，基于 Cocos Creator，单机项目可从它开始。
-  - 具备 UI 管理、虚拟摇杆、分辨率适配、资源加载管理、分包管理、效果管理等常见基础特性。
-  - 更多详情请参考文档 [tgx-core-cocos](./tgx-core-cocos.md)。
-- tgx-metaverse-online
-  - 基于 OpenTGX 的 TypeScript 全栈多人在线元宇宙模板，联机元宇宙可从它开始。
-  - 拥有公共子世界管理、私人子世界管理、聊天系统、角色状态同步等机制，能够很好地划分世界空间，实现项目内容。
-  - 前端基于 tgx-core-cocos，能够快速处理各类问题并发布到各个平台。
-  - 后端基于 [tsrpc](https://tsrpc.cn/)，一个便捷轻量的 NodeJS 服务器框架，由众多项目实践提炼而成，
-  - 多进程架构，可通过集群部署实现扩容，充分利用多核和多机能力。
-  - 更多详情请参考文档 [tgx-metaverse-online](./tgx-metaverse-online.md)。
-- tgx-rpg3d-online - 即将上线
-  - 基于 OpenTGX 的 TypeScript 全栈多人在线 RPG 3D 游戏模板，联机游戏可以从它开始。
-  - 前端基于 tgx-core-cocos，能够快速处理各类问题并发布到各个平台。
-  - 后端基于 [tsrpc](https://tsrpc.cn/)，一个便捷轻量的 NodeJS 服务器框架，由众多项目实践提炼而成，
-  - 多进程架构，可通过集群部署实现扩容，充分利用多核和多机能力。
-  - 更多详情请参考文档 [tgx-metaverse-online](./tgx-metaverse-online.md)。
-
 ## 客户端-环境搭建
 
 Cocos 引擎具备双内核（C++内核和Web3D内核）、跨平台、高性能、低功耗等诸多优点，因此 OpenTGX 使用了 Cocos 引擎作为游戏客户端技术支撑。
@@ -117,15 +94,21 @@ sync: [
 
 通过 `npm run sync` 可执行以上命名。完成 shared 目录的同步。
 
-
 > **注意**：
 ><br>1. 联机项目，请确保 shared 目录同步后，再打开 Cocos Creator。
 ><br>2. 如果出现 shared 目录识别不正常，可以重启 Cocos Creator。
 ><br>3. 如果 symlink 方式不支持，请将 symlink 修改为 copy，再执行 `npm run sync`
 
 ### 4. 启动进程
+
 配置完成后，进入 xxx-server 目录， 执行 `npm run dev:服务名` 即可启动对应服务。也可以通过 VSCODE 的调试进入。
 
 具体的进程名称和启动方式，请参考对应的项目说明。
 
 > 修改完代码后，按 CTRL + S，会触发自动编译、同步 shared 目录和重启进程。
+
+## 更多文档
+
+内置案例，请查看对应文档。
+
+更多开发文档，请查看：[OpenTGX 开发者文档](./developer-guide.md)。

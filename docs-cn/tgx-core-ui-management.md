@@ -198,5 +198,4 @@ tgxUIWaiting.hide();
 
 `tgxUIWaiting` 的实现方式请参考 `UIAlert_Impl` 进行 `UIWaiting_Impl` 的实现。
 
-
 更多细节，请参考项目：[tgx-core-cocos](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-core-cocos)。

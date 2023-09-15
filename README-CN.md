@@ -1,38 +1,24 @@
+
+# OpenTGX 开发者文档
+
 *中文 | [English](./README.md)
 
-# 关于 `OpenTGX`
+## 关于 `OpenTGX`
 
 ![open-tgx-logo-txt](./open-tgx-logo-txt.png)
 
 `OpenTGX` 是一个基于 TypeScript 的开源免费全栈游戏开发解决方案。
-
-与其他开源框架不同之处在于，它不是单纯的框架。而是依靠统一的基础框架和大量的模板案例来满足行业需求和解决项目问题。
 
 - `Open` = 开源、开放
 - `T` = TypeScript，此方案的前后端都使用 TS 语言编写
 - `G` = Game Development Technique, 游戏开发技术
 - `X` = 领靠众多的行业、项目、案例模板，满足多元化需求
 
->Open 是态度， T 是使用入口，G 是技术基础，X 是方案和目标
+>Open 是态度， T 是使用入口，G 是技术基础，X 是方案和目标。
 
-`OpenTGX` 能够加速客户端和服务器两端的开发速度。客户端基于 TypeScript + Cocos Creator (能够发布到几乎所有的主流平台)，服务端使用 TypeScript + NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 ).
+与其他开源框架不同之处在于，它不是单纯的框架。而是依靠统一的基础框架和大量的模板案例来满足行业需求和解决项目问题。
 
-根据你的自身需求，客户端和服务端可以分开使用。
-
-迫不及待想要尝试的朋友，可以参考文档 [快速开始](./docs-cn/quick-start.md)。
-
-相关了解整个 OpenTGX 技术细节和开发流程的朋友，请查看：[OpenTGX 开发者文档](docs-cn/developer-guide.md)。
-
-## 项目模板/产品示例
-
-- [3D 跑酷 - Jare 大冒险](https://store.cocos.com/app/detail/4241)
-- [3D 多人在线元宇宙模板](https://github.com/MrKylinGithub/OpenTGX/tree/main/tgx-metaverse-online)
-- 3D MMORPG 模板 - 即将上线
-- 桌球女孩-多人联机桌球游戏-即将上线
-- [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
-- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
-
-> 案例收集中，有基于 OpenTGX 开发的项目想要在此展示的，可以联系麒麟子。
+`OpenTGX` 能够加速客户端和服务器两端的开发速度。客户端基于 TypeScript + Cocos Creator (能够发布到几乎所有的主流平台)，服务端使用 TypeScript + NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 )。
 
 ## 客户端特性
 
@@ -46,11 +32,35 @@
 
 - 简单易用，不过度设计
 - TypeScript 编程，与客户端使用同样的编程语言
-- 链接管理、用户管理、房间管理、断线重连
+- 链接管理、用户管理、房间/场景/子世界管理、断线重连
+- 登录、注册、创角、聊天、数据同步、数据存储
 
-## 加入社群
+根据你的自身需求，客户端和服务端可以分开使用。
 
-### 微信讨论群
+迫不及待想要尝试的朋友，可以参考文档 [快速开始](./docs-cn/quick-start.md)。
+
+各个模块请参考 [OpenTGX 开发者文档](./docs-cn/developer-guide.md)。
+
+## 内置案例
+
+- `tgx-core-cocos`: 基于 Cocos 的客户端核心框架，解决了加载、分包、UI 管理、虚拟摇杆、常用摄像机等问题。单机项目可从这里开始：[tgx-core-cocos 文档](./docs-cn/tgx-core-cocos.md)。
+
+- `tgx-metaverse-online`：基于 tgx-core-cocos + TSRPC 的多人在线元宇宙案例。基于多进程分布式服务器集群，实现了登录、注册、聊天、多维子世界管理、多人同步、用户交互等特性。多人联机元宇宙项目可以从这里开始：[tgx-metaverse-online 文档](./docs-cn/tgx-metaverse-online.md)。
+
+- `tgx-rpg3d-online`：基于 tgx-core-cocos + TSRPC 的多人在线联机游戏案例。基于多进程分布式服务器集群，实现了登录、注册、聊天、场景管理、多人同步、战斗等特性。
+  >进行中...
+
+- [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
+- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
+
+## 外部项目模板/产品示例
+
+- [Jare 大冒险 - 3D 跑酷源码](https://store.cocos.com/app/detail/4241)
+- 桌球女孩-多人联机桌球游戏源码-即将上线
+
+> 案例收集中，有基于 OpenTGX 开发的项目想要在此展示的，可以联系麒麟子。
+
+## 微信讨论群
 
 群名：**OpenTGX|全栈游戏开发**
 
@@ -70,13 +80,6 @@
 - 每一滴干货都源自商业项目实践
 - 用技术资源赋能行业商机落地
 - 交个朋友，你不亏！
-
-## OpenTGX-Cocos-Client
-
-- `base`: 一些基础工具组件，如屏幕自动适配、资源加载队列、声音播放管理器、输入管理器等等。
-- `easy_camera`：漫游摄像机、FPS摄像机、第三人称摄像机、2D 跟随摄像机
-- `easy_controller`：虚拟摇杆（支持 2D 和 3D）、按键、摄像机控制器
-- `easy_ui_framework`：极简版的 MVVM 型的 UI 框架，与逻辑数据单向依赖。支持 UI 分层管理、UI 自动加载器、UI 事件托管 等等。
 
 ## 你为什么需要它？
 
