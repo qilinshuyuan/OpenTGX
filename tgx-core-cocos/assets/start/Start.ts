@@ -1,4 +1,4 @@
-import { _decorator, assetManager, Component, director, game, Label, Prefab, Node } from 'cc';
+import { _decorator, assetManager, Component, director, game, Label, Prefab, Node, AssetManager } from 'cc';
 import { tgxModuleContext, tgxUIMgr } from '../core_tgx/tgx';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 
@@ -6,15 +6,36 @@ import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
 const { ccclass, property } = _decorator;
 
+// ========== config begin =================
+//the first scene after preloading completes.
+const _FPS = 61;
+const _defaultModule = ModuleDef.BASIC;
+const _firstScene = SceneDef.MAIN_MENU;
 const _preloadBundles = [ModuleDef.BASIC];
+const _preloadScenes = [];
 
 const _preloadRes = [
     { bundle: ModuleDef.BASIC, url: 'ui_alert/UI_Alert', type: 'prefab' },
     { bundle: ModuleDef.BASIC, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
 ];
 
+// ========= config end =====================
+
+if(_preloadScenes.indexOf(_firstScene) == -1){
+    _preloadScenes.push(_firstScene);
+}
+
+for (let i = 0; i < _preloadScenes.length; ++i) {
+    let sceneInfo = _preloadScenes[i];
+    let idx = _preloadBundles.indexOf(sceneInfo.bundle);
+    if (idx == -1) {
+        _preloadBundles.push(sceneInfo.bundle);
+    }
+    _preloadRes.push({ bundle: sceneInfo.bundle, url: sceneInfo.name, type: 'scene' });
+}
+
 const _loadingText = ['Loading.', 'Loading..', 'Loading...'];
-const _totalNum = _preloadBundles.length + _preloadRes.length + 1;
+const _totalNum = _preloadBundles.length + _preloadRes.length;
 
 @ccclass('Start')
 export class Start extends Component {
@@ -30,9 +51,9 @@ export class Start extends Component {
     private _percent: string = '';
     private _numCurrentLoaded = 0;
     start() {
-        tgxModuleContext.setDefaultModule(ModuleDef.BASIC);
+        tgxModuleContext.setDefaultModule(_defaultModule);
 
-        game.frameRate = 61;
+        game.frameRate = _FPS;
         tgxUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
         this.preloadBundle(0);
@@ -75,15 +96,14 @@ export class Start extends Component {
             if (res.type == 'prefab') {
                 bundle.preload(res.url, Prefab, onComplete);
             }
+            else if (res.type == 'scene') {
+                bundle.preloadScene(res.url, onComplete);
+            }
         }
     }
 
     onPreloadingComplete() {
-        let bundle = assetManager.getBundle(ModuleDef.BASIC);
-        bundle.preloadScene(SceneDef.MAIN_MENU, () => {
-            this.onResLoaded();
-            director.loadScene(SceneDef.MAIN_MENU);
-        });
+        director.loadScene(_firstScene.name);
     }
 
     update(deltaTime: number) {
@@ -97,5 +117,3 @@ export class Start extends Component {
         this.loadingBar.setScale(this._numCurrentLoaded / _totalNum, 1, 1);
     }
 }
-
-

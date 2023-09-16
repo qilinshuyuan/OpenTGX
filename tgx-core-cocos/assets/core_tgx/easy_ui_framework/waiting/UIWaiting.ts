@@ -18,7 +18,7 @@ export class UIWaiting extends UIController {
         if (!_inst) {
             _inst = UIMgr.inst.showUI(UIWaiting);
         }
-        _inst._contentStr = contentStr;
+        _inst._contentStr = contentStr || 'Loading';
         return _inst;
     }
 

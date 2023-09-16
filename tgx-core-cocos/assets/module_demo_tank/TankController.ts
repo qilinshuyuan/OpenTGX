@@ -1,5 +1,6 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
-import { tgxCharacterMovement2D, tgxEasyController, tgxEasyControllerEvent } from '../core_tgx/tgx';
+import { tgxCharacterMovement2D, tgxEasyController, tgxEasyControllerEvent, tgxUIMgr } from '../core_tgx/tgx';
+import { UI_HUD } from '../module_basic/ui_hud/UI_HUD';
 import { TankBullet } from './TankBullet';
 import { TankGameAudioMgr } from './TankGameAudioMgr';
 
@@ -21,6 +22,9 @@ export class TankController extends Component {
     private _movement2d: tgxCharacterMovement2D;
 
     start() {
+        
+        tgxUIMgr.inst.showUI(UI_HUD);
+        
         tgxEasyController.on(tgxEasyControllerEvent.BUTTON, this.onButtonHit, this);
 
         this._movement2d = this.node.getComponent(tgxCharacterMovement2D);
