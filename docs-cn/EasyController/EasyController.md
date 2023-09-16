@@ -61,8 +61,6 @@ EasyController 可以看作是 EasyTouch、EasyJoystick、EasyCamera 的合体�
 - rotateVHSeparately 水平和竖直方向是否单独旋转，开启后，同一时间只会进行水平或者竖直旋转。
 - tweenTime 缓动时间 单位：秒
 
-3、
-
 ## 编程指南
 1、当用户操作虚拟摇杆时，会派发对应的事件，事件由 director.getScene() 派发。
 
