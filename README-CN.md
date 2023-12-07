@@ -18,6 +18,17 @@
 
 与其他开源框架不同之处在于，它不是单纯的框架。而是依靠统一的基础框架和大量的模板案例来满足行业需求和解决项目问题。
 
+如果通用解决方案不足以解决你的问题，可以直接访问行业解决方案：
+
+- [TGX-元宇宙](./docs-cn/tgx-metaverse-online.md)
+- [TGX-联机对战](https://store.cocos.com/app/detail/5504)
+![Alt text](./screenshots/tgx-vsgames.jpg)
+- [TGX-MMO 联系VX：qilinzi6666]()
+- [TGX-Moba 联系VX：qilinzi6666]()
+- [TGX-SLG 联系VX：qilinzi6666]()
+- [TGX-卡牌 联系VX：qilinzi6666]()
+
+
 `OpenTGX` 能够加速客户端和服务器两端的开发速度。客户端基于 TypeScript + Cocos Creator (能够发布到几乎所有的主流平台)，服务端使用 TypeScript + NodeJS ( 全世界最流行的 JS/TS 服务端程序开发平台 )。
 
 ## 客户端特性
