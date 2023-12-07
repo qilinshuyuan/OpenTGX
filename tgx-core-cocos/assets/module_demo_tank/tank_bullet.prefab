@@ -51,7 +51,7 @@
       "z": 1
     },
     "_mobility": 0,
-    "_layer": 33554432,
+    "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -101,7 +101,7 @@
       "z": 0.6
     },
     "_mobility": 0,
-    "_layer": 33554432,
+    "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -208,8 +208,8 @@
     "__prefab": {
       "__id__": 9
     },
-    "moveSpeed": 400,
-    "lifeTime": 1000,
+    "moveSpeed": 800,
+    "lifeTime": 750,
     "efx": {
       "__uuid__": "291dc41a-3013-4299-922c-00fbbda9ff3b",
       "__expectedType__": "cc.Prefab"

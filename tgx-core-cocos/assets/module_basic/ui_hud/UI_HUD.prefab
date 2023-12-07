@@ -238,7 +238,7 @@
     "_string": "Scenes",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
+    "_actualFontSize": 27.09375,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -638,7 +638,7 @@
     "_string": "Stats",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
+    "_actualFontSize": 27.09375,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1038,7 +1038,7 @@
     "_string": "About",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 20,
+    "_actualFontSize": 27.09375,
     "_fontSize": 20,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -1301,8 +1301,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": -242.48299999999995,
+      "x": -476.54,
+      "y": 323.327,
       "z": 0
     },
     "_lrot": {
@@ -1314,9 +1314,9 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 0.744,
+      "y": 0.744,
+      "z": 0.744
     },
     "_mobility": 0,
     "_layer": 33554432,
@@ -1413,13 +1413,13 @@
     "__prefab": {
       "__id__": 59
     },
-    "_alignFlags": 20,
+    "_alignFlags": 9,
     "_target": null,
-    "_left": 32.531999999999925,
+    "_left": 17.635999999999967,
     "_right": 0,
-    "_top": 602.483,
-    "_bottom": 84.51700000000005,
-    "_horizontalCenter": 0,
+    "_top": 12.120999999999981,
+    "_bottom": 658.775,
+    "_horizontalCenter": -476.54,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
     "_isAbsRight": true,
@@ -1428,7 +1428,7 @@
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
-    "_originalHeight": 0,
+    "_originalHeight": 66,
     "_alignMode": 2,
     "_lockFlags": 0,
     "_id": ""

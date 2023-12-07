@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab, Quat, v2 } from 'cc';
+import { _decorator, Component, find, instantiate, Node, Prefab, Quat, v2 } from 'cc';
 import { TankGameAudioMgr } from './TankGameAudioMgr';
 const { ccclass, property } = _decorator;
 
@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 export class TankBullet extends Component {
 
     @property
-    moveSpeed: number = 200;
+    moveSpeed: number = 400;
 
     @property
     lifeTime: number = 3000;
@@ -26,7 +26,7 @@ export class TankBullet extends Component {
     update(deltaTime: number) {
         if (this._lifeStart + this.lifeTime < Date.now()) {
             let efx = instantiate(this.efx);
-            this.node.parent.addChild(efx);
+            find('Canvas/objects/ground_effects').addChild(efx);
             efx.setWorldPosition(this.node.worldPosition);
             efx.setWorldRotation(this.node.worldRotation);
             TankGameAudioMgr.playOneShot('sounds/sfx_boom', 1.0);

@@ -49,7 +49,7 @@ export class TankController extends Component {
             //animation
             let oldPosX = this.barrel.position.x;
             tween(this.barrel).to(0.05, { position: v3(oldPosX - 10, 0, 0) })
-                .then(tween(this.barrel).to(0.2, { position: v3(oldPosX, 0, 0) })).call(() => {
+                .then(tween(this.barrel).to(0.1, { position: v3(oldPosX, 0, 0) })).call(() => {
                     this._isFiring = false;
                 })
                 .start();

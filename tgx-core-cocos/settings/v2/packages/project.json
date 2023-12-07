@@ -2,10 +2,14 @@
   "general": {
     "highQuality": true
   },
-  "__version__": "1.0.5",
+  "__version__": "1.0.6",
   "fbx": {
     "legacyFbxImporter": {
       "visible": true
     }
-  }
+  },
+  "script": {
+    "preserveSymlinks": true
+  },
+  "layer": []
 }
