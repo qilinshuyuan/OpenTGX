@@ -4,6 +4,7 @@ import { Layout_DemoList } from "./Layout_DemoList";
 import { ModuleDef } from "../../scripts/ModuleDef";
 import { UI_HUD } from "../ui_hud/UI_HUD";
 import { tgxUIController, tgxUIMgr, tgxUIWaiting } from "../../core_tgx/tgx";
+import { SceneDef, SceneUtil } from "../../scripts/SceneDef";
 
 const DemoList = [
     { bundle: ModuleDef.DEMO_TANK, entryScene: 'tank_game' },
@@ -34,14 +35,7 @@ export class UI_DemoList extends tgxUIController {
                     return;
                 }
                 tgxUIWaiting.show();
-                assetManager.loadBundle(info.bundle, (err, bundle: AssetManager.Bundle) => {
-                    if (bundle) {
-                        director.loadScene(info.entryScene, () => {
-                            tgxUIMgr.inst.hideAll();
-                            tgxUIMgr.inst.showUI(UI_HUD);
-                        });
-                    }
-                });
+                SceneUtil.loadScene({name:info.entryScene,bundle:info.bundle});
             }, this, DemoList[i]);
         }
     }

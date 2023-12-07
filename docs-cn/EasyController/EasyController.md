@@ -25,8 +25,8 @@ EasyController 可以看作是 EasyTouch、EasyJoystick、EasyCamera 的合体�
 
 4、当按下空格键时，可以触发角色的跳跃功能。
 
-### 添加角色控制器
-1、将 EasyController 目录下的 CharacterController 拖动给自己的角色。
+### 添加 3D 角色控制器
+1、将 EasyController 目录下的 CharacterMovement 拖动给自己的角色。
 
 2、如果角色要参与物理碰撞，请确保角色拥有碰撞器（Collider）组件和刚体（RigidBody）组件。
 
@@ -42,10 +42,16 @@ EasyController 可以看作是 EasyTouch、EasyJoystick、EasyCamera 的合体�
 - jumpLoopAnimationClip 跳跃循环动画
 - jumpLandAnimationClip 跳跃落地动画
 
-### 第三人称摄像机控制器
-1、将 ThirdPersionCamera 组件挂到需要控制的摄像机节点上，一般为 Main Camera，主摄像机
+### 添加 2D 角色控制器
+1、将 EasyController 目录下的 CharacterMovement2D 拖动给自己的角色。
+2、参数如下：
+- moveSpeed 移动速度
+- needRotation 是否需要旋转（顶视角，如坦克类游戏，就需要旋转），默认为 false
 
-2、ThirdPersionCamera 相关参数
+### 第三人称摄像机控制器
+1、将 ThirdPersonCameraCtrl 组件挂到需要控制的摄像机节点上，一般为 Main Camera，主摄像机
+
+2、ThirdPersonCameraCtrl 继承自 ThirdPersionCamera，相关参数如下：
 - target 需要跟随的目标，一般是角色节点
 - lookAtOffset 跟随目标点的偏移
 - zoomSensitivity 缩放灵敏度
@@ -63,7 +69,7 @@ EasyController 可以看作是 EasyTouch、EasyJoystick、EasyCamera 的合体�
 - EasyControllerEvent.MOVEMENT_STOP 停止移动
 - EasyControllerEvent.CAMERA_ROTATE 摄像机旋转
 - EasyControllerEvent.CAMERA_ZOOM 摄像机缩放
-- EasyControllerEvent.JUMP 跳
+- EasyControllerEvent.BUTTON 按钮事件
 
 3、在自己的脚本中，使用 director.getScene().on 监听相应事件。
 
