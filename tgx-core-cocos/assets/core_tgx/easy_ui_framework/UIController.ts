@@ -141,18 +141,18 @@ export class UIController extends AutoEventHandler {
      * @en hide and destroy all ui panel.
      * @zh 隐藏并销毁所有UI面板
      *  */
-    public static hideAll() {
+    public static closeAll() {
         while (this._controllers.length) {
-            this._controllers[0].hide();
+            this._controllers[0].close();
         }
     }
 
     //update all ui, called by UIMgr.
-    public static updateAll() {
+    public static updateAll(dt:number) {
         for (let i = 0; i < this._controllers.length; ++i) {
             let ctrl = this._controllers[i];
             if (ctrl.node && isValid(ctrl.node)) {
-                this._controllers[i].onUpdate();
+                this._controllers[i].onUpdate(dt);
             }
         }
     }
@@ -170,7 +170,7 @@ export class UIController extends AutoEventHandler {
         //check whether it has been destroyed, if has, hide it.
         //检查是否为已销毁，如果已销毁，则走销毁流程
         if(this._destroyed){
-            this.hide();
+            this.close();
         }
     }
 
@@ -178,7 +178,7 @@ export class UIController extends AutoEventHandler {
      * @en hide and destroy this ui panel.
      * @zh 隐藏并销毁此UI面板
      *  */
-    public hide() {
+    public close() {
         this._destroyed = true;
         if(!this.node){
             return;
@@ -398,5 +398,5 @@ export class UIController extends AutoEventHandler {
     //销毁
     protected onDispose() { }
     //
-    protected onUpdate() { }
+    protected onUpdate(dt?:number) { }
 }

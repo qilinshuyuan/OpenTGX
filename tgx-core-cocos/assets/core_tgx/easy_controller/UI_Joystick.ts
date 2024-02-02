@@ -28,7 +28,6 @@ export class UI_Joystick extends Component {
 
     private _ctrlRoot: UITransform = null;
     private _ctrlPointer: Node = null;
-    private _checkerCamera: UITransform = null;
     private _buttons: Node = null;
 
     private _cameraSensitivity: number = 0.1;
@@ -37,6 +36,8 @@ export class UI_Joystick extends Component {
     private _movementTouch: Touch = null;
     private _cameraTouchA: Touch = null;
     private _cameraTouchB: Touch = null;
+
+    private _fullscreen: UITransform = null;
 
     private _scene: Scene = null;
 
@@ -60,7 +61,7 @@ export class UI_Joystick extends Component {
         checkerMovement.node.on(Input.EventType.TOUCH_CANCEL, this.onTouchUp_Movement, this);
 
 
-        this._checkerCamera = checkerCamera;
+        this._fullscreen = this.node.getComponent(UITransform);
 
         this._ctrlRoot = this.node.getChildByName('ctrl').getComponent(UITransform);
         this._ctrlRoot.node.active = false;
@@ -116,8 +117,8 @@ export class UI_Joystick extends Component {
                 //because, the touch event use left bottom as zero point(0,0), ui node use the center of screen as zero point(0,0)
                 //this._ctrlRoot.setPosition(x - halfWidth, y - halfHeight, 0);
 
-                let halfWidth = this._checkerCamera.width / 2;
-                let halfHeight = this._checkerCamera.height / 2;
+                let halfWidth = this._fullscreen.width / 2;
+                let halfHeight = this._fullscreen.height / 2;
 
                 this._ctrlRoot.node.active = true;
                 this._ctrlRoot.node.setPosition(x - halfWidth, y - halfHeight, 0);
@@ -132,8 +133,8 @@ export class UI_Joystick extends Component {
         for (let i = 0; i < touches.length; ++i) {
             let touch = touches[i];
             if (this._movementTouch && touch.getID() == this._movementTouch.getID()) {
-                let halfWidth = this._checkerCamera.width / 2;
-                let halfHeight = this._checkerCamera.height / 2;
+                let halfWidth = this._fullscreen.width / 2;
+                let halfHeight = this._fullscreen.height / 2;
                 let x = touch.getUILocationX();
                 let y = touch.getUILocationY();
 

@@ -24,7 +24,7 @@ export class UIWaiting extends UIController {
 
     public static hide(): void {
         if (_inst) {
-            _inst.hide();
+            _inst.close();
             _inst = null;
         }
     }

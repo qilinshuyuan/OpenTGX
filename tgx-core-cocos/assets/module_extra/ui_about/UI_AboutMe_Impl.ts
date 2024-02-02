@@ -16,7 +16,7 @@ export class UI_AboutMe_Impl extends UI_AboutMe {
     protected onCreated(): void {
         let layout = this.layout as Layout_AboutMe;
         this.onButtonEvent(layout.btnClose, () => {
-            this.hide();
+            this.close();
         });
     }
 }

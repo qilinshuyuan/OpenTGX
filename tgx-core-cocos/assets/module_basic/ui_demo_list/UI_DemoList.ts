@@ -24,7 +24,7 @@ export class UI_DemoList extends tgxUIController {
         let layout = this.layout as Layout_DemoList;
         layout.btnClose.node.active = false;
         this.onButtonEvent(layout.btnClose, () => {
-            this.hide();
+            this.close();
         });
 
         for (let i = 0; i < layout.contentRoot.children.length; ++i) {

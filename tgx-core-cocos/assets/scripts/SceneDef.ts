@@ -22,14 +22,14 @@ export class SceneUtil {
         let bundle = assetManager.getBundle(scene.bundle);
         if (bundle) {
             director.loadScene(scene.name, () => {
-                tgxUIMgr.inst.hideAll();
+                tgxUIMgr.inst.closeAll();
             });
         }
         else {
             assetManager.loadBundle(scene.bundle, (err, bundle: AssetManager.Bundle) => {
                 if (bundle) {
                     director.loadScene(scene.name, () => {
-                        tgxUIMgr.inst.hideAll();
+                        tgxUIMgr.inst.closeAll();
                     });
                 }
             })

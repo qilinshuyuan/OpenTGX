@@ -7,12 +7,12 @@ const { ccclass, property } = _decorator;
 
 @ccclass('tgxUIMgr.UIUpdater')
 class UIUpdater extends Component {
-    update() {
-        UIController.updateAll();
+    update(dt:number) {
+        UIController.updateAll(dt);
     }
 }
 
-/**
+/** 
  * @en the `User Interface Manager`, handles some stuffs like the ui loads,ui layers,resizing etc.
  * @zh UI管理器，处理UI加载，层级，窗口变化等
  * 
@@ -100,8 +100,8 @@ export class UIMgr {
         return this._uiRoot.children[layerIndex] || this._uiRoot;
     }
 
-    public hideAll() {
-        UIController.hideAll();
+    public closeAll() {
+        UIController.closeAll();
     }
 
     public getUI<T extends UIController>(uiCls): T {
