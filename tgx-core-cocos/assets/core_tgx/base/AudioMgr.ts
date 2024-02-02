@@ -75,6 +75,7 @@ export class AudioMgr {
      */
     play(sound: AudioClip | string, volume: number = 1.0, bundleName:string = 'resources') {
         if (sound instanceof AudioClip) {
+            this._audioSource.stop();
             this._audioSource.clip = sound;
             this._audioSource.play();
             this.audioSource.volume = volume;
@@ -86,6 +87,7 @@ export class AudioMgr {
                     console.log(err);
                 }
                 else {
+                    this._audioSource.stop();
                     this._audioSource.clip = clip;
                     this._audioSource.play();
                     this.audioSource.volume = volume;
