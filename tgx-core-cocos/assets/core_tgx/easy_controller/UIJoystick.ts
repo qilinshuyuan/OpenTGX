@@ -17,11 +17,11 @@ const { ccclass, property } = _decorator;
  * multi-touch for camera zoom.
  *  */
 
-@ccclass('tgxUI_Joystick')
-export class UI_Joystick extends Component {
+@ccclass('tgxUIJoystick')
+export class UIJoystick extends Component {
 
-    private static _inst: UI_Joystick = null;
-    public static get inst(): UI_Joystick {
+    private static _inst: UIJoystick = null;
+    public static get inst(): UIJoystick {
         return this._inst;
     }
 
@@ -37,17 +37,19 @@ export class UI_Joystick extends Component {
     private _cameraTouchA: Touch = null;
     private _cameraTouchB: Touch = null;
 
-    private _fullscreen: UITransform = null;
-
+    private _fullscreen:UITransform = null;
     private _scene: Scene = null;
 
     private _key2buttonMap = {};
 
     protected onLoad(): void {
-        UI_Joystick._inst = this;
-    }
+        UIJoystick._inst = this;
+        this._key2buttonMap[KeyCode.KEY_J] = 'btn_slot_0';
+        this._key2buttonMap[KeyCode.KEY_K] = 'btn_slot_1';
+        this._key2buttonMap[KeyCode.KEY_L] = 'btn_slot_2';
+        this._key2buttonMap[KeyCode.KEY_U] = 'btn_slot_3';
+        this._key2buttonMap[KeyCode.KEY_I] = 'btn_slot_4';
 
-    start() {
         let checkerCamera = this.node.getChildByName('checker_camera').getComponent(UITransform);
         checkerCamera.node.on(Input.EventType.TOUCH_START, this.onTouchStart_CameraCtrl, this);
         checkerCamera.node.on(Input.EventType.TOUCH_MOVE, this.onTouchMove_CameraCtrl, this);
@@ -69,12 +71,6 @@ export class UI_Joystick extends Component {
 
         this._buttons = this.node.getChildByName('buttons');
 
-        this._key2buttonMap[KeyCode.KEY_J] = 'btn_slot_0';
-        this._key2buttonMap[KeyCode.KEY_K] = 'btn_slot_1';
-        this._key2buttonMap[KeyCode.KEY_L] = 'btn_slot_2';
-        this._key2buttonMap[KeyCode.KEY_U] = 'btn_slot_3';
-        this._key2buttonMap[KeyCode.KEY_I] = 'btn_slot_4';
-
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
         input.on(Input.EventType.KEY_UP, this.onKeyUp, this);
         input.on(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
@@ -88,7 +84,11 @@ export class UI_Joystick extends Component {
         input.off(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
         this._scene = null;
 
-        UI_Joystick._inst = null;
+        UIJoystick._inst = null;
+    }
+
+    cleanKeyMap() {
+        this._key2buttonMap = {};
     }
 
     bindKeyToButton(keyCode: KeyCode, btnName: string) {
@@ -198,6 +198,7 @@ export class UI_Joystick extends Component {
     }
 
     private onTouchStart_CameraCtrl(event: EventTouch) {
+        this.emitEvent(EasyControllerEvent.SCREEN_TOUCH_START, event);
         let touches = event.getAllTouches();
         this._cameraTouchA = null;
         this._cameraTouchB = null;
@@ -253,6 +254,7 @@ export class UI_Joystick extends Component {
     }
 
     private onTouchUp_CameraCtrl(event: EventTouch) {
+        this.emitEvent(EasyControllerEvent.SCREEN_TOUCH_END, event);
         let touches = event.getAllTouches();
         let hasTouchA = false;
         let hasTouchB = false;
@@ -352,7 +354,7 @@ export class UI_Joystick extends Component {
         if (isValid(this._scene)) {
             this._scene.emit(type, arg0, arg1, arg2, arg3, arg4);
         }
-        else{
+        else {
             console.log('oops!');
         }
     }

@@ -7177,7 +7177,21 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 1,
-    "_id": "e3AnthR3tNrKD+lGOfugd+"
+    "_id": "e3AnthR3tNrKD+lGOfugd+",
+    "_enableShadow": true,
+    "_shadowBlur": 4,
+    "_shadowOffset": {
+      "__type__": "cc.Vec2",
+      "x": 1,
+      "y": -1
+    },
+    "_shadowColor": {
+      "__type__": "cc.Color",
+      "r": 7,
+      "g": 2,
+      "b": 0,
+      "a": 255
+    }
   },
   {
     "__type__": "cc.LabelShadow",
@@ -7189,19 +7203,6 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 7,
-      "g": 2,
-      "b": 0,
-      "a": 255
-    },
-    "_offset": {
-      "__type__": "cc.Vec2",
-      "x": 1,
-      "y": -1
-    },
-    "_blur": 4,
     "_id": "3209BPLfJKyrJs6MbhABkt"
   },
   {

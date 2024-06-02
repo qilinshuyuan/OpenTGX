@@ -16,7 +16,7 @@ export class SafeJSON {
         try {
             return JSON.stringify(value, replacer, space);
         } catch (error) {
-            return null;
+            return '';
         }
     }
 }

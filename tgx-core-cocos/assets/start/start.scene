@@ -854,7 +854,16 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
-    "_id": "059MljtclJr4iE2mRgTzDb"
+    "_id": "059MljtclJr4iE2mRgTzDb",
+    "_enableOutline": true,
+    "_outlineWidth": 2,
+    "_outlineColor": {
+      "__type__": "cc.Color",
+      "r": 31,
+      "g": 6,
+      "b": 31,
+      "a": 255
+    }
   },
   {
     "__type__": "cc.Widget",
@@ -896,14 +905,6 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_color": {
-      "__type__": "cc.Color",
-      "r": 31,
-      "g": 6,
-      "b": 31,
-      "a": 255
-    },
-    "_width": 2,
     "_id": "86M9UpwHBMaoeUdkYsAbRb"
   },
   {

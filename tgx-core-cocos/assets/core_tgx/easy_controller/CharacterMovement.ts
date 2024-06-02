@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, v3, RigidBody, Vec3, find, Camera, SkeletalAnimation, AnimationClip, Collider, ICollisionEvent } from 'cc';
+import { _decorator, Component, Node, v3, RigidBody, Vec3, find, Camera, SkeletalAnimation,Animation, AnimationClip, Collider, ICollisionEvent } from 'cc';
 import { EasyController, EasyControllerEvent } from './EasyController';
 
 const { ccclass, property } = _decorator;
@@ -43,14 +43,14 @@ export class CharacterMovement extends Component {
     _isInTheAir: boolean = false;
     _currentVerticalVelocity: number = 0.0;
 
-    private _anim: SkeletalAnimation;
+    private _anim: Animation;
 
     start() {
         if (!this.mainCamera) {
             this.mainCamera = find('Main Camera')?.getComponent(Camera);
         }
         this._rigidBody = this.node.getComponent(RigidBody);
-        this._anim = this.node.getComponent(SkeletalAnimation);
+        this._anim = this.node.getComponent(Animation);
         if (this._anim) {
             let clipArr = [
                 this.idleAnimClip,

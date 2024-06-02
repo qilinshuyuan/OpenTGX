@@ -12,7 +12,7 @@ class UIUpdater extends Component {
     }
 }
 
-/** 
+/**
  * @en the `User Interface Manager`, handles some stuffs like the ui loads,ui layers,resizing etc.
  * @zh UI管理器，处理UI加载，层级，窗口变化等
  * 
@@ -133,7 +133,7 @@ export class UIMgr {
      * @param thisArg the this argument for param `cb`.
      * @returns the instance of `uiCls`
      *  */
-    public showUI(uiCls: any, cb?: Function, thisArg?: any): any {
+    public showUI(uiCls: any, cb?: Function, thisArg?: any, params?:any): any {
         let bundleName = ModuleContext.getClassModule(uiCls);
         if (bundleName) {
             let bundle = assetManager.getBundle(bundleName);
@@ -143,7 +143,7 @@ export class UIMgr {
                         console.log(err);
                     }
                     else {
-                        this.showUI(uiCls, cb, thisArg);
+                        this.showUI(uiCls, cb, thisArg,params);
                     }
                 });
                 return;
@@ -176,7 +176,7 @@ export class UIMgr {
 
                 let parent = UIMgr.inst.getLayerNode(ui.layer);
                 parent.addChild(node);
-                ui.setup(node);
+                ui.setup(node,params);
                 if (cb) {
                     cb.apply(thisArg, [ui]);
                 }

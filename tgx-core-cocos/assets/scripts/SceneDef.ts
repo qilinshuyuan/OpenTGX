@@ -1,5 +1,4 @@
 import { AssetManager, assetManager, director } from "cc";
-import { tgxUIMgr } from "../core_tgx/tgx";
 import { ModuleDef } from "./ModuleDef";
 
 export interface ISceneInfo {
@@ -22,14 +21,14 @@ export class SceneUtil {
         let bundle = assetManager.getBundle(scene.bundle);
         if (bundle) {
             director.loadScene(scene.name, () => {
-                tgxUIMgr.inst.closeAll();
+                tgx.UIMgr.inst.closeAll();
             });
         }
         else {
             assetManager.loadBundle(scene.bundle, (err, bundle: AssetManager.Bundle) => {
                 if (bundle) {
                     director.loadScene(scene.name, () => {
-                        tgxUIMgr.inst.closeAll();
+                        tgx.UIMgr.inst.closeAll();
                     });
                 }
             })

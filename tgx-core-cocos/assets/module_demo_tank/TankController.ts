@@ -1,5 +1,4 @@
 import { _decorator, Component, Node, v3, Vec3, Vec2, v2, Prefab, instantiate, tween } from 'cc';
-import { tgxCharacterMovement2D, tgxEasyController, tgxEasyControllerEvent, tgxUIMgr } from '../core_tgx/tgx';
 import { UI_HUD } from '../module_basic/ui_hud/UI_HUD';
 import { TankBullet } from './TankBullet';
 import { TankGameAudioMgr } from './TankGameAudioMgr';
@@ -19,15 +18,15 @@ export class TankController extends Component {
     @property(Node)
     barrel: Node;
 
-    private _movement2d: tgxCharacterMovement2D;
+    private _movement2d: tgx.CharacterMovement2D;
 
     start() {
         
-        tgxUIMgr.inst.showUI(UI_HUD);
+        tgx.UIMgr.inst.showUI(UI_HUD);
         
-        tgxEasyController.on(tgxEasyControllerEvent.BUTTON, this.onButtonHit, this);
+        tgx.EasyController.on(tgx.EasyControllerEvent.BUTTON, this.onButtonHit, this);
 
-        this._movement2d = this.node.getComponent(tgxCharacterMovement2D);
+        this._movement2d = this.node.getComponent(tgx.CharacterMovement2D);
     }
 
     private _isFiring = false;
@@ -57,7 +56,7 @@ export class TankController extends Component {
     }
 
     onDestroy() {
-        tgxEasyController.off(tgxEasyControllerEvent.BUTTON, this.onButtonHit, this);
+        tgx.EasyController.off(tgx.EasyControllerEvent.BUTTON, this.onButtonHit, this);
     }
 }
 

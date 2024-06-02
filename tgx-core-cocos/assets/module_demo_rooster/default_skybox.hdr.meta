@@ -1,5 +1,5 @@
 {
-  "ver": "1.0.26",
+  "ver": "1.0.27",
   "importer": "image",
   "imported": true,
   "uuid": "fe355a4b-b64f-4067-87a9-a5d1feec2392",
@@ -127,7 +127,6 @@
     "type": "texture cube",
     "isRGBE": true,
     "hasAlpha": true,
-    "redirect": "fe355a4b-b64f-4067-87a9-a5d1feec2392@b47c0",
     "fixAlphaTransparencyArtifacts": false
   }
 }

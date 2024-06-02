@@ -4,12 +4,17 @@ const PROP_IMPL_CLASS = '__impl__class__';
 
 let defaultModule = 'resources';
 
+
 export class ModuleContext {
     public static setDefaultModule(moduleName) {
         defaultModule = moduleName;
     }
 
-    public static attachModule(cls, moduleName) {
+    public static getDefaultModule(){
+        return defaultModule;
+    }
+
+    public static attachClassModule(cls, moduleName) {
         cls[PROP_MODULE] = moduleName;
     }
 

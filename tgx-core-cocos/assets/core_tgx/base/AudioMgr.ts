@@ -5,7 +5,7 @@ import { Node, AudioSource, AudioClip, resources, director, assetManager } from 
  * this is a sington class for audio play, can be easily called from anywhere in you project.
  * @zh
  * 这是一个用于播放音频的单件类，可以很方便地在项目的任何地方调用。
- */ 
+ */
 export class AudioMgr {
 
     private static _inst: AudioMgr;
@@ -17,6 +17,9 @@ export class AudioMgr {
     }
 
     private _audioSource: AudioSource;
+    private _musicVolume = 1.0;
+    private _musicVolumeScale = 1.0;
+    private _soundVolume = 1.0;
     constructor() {
         //@en create a node as audioMgr
         //@zh 创建一个节点作为 audioMgr
@@ -40,6 +43,15 @@ export class AudioMgr {
         return this._audioSource;
     }
 
+    public set musicVolume(v: number) {
+        this._musicVolume = v;
+        this._audioSource.volume = this._musicVolume * this._musicVolumeScale;
+    }
+
+    public set soundVolume(v: number) {
+        this._soundVolume = v;
+    }
+
     /**
      * @en
      * play short audio, such as strikes,explosions
@@ -48,9 +60,10 @@ export class AudioMgr {
      * @param sound clip or url for the audio
      * @param volume 
      */
-    playOneShot(sound: AudioClip | string, volume: number = 1.0, bundleName:string = 'resources') {
+    playOneShot(sound: AudioClip | string, volume: number = 1.0, bundleName: string = 'resources') {
         if (sound instanceof AudioClip) {
-            this._audioSource.playOneShot(sound, volume);
+            this._audioSource.volume = 1.0;
+            this._audioSource.playOneShot(sound, volume * this._soundVolume);
         }
         else {
             let bundle = assetManager.getBundle(bundleName);
@@ -59,7 +72,8 @@ export class AudioMgr {
                     console.log(err);
                 }
                 else {
-                    this._audioSource.playOneShot(clip, volume);
+                    this._audioSource.volume = 1.0;
+                    this._audioSource.playOneShot(clip, volume * this._soundVolume);
                 }
             });
         }
@@ -73,12 +87,13 @@ export class AudioMgr {
      * @param sound clip or url for the sound
      * @param volume 
      */
-    play(sound: AudioClip | string, volume: number = 1.0, bundleName:string = 'resources') {
+    play(sound: AudioClip | string, volume: number = 1.0, bundleName: string = 'resources') {
+        this._musicVolumeScale = volume;
         if (sound instanceof AudioClip) {
             this._audioSource.stop();
             this._audioSource.clip = sound;
             this._audioSource.play();
-            this.audioSource.volume = volume;
+            this.audioSource.volume = this._musicVolume * this._musicVolumeScale;
         }
         else {
             let bundle = assetManager.getBundle(bundleName);
@@ -90,7 +105,7 @@ export class AudioMgr {
                     this._audioSource.stop();
                     this._audioSource.clip = clip;
                     this._audioSource.play();
-                    this.audioSource.volume = volume;
+                    this.audioSource.volume = this._musicVolume * this._musicVolumeScale;
                 }
             });
         }
@@ -113,7 +128,7 @@ export class AudioMgr {
     /**
      * resume the audio play
      */
-    resume(){
+    resume() {
         this._audioSource.play();
     }
 }
