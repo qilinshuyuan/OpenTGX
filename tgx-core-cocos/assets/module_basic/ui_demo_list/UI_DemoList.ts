@@ -2,8 +2,6 @@ import { Button, assetManager, AssetManager, director } from "cc";
 import { GameUILayers } from "../../scripts/GameUILayers";
 import { Layout_DemoList } from "./Layout_DemoList";
 import { ModuleDef } from "../../scripts/ModuleDef";
-import { UI_HUD } from "../ui_hud/UI_HUD";
-import { tgxUIController, tgxUIMgr, tgxUIWaiting } from "../../core_tgx/tgx";
 import { SceneDef, SceneUtil } from "../../scripts/SceneDef";
 
 const DemoList = [
@@ -11,7 +9,7 @@ const DemoList = [
     { bundle: ModuleDef.DEMO_ROOSTER, entryScene: 'rooster_jump' },
 ];
 
-export class UI_DemoList extends tgxUIController {
+export class UI_DemoList extends tgx.UIController {
     constructor() {
         super('ui_demo_list/UI_DemoList', GameUILayers.POPUP, Layout_DemoList);
     }
@@ -34,7 +32,7 @@ export class UI_DemoList extends tgxUIController {
                 if (!info) {
                     return;
                 }
-                tgxUIWaiting.show();
+                tgx.UIWaiting.show();
                 SceneUtil.loadScene({name:info.entryScene,bundle:info.bundle});
             }, this, DemoList[i]);
         }

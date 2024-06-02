@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.12",
+  "ver": "2.3.13",
   "importer": "fbx",
   "imported": true,
   "uuid": "ef35630b-fbaf-43b2-ab69-409fabe89908",
@@ -70,7 +70,6 @@
         ]
       }
     ],
-    "redirect": "ef35630b-fbaf-43b2-ab69-409fabe89908@36e6a",
     "assetFinder": {
       "meshes": [],
       "skeletons": [],

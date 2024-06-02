@@ -1,5 +1,5 @@
 {
-  "ver": "2.3.12",
+  "ver": "2.3.13",
   "importer": "fbx",
   "imported": true,
   "uuid": "818afa8d-4f32-4b2f-8dd7-b09a3315ff50",
@@ -229,7 +229,6 @@
       }
     ],
     "legacyFbxImporter": false,
-    "redirect": "818afa8d-4f32-4b2f-8dd7-b09a3315ff50@64191",
     "assetFinder": {
       "meshes": [
         "818afa8d-4f32-4b2f-8dd7-b09a3315ff50@73ece",

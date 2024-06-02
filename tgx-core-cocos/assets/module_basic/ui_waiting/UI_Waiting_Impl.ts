@@ -1,11 +1,9 @@
-import { tgxUIWaiting, tgxLayout_UIWaiting, tgxModuleContext } from "../../core_tgx/tgx";
 import { GameUILayers } from "../../scripts/GameUILayers";
+import { ModuleDef } from "../../scripts/ModuleDef";
 
-
-export class UIWaiting_Impl extends tgxUIWaiting{
+@tgx_class(ModuleDef.BASIC,tgx.UIWaiting)
+export class UIWaiting_Impl extends tgx.UIWaiting{
     constructor(){
-        super('ui_waiting/UI_Waiting',GameUILayers.LOADING, tgxLayout_UIWaiting);
+        super('ui_waiting/UI_Waiting',GameUILayers.LOADING, tgx.Layout_UIWaiting);
     }
 }
-
-tgxModuleContext.attachImplClass(tgxUIWaiting, UIWaiting_Impl);

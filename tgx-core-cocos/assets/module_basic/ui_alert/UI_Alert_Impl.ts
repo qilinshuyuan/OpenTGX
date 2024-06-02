@@ -1,11 +1,9 @@
-
-import { tgxLayout_UIAlert, tgxModuleContext, tgxUIAlert } from "../../core_tgx/tgx";
 import { GameUILayers } from "../../scripts/GameUILayers";
+import { ModuleDef } from "../../scripts/ModuleDef";
 
-export class UIAlert_Impl extends tgxUIAlert {
+@tgx_class(ModuleDef.BASIC,tgx.UIAlert)
+export class UIAlert_Impl extends tgx.UIAlert {
     constructor() {
-        super('ui_alert/UI_Alert', GameUILayers.ALERT, tgxLayout_UIAlert);
+        super('ui_alert/UI_Alert', GameUILayers.ALERT, tgx.Layout_UIAlert);
     }
 }
-
-tgxModuleContext.attachImplClass(tgxUIAlert, UIAlert_Impl);

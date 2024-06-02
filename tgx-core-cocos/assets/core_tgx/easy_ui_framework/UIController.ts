@@ -1,4 +1,5 @@
-import { _decorator, game, Prefab, isValid, Button, find, EventHandler, Toggle, ToggleContainer, Node, SkeletalAnimation, Component, EventTouch } from "cc";
+import { _decorator, game, Prefab, isValid, Button, find, EventHandler, Toggle, ToggleContainer, Node, SkeletalAnimation, Component, EventTouch, Slider } from "cc";
+import { DoubleList, DoubleListItem } from "../base/DoubleList";
 const { ccclass, property } = _decorator;
 /***
  * @en internal class, used for handling node event.
@@ -31,9 +32,9 @@ export class __NodeEventAgent__ extends Component {
      * */
     onToggleEvent(toggle: Toggle, customEventData) {
         let checkEvents = toggle.checkEvents;
-        //if (toggle['_toggleContainer']) {
-        //    checkEvents = toggle['_toggleContainer'].checkEvents;
-        //}
+        if (toggle['_toggleContainer']) {
+            checkEvents = toggle['_toggleContainer'].checkEvents;
+        }
         for (let i = 0; i < checkEvents.length; ++i) {
             let h = checkEvents[i];
             if (h.customEventData == customEventData) {
@@ -45,39 +46,20 @@ export class __NodeEventAgent__ extends Component {
         }
     }
 
-}
-
-/**
- * @en manage event-handlers automatically, will remove all handlers when the ui destroyed.
- * @zh 自动管理事件，将在UI销毁时自动清理
+    /***
+ * @en recieve slide event and deliver them to the real handlers.
+ * @zh 接受 Slide 事件，并转发给真正的处理函数
  * */
-export class AutoEventHandler {
-    private _handlers = [];
-    on(event: string, cb: () => void, target?: any, once?: boolean) {
-        this._handlers.push({
-            event: event,
-            cb: cb,
-            target: target,
-            once: once
-        });
-        game.on(event, cb, target, once);
-    }
-
-    off(event: string, cb: () => void, target?: any, once?: boolean) {
-        game.off(event, cb, target);
-        for (let i = 0; i < this._handlers.length; ++i) {
-            let h = this._handlers[i];
-            if (h.event == event && h.cb == cb && h.target == target && h.once == once) {
-                this._handlers.splice(i, 1);
-                return;
+    onSlideEvent(slider: Slider, customEventData) {
+        let slideEvents = slider.slideEvents;
+        for (let i = 0; i < slideEvents.length; ++i) {
+            let h = slideEvents[i];
+            if (h.customEventData == customEventData) {
+                let cb = h['$cb$'];
+                let target = h['$target$']
+                let args = h['$args$'];
+                cb.apply(target, [slider, args]);
             }
-        }
-    }
-
-    dispose() {
-        for (let i = 0; i < this._handlers.length; ++i) {
-            let h = this._handlers[i];
-            game.off(h.event, h.cb, h.target);
         }
     }
 }
@@ -86,23 +68,25 @@ export class AutoEventHandler {
  * @en base class of UI Panel
  * @zh 各类UI面板基类
  * */
-export class UIController extends AutoEventHandler {
+export class UIController {
     private static _idBase = 1000;
 
-    private static _controllers: UIController[] = [];
+    private static _controllers: DoubleList = new DoubleList();
+    private _listItem:DoubleListItem = null;
     private _instId: number = 0;
     private _prefab: string | Prefab;
     private _layer: number;
     private _layout: any;
     protected node: Node;
-    private _destroyed:boolean = false;
+    protected _destroyed: boolean = false;
+    protected _ingoreCloseAll:boolean = false;
     constructor(prefab: string | Prefab, layer: number, layoutCls: any) {
-        super();
+     
         this._prefab = prefab;
         this._layer = layer;
         this._layout = layoutCls;
         this._instId = UIController._idBase++;
-        UIController._controllers.push(this);
+        this._listItem = UIController._controllers.addToTail(this);
     }
 
     /***
@@ -142,33 +126,35 @@ export class UIController extends AutoEventHandler {
      * @zh 隐藏并销毁所有UI面板
      *  */
     public static closeAll() {
-        while (this._controllers.length) {
-            this._controllers[0].close();
-        }
+        this._controllers.forEach(v=>{
+            let c = v.data as UIController;
+            if(!c._ingoreCloseAll){
+                c.close();
+            }
+        });
     }
 
     //update all ui, called by UIMgr.
-    public static updateAll(dt:number) {
-        for (let i = 0; i < this._controllers.length; ++i) {
-            let ctrl = this._controllers[i];
-            if (ctrl.node && isValid(ctrl.node)) {
-                this._controllers[i].onUpdate(dt);
+    public static updateAll(dt: number) {
+        this._controllers.forEach(v=>{
+            let c = v.data as UIController;
+            if(c.node && isValid(c.node)){
+                c.onUpdate(dt);
             }
-        }
+        });
     }
 
     //setup this ui,called by UIMgr.
-    public setup(node: Node) {
+    public setup(node: Node,params:any) {
         this.node = node;
+        
         if (this._layout) {
             this._layout = this.node.getComponent(this._layout);
         }
         //notify sub class to handle something.
         //节点创建完毕，调用子类的处理函数。
-        this.onCreated();
+        this.onCreated(params);
 
-        //check whether it has been destroyed, if has, hide it.
-        //检查是否为已销毁，如果已销毁，则走销毁流程
         if(this._destroyed){
             this.close();
         }
@@ -180,20 +166,14 @@ export class UIController extends AutoEventHandler {
      *  */
     public close() {
         this._destroyed = true;
-        if(!this.node){
-            return;
+        this._listItem?.dispose();
+        this._listItem = null;
+        if (this.node) {
+            this.node.removeFromParent();
+            this.onDispose();
+            this.node.destroy();
+            this.node = null;
         }
-        this.node.removeFromParent();
-        for (let i = 0; i < UIController._controllers.length; ++i) {
-            if (UIController._controllers[i] == this) {
-                UIController._controllers.splice(i, 1);
-                break;
-            }
-        }
-        this.dispose();
-        this.onDispose();
-        this.node.destroy();
-        this.node = null;
     }
 
     /**
@@ -385,6 +365,79 @@ export class UIController extends AutoEventHandler {
         }
     }
 
+
+    onSlideEvent(relativeNodePath: string | Node | Slider, cb: Function, target?: any, args?: any) {
+        let sliderNode: Node = null;
+        if (relativeNodePath instanceof Node) {
+            sliderNode = relativeNodePath;
+        }
+        else if (relativeNodePath instanceof Slider) {
+            sliderNode = relativeNodePath.node;
+        }
+        else {
+            sliderNode = find(relativeNodePath, this.node);
+        }
+
+        if (!sliderNode) {
+            return null;
+        }
+
+        //添加转发器
+        let agent = this.node.getComponent(__NodeEventAgent__);
+        if (!agent) {
+            agent = this.node.addComponent(__NodeEventAgent__);
+        }
+
+        let slider = sliderNode.getComponent(Slider);
+        let slideEvents = slider.slideEvents;
+        let handler = new EventHandler();
+        handler.target = this.node;
+        handler.component = 'tgxNodeEventAgent';
+        handler.handler = 'onSlideEvent';
+        handler.customEventData = '' + UIController._idBase++;
+
+        //附加额外信息 供事件转发使用
+        handler['$cb$'] = cb;
+        handler['$target$'] = target;
+        handler['$args$'] = args;
+
+        slideEvents.push(handler);
+        slider.slideEvents = slideEvents;
+    }
+
+    offSlideEvent(relativeNodePath: string | Node | Slider, cb: Function, target: any) {
+        let sliderNode: Node = null;
+        if (relativeNodePath instanceof Node) {
+            sliderNode = relativeNodePath;
+        }
+        else if (relativeNodePath instanceof Slider) {
+            sliderNode = relativeNodePath.node;
+        }
+        else {
+            sliderNode = find(relativeNodePath, this.node);
+        }
+
+        if (!sliderNode) {
+            return null;
+        }
+
+        //添加转发器
+        let agent = this.node.getComponent(__NodeEventAgent__);
+        if (!agent) {
+            return;
+        }
+        let slider = sliderNode.getComponent(Slider);
+        let slideEvents = slider.slideEvents;
+        for (let i = 0; i < slideEvents.length; ++i) {
+            let h = slideEvents[i];
+            if (h['$cb$'] == cb && h['$target$'] == target) {
+                slideEvents.splice(i, 1);
+                slider.slideEvents = slideEvents;
+                break;
+            }
+        }
+    }
+
     /***
      * @en the extra resource needed by this ui panel.the ui will not be created until these res loaded.
      * @zh 本UI使用的依赖资源.UI会等这些资源加载完成后才创建。
@@ -394,9 +447,9 @@ export class UIController extends AutoEventHandler {
     }
 
     //子类的所有操作，需要在这个函数之后。
-    protected onCreated() { }
+    protected onCreated(params?:any) { }
     //销毁
     protected onDispose() { }
     //
-    protected onUpdate(dt?:number) { }
+    protected onUpdate(dt: number) { }
 }

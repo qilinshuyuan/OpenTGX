@@ -1,11 +1,10 @@
 import { profiler } from "cc";
 import { Layout_UI_HUD } from "./Layout_HUD";
-import { tgxUIMgr, tgxUIController } from "../../core_tgx/tgx";
 import { GameUILayers } from "../../scripts/GameUILayers";
 import { UI_AboutMe } from "../../scripts/UIDef";
 import { UI_DemoList } from "../ui_demo_list/UI_DemoList";
 
-export class UI_HUD extends tgxUIController {
+export class UI_HUD extends tgx.UIController {
     constructor() {
         super('ui_hud/UI_HUD', GameUILayers.HUD, Layout_UI_HUD);
     }
@@ -23,7 +22,7 @@ export class UI_HUD extends tgxUIController {
         this.onButtonEvent(layout.btnToggleStats, this.onToggleStats, this);
 
         this.onButtonEvent(layout.btnAbout, () => {
-            tgxUIMgr.inst.showUI(UI_AboutMe);
+            tgx.UIMgr.inst.showUI(UI_AboutMe);
         });
     }
 
@@ -37,7 +36,7 @@ export class UI_HUD extends tgxUIController {
     }
 
     onSceneChange() {
-        tgxUIMgr.inst.showUI(UI_DemoList, (ui: UI_DemoList) => {
+        tgx.UIMgr.inst.showUI(UI_DemoList, (ui: UI_DemoList) => {
             ui.showCloseBtn();
         });
     }

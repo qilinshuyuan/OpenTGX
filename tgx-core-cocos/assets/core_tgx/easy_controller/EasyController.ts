@@ -29,6 +29,16 @@ export class EasyControllerEvent{
      * @param buttonName: string, indicates which button is pressed. 
      */
     public static BUTTON:string = 'EasyControllerEvent.BUTTON';
+
+    /**
+     * Dispatched when screen is touched.
+     */
+    public static SCREEN_TOUCH_START:string = 'EasyControllerEvent.SCREEN_TOUCH_START';
+
+    /**
+     * Dispatched when screen is touched end.
+     */
+    public static SCREEN_TOUCH_END:string = 'EasyControllerEvent.SCREEN_TOUCH_END';
 }
 
 export class EasyController{

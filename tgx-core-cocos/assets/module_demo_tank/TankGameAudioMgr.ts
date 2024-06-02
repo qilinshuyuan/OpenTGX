@@ -1,5 +1,4 @@
 import { _decorator, assetManager, AudioClip, Component, Node } from 'cc';
-import { tgxAudioMgr } from '../core_tgx/tgx';
 import { ModuleDef } from '../scripts/ModuleDef';
 
 const BundleName = ModuleDef.DEMO_TANK;
@@ -14,7 +13,7 @@ export class TankGameAudioMgr {
   * @param volume 
   */
     public static playOneShot(sound: AudioClip | string, volume: number = 1.0) {
-        tgxAudioMgr.inst.playOneShot(sound, volume, BundleName);
+        tgx.AudioMgr.inst.playOneShot(sound, volume, BundleName);
     }
 
     /**
@@ -26,28 +25,28 @@ export class TankGameAudioMgr {
      * @param volume 
      */
     public static play(sound: AudioClip | string, volume: number = 1.0,) {
-        tgxAudioMgr.inst.play(sound, volume, BundleName);
+        tgx.AudioMgr.inst.play(sound, volume, BundleName);
     }
 
     /**
  * stop the audio play
  */
     public static stop() {
-        tgxAudioMgr.inst.stop();
+        tgx.AudioMgr.inst.stop();
     }
 
     /**
      * pause the audio play
      */
     public static pause() {
-        tgxAudioMgr.inst.pause();
+        tgx.AudioMgr.inst.pause();
     }
 
     /**
      * resume the audio play
      */
     public static resume() {
-        tgxAudioMgr.inst.audioSource.play();
+        tgx.AudioMgr.inst.audioSource.play();
     }
 }
 

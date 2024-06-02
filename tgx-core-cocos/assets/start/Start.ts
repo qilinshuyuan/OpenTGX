@@ -1,9 +1,9 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab, Node, AssetManager } from 'cc';
-import { tgxModuleContext, tgxUIMgr } from '../core_tgx/tgx';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 
 import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
+
 const { ccclass, property } = _decorator;
 
 // ========== config begin =================
@@ -51,10 +51,10 @@ export class Start extends Component {
     private _percent: string = '';
     private _numCurrentLoaded = 0;
     start() {
-        tgxModuleContext.setDefaultModule(_defaultModule);
+        tgx.ModuleContext.setDefaultModule(_defaultModule);
 
         game.frameRate = _FPS;
-        tgxUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
+        tgx.UIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
         this.preloadBundle(0);
     }

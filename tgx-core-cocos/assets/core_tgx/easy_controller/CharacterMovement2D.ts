@@ -10,7 +10,7 @@ export class CharacterMovement2D extends Component {
     moveSpeed: number = 100;
 
     @property
-    needRotation:boolean = false;
+    needRotation: boolean = false;
 
     start() {
         EasyController.on(EasyControllerEvent.MOVEMENT, this.onMovement, this);
@@ -20,17 +20,17 @@ export class CharacterMovement2D extends Component {
     private _moveFactor: number = 0;
     private _moveDir: Vec2 = v2(1, 0);
 
-    public get moveDir():Vec2{
+    public get moveDir(): Vec2 {
         return this._moveDir;
     }
 
-    public get realSpeed():number{
+    public getRealSpeed(): number {
         return this.moveSpeed * this._moveFactor;
     }
 
-    onMovement(degree, strengthen) {
+    onMovement(degree: number, strengthen: number) {
         let angle = degree / 180 * Math.PI;
-        if(this.needRotation){
+        if (this.needRotation) {
             this.node.setRotationFromEuler(0, 0, degree);
         }
         this._moveDir.set(Math.cos(angle), Math.sin(angle));
@@ -50,7 +50,7 @@ export class CharacterMovement2D extends Component {
 
     update(deltaTime: number) {
         if (this._moveFactor) {
-            Vec2.multiplyScalar(tempV2, this._moveDir, this.realSpeed * deltaTime);
+            Vec2.multiplyScalar(tempV2, this._moveDir, this.getRealSpeed() * deltaTime);
             let pos = this.node.position;
             this.node.setPosition(pos.x + tempV2.x, pos.y + tempV2.y, pos.z);
         }
