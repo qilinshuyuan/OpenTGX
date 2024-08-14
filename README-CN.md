@@ -5,7 +5,7 @@
 
 # OpenTGX 开发文档
 
-由于精力有限，OpenTGX 开发文档只有英文版，请前往查看。
+由于精力有限，OpenTGX 开发文档只有英文版，[【请前往查看】](./README.md)。
 
 ## 关于 `OpenTGX`
 
