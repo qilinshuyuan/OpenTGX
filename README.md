@@ -4,34 +4,26 @@
 
 ![open-tgx-logo-txt.png](./open-tgx-logo-txt.png)
 
-`OpenTGX` is a free and open-source game development solution using typescript for both client and server sides.
+`OpenTGX` is an open-source game development solution.
 
 The biggest difference compared to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has plenty of examples and cases to meet the project's requirements and solve problems.
 
-- `Open` = open source and open-minded
-- `T` = TypeScript, both client and server are written by TS
-- `G` = based on Game Development Technique
-- `X` = plenty of various examples and cases for different fields.
+- `Open` = open source
+- `TGX` = Take Gamedev Tech to more fields!
 
-> Open is the attitude, T is the interacting interface, G is the technical basis, and X is the plan and objective.
-
-`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform).
+`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and can work with [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform) and Golang.
 
 It targets to be a solution that can solve the daily development requirements and issues.
 
-The client and server sides can be used separately, you can use only one of them for your needs.
-
 The **Get Started** will come soon.
 
-## Client-Side Features
+## Features
 
 - **First Loading Time**、**Bundle Management**
 - **Module Management**、**UI Management**
 - **Network**、**Communication with Platform**
 - **Joystick**、**2D&3D Utils and Tools**
 - **Performance**、**Heating**、**Rendering**
-
-## Server Side Features
 
 ## Contact Me
 
