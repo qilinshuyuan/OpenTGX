@@ -1,37 +1,39 @@
-[OpenTGX 中文文档](./README-CN.md)
+*English | [中文](./README-CN.md)
 
 ## About `OpenTGX`
 
 ![open-tgx-logo-txt.png](./open-tgx-logo-txt.png)
 
-`OpenTGX` is a free and open-source game development solution using typescript for both client and server sides.
+`OpenTGX` is an open-source game development solution.
 
 The biggest difference compared to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has plenty of examples and cases to meet the project's requirements and solve problems.
 
-- `Open` = open source and open-minded
-- `T` = TypeScript, both client and server are written by TS
-- `G` = based on Game Development Technique
-- `X` = plenty of various examples and cases for different fields.
+- `Open` = open source
+- `TGX` = Take Gamedev Tech to more fields!
 
-> Open is the attitude, T is the interacting interface, G is the technical basis, and X is the plan and objective.
-
-`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform).
+`OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and can work with [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform) and Golang.
 
 It targets to be a solution that can solve the daily development requirements and issues.
 
-The client and server sides can be used separately, you can use only one of them for your needs.
+## Documentation
 
-The **Get Started** will come soon.
+- [Quick Start](./docs/quick-start.md)
+- [Developer Guide](./docs/developer-guide.md)
+- [UI Framework](./docs/tgx-core-ui-management.md)
+- [Virtual Joystick](./docs/EasyController/EasyController.md)
+- [Audio Manager](./docs/tgx-core-audio-mgr.md)
+- [Auto Resolution Policy](./docs/tgx-core-auto-resolution-policy.md)
+- [Camera Components](./docs/tgx-core-camera-components.md)
+- [Module Management](./docs/tgx-core-module-class.md)
+- [tgx-core-cocos](./docs/tgx-core-cocos.md)
 
-## Client-Side Features
+## Features
 
 - **First Loading Time**、**Bundle Management**
 - **Module Management**、**UI Management**
 - **Network**、**Communication with Platform**
 - **Joystick**、**2D&3D Utils and Tools**
 - **Performance**、**Heating**、**Rendering**
-
-## Server Side Features
 
 ## Contact Me
 
@@ -47,8 +49,8 @@ Here are some examples and products based on OpenTGX, you can get them as refere
 
 - [Jare Adventure](https://store.cocos.com/app/en/detail/4241)
 - Billiards Girl-Coming soon
-- [Joystick - Tank Game 2D](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
-- [Joystick - Rooster Jump Jump](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
+- [Joystick - Tank Game 2D](https://github.com/qilinshuyuan/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
+- [Joystick - Rooster Jump Jump](https://github.com/qilinshuyuan/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
 > If you have examples and products based on KylinsToolkit and want to be listed here, please contact me.
 
 ## OpenTGX-Cocos-Client
