@@ -1,4 +1,4 @@
-[OpenTGX 中文文档](./README-CN.md)
+*English | [中文](./README-CN.md)
 
 ## About `OpenTGX`
 
@@ -15,7 +15,17 @@ The biggest difference compared to the other frameworks is that `OpenGTX` is not
 
 It targets to be a solution that can solve the daily development requirements and issues.
 
-The **Get Started** will come soon.
+## Documentation
+
+- [Quick Start](./docs/quick-start.md)
+- [Developer Guide](./docs/developer-guide.md)
+- [UI Framework](./docs/tgx-core-ui-management.md)
+- [Virtual Joystick](./docs/EasyController/EasyController.md)
+- [Audio Manager](./docs/tgx-core-audio-mgr.md)
+- [Auto Resolution Policy](./docs/tgx-core-auto-resolution-policy.md)
+- [Camera Components](./docs/tgx-core-camera-components.md)
+- [Module Management](./docs/tgx-core-module-class.md)
+- [tgx-core-cocos](./docs/tgx-core-cocos.md)
 
 ## Features
 
@@ -39,8 +49,8 @@ Here are some examples and products based on OpenTGX, you can get them as refere
 
 - [Jare Adventure](https://store.cocos.com/app/en/detail/4241)
 - Billiards Girl-Coming soon
-- [Joystick - Tank Game 2D](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
-- [Joystick - Rooster Jump Jump](https://github.com/MrKylinGithub/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
+- [Joystick - Tank Game 2D](https://github.com/qilinshuyuan/KylinsToolkit/tree/main/kfc/assets/module_demo_tank)
+- [Joystick - Rooster Jump Jump](https://github.com/qilinshuyuan/KylinsToolkit/tree/main/kfc/assets/module_demo_rooster)
 > If you have examples and products based on KylinsToolkit and want to be listed here, please contact me.
 
 ## OpenTGX-Cocos-Client

@@ -52,8 +52,8 @@
 
 - `tgx-metaverse-online`：基于 tgx-core-cocos + TSRPC 的多人在线元宇宙案例。基于多进程分布式服务器集群，实现了登录、注册、聊天、多维子世界管理、多人同步、用户交互等特性。多人联机元宇宙项目可以从这里开始：[tgx-metaverse-online 文档](./docs-cn/tgx-metaverse-online.md)。
 
-- [虚拟摇杆 - 坦克 2D](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_tank)
-- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/MrKylinGithub/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
+- [虚拟摇杆 - 坦克 2D](https://github.com/qilinshuyuan/OpenTGX/tree/main/kfc/assets/module_demo_tank)
+- [虚拟摇杆 - 伞鸡跳跳跳](https://github.com/qilinshuyuan/OpenTGX/tree/main/kfc/assets/module_demo_rooster)
 
 ## 微信讨论群
 
