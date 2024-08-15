@@ -8,8 +8,8 @@
 
 The biggest difference compared to the other frameworks is that `OpenGTX` is not only a framework, it is based on a unified basic framework and has plenty of examples and cases to meet the project's requirements and solve problems.
 
-- `Open` = open source
-- `TGX` = Take Gamedev Tech to more fields!
+- `Open` = Open Source
+- `TGX` = Take Gamedev Tech to More Fields!
 
 `OpenTGX` is based on [Cocos Creator](https://www.cocos.com/creator) (one of the top game engines in the world) and can work with [NodeJS](https://nodejs.org/en)( the most popular JS server-side programming platform) and Golang.
 
