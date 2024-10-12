@@ -182,7 +182,7 @@
     "_priority": 6553,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 407.9483870967742,
+    "_orthoHeight": 411.3811007268951,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -769,7 +769,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -38.748999999999995,
+      "y": -38.74900000000001,
       "z": 0
     },
     "_lrot": {
@@ -807,8 +807,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 169.2587890625,
-      "height": 54.4
+      "width": 169.2459659754673,
+      "height": 54.400000000000006
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -840,7 +840,7 @@
     "_string": "Loading...",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 35,
+    "_actualFontSize": 52.6640625,
     "_fontSize": 35,
     "_fontFamily": "Arial",
     "_lineHeight": 40,
@@ -854,16 +854,30 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
-    "_id": "059MljtclJr4iE2mRgTzDb",
     "_enableOutline": true,
-    "_outlineWidth": 2,
     "_outlineColor": {
       "__type__": "cc.Color",
       "r": 31,
       "g": 6,
       "b": 31,
       "a": 255
-    }
+    },
+    "_outlineWidth": 2,
+    "_enableShadow": false,
+    "_shadowColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_shadowOffset": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "_shadowBlur": 2,
+    "_id": "059MljtclJr4iE2mRgTzDb"
   },
   {
     "__type__": "cc.Widget",
@@ -880,7 +894,7 @@
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": -15.949000000000002,
+    "_bottom": -15.949000000000005,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
@@ -1072,6 +1086,9 @@
     "lightProbeInfo": {
       "__id__": 37
     },
+    "postSettings": {
+      "__id__": 38
+    },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
   },
@@ -1134,6 +1151,7 @@
       "z": 0
     },
     "_distance": 0,
+    "_planeBias": 1,
     "_shadowColor": {
       "__type__": "cc.Color",
       "r": 76,
@@ -1216,5 +1234,9 @@
     "_showConvex": false,
     "_data": null,
     "_lightProbeSphereVolume": 1
+  },
+  {
+    "__type__": "cc.PostSettingsInfo",
+    "_toneMappingType": 0
   }
 ]
