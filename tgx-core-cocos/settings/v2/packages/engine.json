@@ -122,7 +122,7 @@
         "_value": true
       },
       "render-pipeline": {
-        "_option": "legacy-pipeline"
+        "_option": "custom-pipeline"
       }
     },
     "flags": {},
@@ -134,14 +134,14 @@
       "base",
       "gfx-webgl",
       "intersection-2d",
-      "legacy-pipeline",
       "physics-ammo",
       "primitive",
       "profiler",
       "skeletal-animation",
       "tween",
       "ui",
-      "websocket"
+      "websocket",
+      "custom-pipeline"
     ],
     "noDeprecatedFeatures": {
       "value": false,
