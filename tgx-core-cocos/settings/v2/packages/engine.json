@@ -1,11 +1,8 @@
 {
-  "__version__": "1.0.9",
+  "__version__": "1.0.10",
   "modules": {
     "cache": {
       "base": {
-        "_value": true
-      },
-      "graphcis": {
         "_value": true
       },
       "gfx-webgl": {
@@ -121,11 +118,11 @@
       "procedural-animation": {
         "_value": false
       },
-      "custom-pipeline": {
-        "_value": false
-      },
       "graphics": {
         "_value": true
+      },
+      "render-pipeline": {
+        "_option": "custom-pipeline"
       }
     },
     "flags": {},
@@ -137,14 +134,14 @@
       "base",
       "gfx-webgl",
       "intersection-2d",
-      "meshopt",
       "physics-ammo",
       "primitive",
       "profiler",
       "skeletal-animation",
       "tween",
       "ui",
-      "websocket"
+      "websocket",
+      "custom-pipeline"
     ],
     "noDeprecatedFeatures": {
       "value": false,
