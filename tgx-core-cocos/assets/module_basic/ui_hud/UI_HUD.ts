@@ -15,7 +15,7 @@ export class UI_HUD extends tgx.UIController {
 
     //子类的所有操作，需要在这个函数之后。
     protected onCreated() {
-        let layout = this.layout as Layout_UI_HUD;
+        let layout = this._layout as Layout_UI_HUD;
 
         this.onButtonEvent(layout.btnScenes, this.onSceneChange, this);
 

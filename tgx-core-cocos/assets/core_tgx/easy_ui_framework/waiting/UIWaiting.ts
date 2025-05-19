@@ -30,7 +30,7 @@ export class UIWaiting extends UIController {
     }
 
     protected onUpdate() {
-        let layout = this.layout as Layout_UIWaiting;
+        let layout = this._layout as Layout_UIWaiting;
         if (layout.loadingIcon) {
             let euler = layout.loadingIcon.eulerAngles;
             let rot = (Date.now() / 1000) * 90;

@@ -76,7 +76,7 @@ export class UIController {
     private _instId: number = 0;
     private _prefab: string | Prefab;
     private _layer: number;
-    private _layout: any;
+    protected _layout: any;
     protected node: Node;
     protected _destroyed: boolean = false;
     protected _ingoreCloseAll:boolean = false;
@@ -111,14 +111,6 @@ export class UIController {
      *  */
     public get layer(): number {
         return this._layer;
-    }
-
-    /***
-     * @en layout of this ui panel.
-     * @zh 本UI所在的UI层级
-     *  */
-    public get layout(): any {
-        return this._layout;
     }
 
     /***

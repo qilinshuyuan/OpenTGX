@@ -13,9 +13,12 @@ export class UI_AboutMe_Impl extends UI_AboutMe {
         return [];
     }
 
+    public get layout(): Layout_AboutMe {
+        return this._layout as Layout_AboutMe;
+    }
+
     protected onCreated(): void {
-        let layout = this.layout as Layout_AboutMe;
-        this.onButtonEvent(layout.btnClose, () => {
+        this.onButtonEvent(this.layout.btnClose, () => {
             this.close();
         });
     }
