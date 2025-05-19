@@ -53,7 +53,7 @@ export class UIAlert extends UIController {
     }
 
     public get layout():Layout_UIAlert{
-        return super.layout as Layout_UIAlert;
+        return this._layout as Layout_UIAlert;
     }
 
     private init(opts: UIAlertOptions) {

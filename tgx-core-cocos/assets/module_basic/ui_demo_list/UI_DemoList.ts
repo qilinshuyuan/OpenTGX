@@ -18,15 +18,20 @@ export class UI_DemoList extends tgx.UIController {
         return [];
     }
 
+
+    public get layout():Layout_DemoList
+    {
+        return this._layout as Layout_DemoList;
+    }
+
     protected onCreated(): void {
-        let layout = this.layout as Layout_DemoList;
-        layout.btnClose.node.active = false;
-        this.onButtonEvent(layout.btnClose, () => {
+        this.layout.btnClose.node.active = false;
+        this.onButtonEvent(this.layout.btnClose, () => {
             this.close();
         });
 
-        for (let i = 0; i < layout.contentRoot.children.length; ++i) {
-            let item = layout.contentRoot.children[i];
+        for (let i = 0; i < this.layout.contentRoot.children.length; ++i) {
+            let item = this.layout.contentRoot.children[i];
             let btn = item.getComponent(Button);
             this.onButtonEvent(btn, (currentTarget, info: { bundle: string, entryScene: string }) => {
                 if (!info) {
@@ -39,7 +44,6 @@ export class UI_DemoList extends tgx.UIController {
     }
 
     showCloseBtn() {
-        let layout = this.layout as Layout_DemoList;
-        layout.btnClose.node.active = true;
+        this.layout.btnClose.node.active = true;
     }
 }
